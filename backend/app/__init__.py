@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, app
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -25,4 +25,5 @@ def create_app():
     from app.routes import init_routes
     init_routes(app)
 
+    app.register_blueprint(health_bp)
     return app
