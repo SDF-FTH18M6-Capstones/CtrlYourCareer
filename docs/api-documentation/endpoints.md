@@ -40,7 +40,7 @@ Base URL: `/api`. Bodies are JSON. Only `/health` is implemented so far; the res
 - `POST /api/assessments` creates an assessment (admin only). Returns 201.
 - `POST /api/assessments/{assessment_id}/questions` adds a question with its options, each with `is_correct` (admin only). Returns 201.
 - `POST /api/assessments/{assessment_id}/attempts` starts an attempt. Sets `started_at` and `status`. Returns 201.
-- `POST /api/attempts/{attempt_id}/answers` body: `question_id`, `option_id`. Returns 201.
+- `POST /api/attempts/{attempt_id}/answers` body: `question_id`, plus `option_id` for multiple choice or `answer_text` for written answers. Returns 201.
 - `POST /api/attempts/{attempt_id}/submit` sets `completed_at`, calculates `total_score` from the `marks` of correct answers, and updates `status`.
 - `GET /api/attempts/{attempt_id}` returns the attempt with `total_score`, `status` and its answers.
 - `GET /api/users/me/attempts` lists the user's attempts.
