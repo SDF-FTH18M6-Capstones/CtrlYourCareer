@@ -1,3 +1,6 @@
+![CtrlYourCareer ERD](ERD.png)
+
+Interactive version: [View on dbdiagram.io](https://dbdiagram.io/d/6af42ed804c7e97b1d2f9f09)
 
 # CtrlYourCareer – Student MVP Database Design
 
