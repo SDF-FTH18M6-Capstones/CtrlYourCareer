@@ -1,0 +1,177 @@
+
+erDiagram
+    USERS ||--o| STUDENT_PROFILES : has
+    USERS ||--o{ STUDENT_CAREER_INTERESTS : selects
+    CAREERS ||--o{ STUDENT_CAREER_INTERESTS : interests
+
+    SECTORS ||--o{ CAREERS : contains
+
+    USERS ||--o{ STUDENT_SKILLS : has
+    SKILLS ||--o{ STUDENT_SKILLS : records
+
+    CAREERS ||--o{ CAREER_SKILLS : requires
+    SKILLS ||--o{ CAREER_SKILLS : required_for
+
+    ASSESSMENTS ||--o{ ASSESSMENT_SKILLS : measures
+    SKILLS ||--o{ ASSESSMENT_SKILLS : measured_by
+
+    ASSESSMENTS ||--o{ QUESTIONS : contains
+    QUESTIONS ||--o{ QUESTION_OPTIONS : offers
+
+    USERS ||--o{ ASSESSMENT_ATTEMPTS : takes
+    ASSESSMENTS ||--o{ ASSESSMENT_ATTEMPTS : receives
+
+    ASSESSMENT_ATTEMPTS ||--o{ ASSESSMENT_ANSWERS : contains
+    QUESTIONS ||--o{ ASSESSMENT_ANSWERS : answered_in
+    QUESTION_OPTIONS o|--o{ ASSESSMENT_ANSWERS : selected_in
+
+    LEARNING_RESOURCES ||--o{ RESOURCE_SKILLS : develops
+    SKILLS ||--o{ RESOURCE_SKILLS : developed_by
+
+    USERS ||--o{ LEARNING_PROGRESS : tracks
+    LEARNING_RESOURCES ||--o{ LEARNING_PROGRESS : tracked_in
+
+    USERS ||--o{ CAREER_MATCHES : receives
+    CAREERS ||--o{ CAREER_MATCHES : recommended_as
+
+    USERS {
+        int user_id PK
+        varchar full_name
+        varchar email UK
+        varchar password_hash
+        varchar role
+        timestamp created_at
+    }
+
+    STUDENT_PROFILES {
+        int profile_id PK
+        int user_id FK
+        varchar institution
+        varchar course
+        varchar education_level
+        int graduation_year
+    }
+
+    SECTORS {
+        int sector_id PK
+        varchar sector_name UK
+        text description
+    }
+
+    CAREERS {
+        int career_id PK
+        int sector_id FK
+        varchar career_name
+        text description
+        text education_requirements
+    }
+
+    SKILLS {
+        int skill_id PK
+        varchar skill_name UK
+        varchar category
+        text description
+    }
+
+    STUDENT_CAREER_INTERESTS {
+        int interest_id PK
+        int user_id FK
+        int career_id FK
+        timestamp created_at
+    }
+
+    STUDENT_SKILLS {
+        int student_skill_id PK
+        int user_id FK
+        int skill_id FK
+        varchar proficiency_level
+        varchar source_type
+        timestamp updated_at
+    }
+
+    CAREER_SKILLS {
+        int career_skill_id PK
+        int career_id FK
+        int skill_id FK
+        decimal importance_weight
+        varchar required_level
+    }
+
+    ASSESSMENTS {
+        int assessment_id PK
+        varchar title
+        text description
+        varchar assessment_type
+        int time_limit
+    }
+
+    ASSESSMENT_SKILLS {
+        int assessment_skill_id PK
+        int assessment_id FK
+        int skill_id FK
+    }
+
+    QUESTIONS {
+        int question_id PK
+        int assessment_id FK
+        text question_text
+        varchar question_type
+        decimal marks
+    }
+
+    QUESTION_OPTIONS {
+        int option_id PK
+        int question_id FK
+        text option_text
+        boolean is_correct
+    }
+
+    ASSESSMENT_ATTEMPTS {
+        int attempt_id PK
+        int user_id FK
+        int assessment_id FK
+        timestamp started_at
+        timestamp completed_at
+        decimal total_score
+        varchar status
+    }
+
+    ASSESSMENT_ANSWERS {
+        int answer_id PK
+        int attempt_id FK
+        int question_id FK
+        int selected_option_id FK
+        text answer_text
+        decimal awarded_marks
+    }
+
+    LEARNING_RESOURCES {
+        int resource_id PK
+        varchar title
+        text description
+        text resource_url
+        varchar resource_type
+    }
+
+    RESOURCE_SKILLS {
+        int resource_skill_id PK
+        int resource_id FK
+        int skill_id FK
+    }
+
+    LEARNING_PROGRESS {
+        int progress_id PK
+        int user_id FK
+        int resource_id FK
+        varchar status
+        timestamp started_at
+        timestamp completed_at
+    }
+
+    CAREER_MATCHES {
+        int match_id PK
+        int user_id FK
+        int career_id FK
+        decimal compatibility_score
+        timestamp generated_at
+    }
