@@ -1,48 +1,62 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import CareerForm from '../components/CareerForm'
 import CareerList from '../components/CareerList'
+import { getCareers, createCareer, deleteCareer } from '../services/api'
 
 function ExploreCareers() {
-  const [careers, setCareers] = useState([
-    {
-      id: 1,
-      title: 'Frontend Developer',
-      category: 'Technology',
-      description: 'Build websites and user interfaces using HTML, CSS and JavaScript.'
-    },
-    {
-      id: 2,
-      title: 'Backend Developer',
-      category: 'Technology',
-      description: 'Build server-side applications, APIs and manage databases.'
-    },
-    {
-      id: 3,
-      title: 'UI/UX Designer',
-      category: 'Design',
-      description: 'Design digital experiences that are useful and easy to navigate.'
-    },
-    {
-      id: 4,
-      title: 'Data Analyst',
-      category: 'Data',
-      description: 'Use data to identify patterns and support decision-making.'
-    }
-  ])
+  const [careers, setCareers] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
 
-  const handleAddCareer = (newCareer) => {
-    setCareers((currentCareers) => [
-      ...currentCareers,
-      { ...newCareer, id: Date.now() }
-    ])
+  useEffect(() => {
+    const loadCareers = async () => {
+      try {
+        const data = await getCareers()
+        setCareers(data)
+      } catch (err) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadCareers()
+  }, [])
+
+  const handleAddCareer = async (newCareer) => {
+    setSaving(true)
+    setError('')
+    setSuccess('')
+
+    try {
+      const createdCareer = await createCareer(newCareer)
+      setCareers((currentCareers) => [...currentCareers, createdCareer])
+      setSuccess('Career added successfully!')
+    } catch (err) {
+      setError(err.message)
+      throw err
+    } finally {
+      setSaving(false)
+    }
   }
 
-  const handleDeleteCareer = (id) => {
-    setCareers((currentCareers) =>
-      currentCareers.filter((career) => career.id !== id)
-    )
+  const handleDeleteCareer = async (id) => {
+    setError('')
+    setSuccess('')
+
+    try {
+      await deleteCareer(id)
+      setCareers((currentCareers) =>
+        currentCareers.filter((career) => career.id !== id)
+      )
+      setSuccess('Career deleted successfully!')
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   return (
@@ -57,15 +71,31 @@ function ExploreCareers() {
         </p>
       </section>
 
+      {error && (
+        <p className="mb-4 rounded bg-red-100 p-3 text-red-700">
+          {error}
+        </p>
+      )}
+
+      {success && (
+        <p className="mb-4 rounded bg-green-100 p-3 text-green-700">
+          {success}
+        </p>
+      )}
+
       <section className="mb-10">
-        <CareerForm onSubmit={handleAddCareer} />
+        <CareerForm onSubmit={handleAddCareer} loading={saving} />
       </section>
 
       <section className="mb-10">
-        <CareerList
-          careers={careers}
-          onDelete={handleDeleteCareer}
-        />
+        {loading ? (
+          <p className="text-gray-600">Loading careers...</p>
+        ) : (
+          <CareerList
+            careers={careers}
+            onDelete={handleDeleteCareer}
+          />
+        )}
       </section>
 
       <section className="mt-10 bg-gray-100 p-8">

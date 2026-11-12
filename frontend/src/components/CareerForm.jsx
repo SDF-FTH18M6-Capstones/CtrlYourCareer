@@ -15,22 +15,28 @@ function CareerForm({ onSubmit, loading = false }) {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!formData.title.trim()) return
+    if (formData.title.trim().length < 2) return
+    if (formData.category.trim().length < 2) return
+    if (formData.description.trim().length < 10) return
 
-    onSubmit({
-      title: formData.title.trim(),
-      category: formData.category.trim(),
-      description: formData.description.trim()
-    })
+    try {
+      await onSubmit({
+        title: formData.title.trim(),
+        category: formData.category.trim(),
+        description: formData.description.trim()
+      })
 
-    setFormData({
-      title: '',
-      category: '',
-      description: ''
-    })
+      setFormData({
+        title: '',
+        category: '',
+        description: ''
+      })
+    } catch {
+      return
+    }
   }
 
   return (
@@ -45,6 +51,7 @@ function CareerForm({ onSubmit, loading = false }) {
           value={formData.title}
           onChange={handleChange}
           placeholder="e.g. Software Developer"
+          minLength="2"
           required
           className="w-full rounded-md border p-3"
         />
@@ -58,6 +65,8 @@ function CareerForm({ onSubmit, loading = false }) {
           value={formData.category}
           onChange={handleChange}
           placeholder="e.g. Technology"
+          minLength="2"
+          required
           className="w-full rounded-md border p-3"
         />
       </div>
@@ -69,7 +78,9 @@ function CareerForm({ onSubmit, loading = false }) {
           value={formData.description}
           onChange={handleChange}
           placeholder="Describe this career"
+          minLength="10"
           rows="3"
+          required
           className="w-full rounded-md border p-3"
         />
       </div>

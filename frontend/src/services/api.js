@@ -13,7 +13,16 @@ async function apiRequest(endpoint, options = {}) {
   const data = await response.json().catch(() => null)
 
   if (!response.ok) {
-    throw new Error(data?.message || data?.error || 'Something went wrong')
+    const validationErrors = data?.errors
+      ? Object.values(data.errors).flat().join(' ')
+      : ''
+
+    throw new Error(
+      data?.message ||
+      data?.error ||
+      validationErrors ||
+      'Something went wrong. Please try again.'
+    )
   }
 
   return data
@@ -27,6 +36,12 @@ export const createSkill = (skill) =>
     body: JSON.stringify(skill)
   })
 
+export const updateSkill = (id, skill) =>
+  apiRequest(`/api/skills/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(skill)
+  })
+
 export const deleteSkill = (id) =>
   apiRequest(`/api/skills/${id}`, {
     method: 'DELETE'
@@ -37,6 +52,12 @@ export const getCareers = () => apiRequest('/api/careers')
 export const createCareer = (career) =>
   apiRequest('/api/careers', {
     method: 'POST',
+    body: JSON.stringify(career)
+  })
+
+export const updateCareer = (id, career) =>
+  apiRequest(`/api/careers/${id}`, {
+    method: 'PUT',
     body: JSON.stringify(career)
   })
 

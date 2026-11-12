@@ -15,22 +15,27 @@ function SkillForm({ onSubmit, loading = false }) {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!formData.name.trim()) return
+    if (formData.name.trim().length < 2) return
+    if (formData.category.trim().length < 2) return
 
-    onSubmit({
-      name: formData.name.trim(),
-      category: formData.category.trim(),
-      description: formData.description.trim()
-    })
+    try {
+      await onSubmit({
+        name: formData.name.trim(),
+        category: formData.category.trim(),
+        description: formData.description.trim()
+      })
 
-    setFormData({
-      name: '',
-      category: '',
-      description: ''
-    })
+      setFormData({
+        name: '',
+        category: '',
+        description: ''
+      })
+    } catch {
+      return
+    }
   }
 
   return (
@@ -45,6 +50,7 @@ function SkillForm({ onSubmit, loading = false }) {
           value={formData.name}
           onChange={handleChange}
           placeholder="e.g. Python"
+          minLength="2"
           required
           className="w-full rounded-md border p-3"
         />
@@ -58,6 +64,8 @@ function SkillForm({ onSubmit, loading = false }) {
           value={formData.category}
           onChange={handleChange}
           placeholder="e.g. Programming"
+          minLength="2"
+          required
           className="w-full rounded-md border p-3"
         />
       </div>

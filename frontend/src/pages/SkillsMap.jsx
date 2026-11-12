@@ -1,28 +1,62 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import SkillForm from '../components/SkillForm'
 import SkillList from '../components/SkillList'
+import { getSkills, createSkill, deleteSkill } from '../services/api'
 
 function SkillsMap() {
-  const [skills, setSkills] = useState([
-    { id: 1, name: 'HTML', category: 'Technical Skills', description: 'Building web page structure' },
-    { id: 2, name: 'CSS', category: 'Technical Skills', description: 'Styling web pages' },
-    { id: 3, name: 'JavaScript', category: 'Technical Skills', description: 'Adding interactivity to websites' },
-    { id: 4, name: 'Python', category: 'Programming', description: 'Programming and problem solving' }
-  ])
+  const [skills, setSkills] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
 
-  const handleAddSkill = (newSkill) => {
-    setSkills((currentSkills) => [
-      ...currentSkills,
-      { ...newSkill, id: Date.now() }
-    ])
+  useEffect(() => {
+    const loadSkills = async () => {
+      try {
+        const data = await getSkills()
+        setSkills(data)
+      } catch (err) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadSkills()
+  }, [])
+
+  const handleAddSkill = async (newSkill) => {
+    setSaving(true)
+    setError('')
+    setSuccess('')
+
+    try {
+      const createdSkill = await createSkill(newSkill)
+      setSkills((currentSkills) => [...currentSkills, createdSkill])
+      setSuccess('Skill added successfully!')
+    } catch (err) {
+      setError(err.message)
+      throw err
+    } finally {
+      setSaving(false)
+    }
   }
 
-  const handleDeleteSkill = (id) => {
-    setSkills((currentSkills) =>
-      currentSkills.filter((skill) => skill.id !== id)
-    )
+  const handleDeleteSkill = async (id) => {
+    setError('')
+    setSuccess('')
+
+    try {
+      await deleteSkill(id)
+      setSkills((currentSkills) =>
+        currentSkills.filter((skill) => skill.id !== id)
+      )
+      setSuccess('Skill deleted successfully!')
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   return (
@@ -44,15 +78,31 @@ function SkillsMap() {
         </p>
       </section>
 
+      {error && (
+        <p className="mb-4 rounded bg-red-100 p-3 text-red-700">
+          {error}
+        </p>
+      )}
+
+      {success && (
+        <p className="mb-4 rounded bg-green-100 p-3 text-green-700">
+          {success}
+        </p>
+      )}
+
       <section className="mb-10">
-        <SkillForm onSubmit={handleAddSkill} />
+        <SkillForm onSubmit={handleAddSkill} loading={saving} />
       </section>
 
       <section>
-        <SkillList
-          skills={skills}
-          onDelete={handleDeleteSkill}
-        />
+        {loading ? (
+          <p className="text-gray-600">Loading skills...</p>
+        ) : (
+          <SkillList
+            skills={skills}
+            onDelete={handleDeleteSkill}
+          />
+        )}
       </section>
 
       <section className="mt-10 bg-gray-100 p-8">
