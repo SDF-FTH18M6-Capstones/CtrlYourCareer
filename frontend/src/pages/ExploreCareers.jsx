@@ -1,29 +1,49 @@
 
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import CareerForm from '../components/CareerForm'
+import CareerList from '../components/CareerList'
 
 function ExploreCareers() {
-  const careers = [
+  const [careers, setCareers] = useState([
     {
+      id: 1,
       title: 'Frontend Developer',
-      description: 'Build websites and user interfaces using HTML, CSS and JavaScript.',
-      skills: ['HTML', 'CSS', 'JavaScript', 'React']
+      category: 'Technology',
+      description: 'Build websites and user interfaces using HTML, CSS and JavaScript.'
     },
     {
+      id: 2,
       title: 'Backend Developer',
-      description: 'Build server-side applications, APIs and manage databases.',
-      skills: ['Python', 'Flask', 'SQL', 'APIs']
+      category: 'Technology',
+      description: 'Build server-side applications, APIs and manage databases.'
     },
     {
+      id: 3,
       title: 'UI/UX Designer',
-      description: 'Design digital experiences that are useful and easy to navigate.',
-      skills: ['Figma', 'Wireframing', 'Prototyping', 'Research']
+      category: 'Design',
+      description: 'Design digital experiences that are useful and easy to navigate.'
     },
     {
+      id: 4,
       title: 'Data Analyst',
-      description: 'Use data to identify patterns and support decision-making.',
-      skills: ['Python', 'SQL', 'Excel', 'Data Visualization']
+      category: 'Data',
+      description: 'Use data to identify patterns and support decision-making.'
     }
-  ]
+  ])
+
+  const handleAddCareer = (newCareer) => {
+    setCareers((currentCareers) => [
+      ...currentCareers,
+      { ...newCareer, id: Date.now() }
+    ])
+  }
+
+  const handleDeleteCareer = (id) => {
+    setCareers((currentCareers) =>
+      currentCareers.filter((career) => career.id !== id)
+    )
+  }
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
@@ -37,30 +57,15 @@ function ExploreCareers() {
         </p>
       </section>
 
-      <section className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {careers.map((career) => (
-          <div key={career.title} className="border border-gray-300 p-7">
-            <h2 className="mb-4 text-xl font-bold">{career.title}</h2>
+      <section className="mb-10">
+        <CareerForm onSubmit={handleAddCareer} />
+      </section>
 
-            <p className="mb-6 leading-7 text-gray-600">
-              {career.description}
-            </p>
-
-            <h3 className="mb-3 font-bold">Skills Required</h3>
-
-            <div className="mb-6 flex flex-wrap gap-2">
-              {career.skills.map((skill) => (
-                <span key={skill} className="border border-gray-300 px-3 py-2 text-sm">
-                  {skill}
-                </span>
-              ))}
-            </div>
-
-            <Link to="/skills-map" className="font-bold underline">
-              Explore Required Skills
-            </Link>
-          </div>
-        ))}
+      <section className="mb-10">
+        <CareerList
+          careers={careers}
+          onDelete={handleDeleteCareer}
+        />
       </section>
 
       <section className="mt-10 bg-gray-100 p-8">
@@ -70,7 +75,10 @@ function ExploreCareers() {
           Review your skills and identify areas you would like to improve.
         </p>
 
-        <Link to="/skills-map" className="inline-block bg-gray-900 px-6 py-3 text-white hover:bg-gray-700">
+        <Link
+          to="/skills-map"
+          className="inline-block bg-gray-900 px-6 py-3 text-white hover:bg-gray-700"
+        >
           View My Skills Map
         </Link>
       </section>
