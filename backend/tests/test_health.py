@@ -5,5 +5,5 @@ def test_health_endpoint(client):
 
     data = response.get_json()
 
-    assert data["status"] == "success"
-    assert data["message"] == "SkillMap backend is running"
+    assert data["status"] == "healthy"
+    assert data["message"] == "CtrlYourCareer API is running"
