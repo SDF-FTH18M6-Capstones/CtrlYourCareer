@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 
 function SkillForm({ onSubmit, loading = false }) {
@@ -7,6 +6,15 @@ function SkillForm({ onSubmit, loading = false }) {
     category: '',
     description: ''
   })
+
+  const categories = [
+    'Communication',
+    'Problem Solving',
+    'Programming',
+    'Leadership',
+    'Creativity',
+    'Teamwork'
+  ]
 
   const handleChange = (e) => {
     setFormData({
@@ -19,12 +27,12 @@ function SkillForm({ onSubmit, loading = false }) {
     e.preventDefault()
 
     if (formData.name.trim().length < 2) return
-    if (formData.category.trim().length < 2) return
+    if (!formData.category) return
 
     try {
       await onSubmit({
         name: formData.name.trim(),
-        category: formData.category.trim(),
+        category: formData.category,
         description: formData.description.trim()
       })
 
@@ -39,11 +47,11 @@ function SkillForm({ onSubmit, loading = false }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-lg bg-white p-6 shadow">
-      <h2 className="text-xl font-semibold">Add a Skill</h2>
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <h2 className="text-xl font-semibold text-gray-900">Add a Skill</h2>
 
       <div>
-        <label className="mb-1 block font-medium">Skill Name</label>
+        <label className="mb-2 block font-medium text-gray-700">Skill Name</label>
         <input
           type="text"
           name="name"
@@ -52,40 +60,44 @@ function SkillForm({ onSubmit, loading = false }) {
           placeholder="e.g. Python"
           minLength="2"
           required
-          className="w-full rounded-md border p-3"
+          className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
         />
       </div>
 
       <div>
-        <label className="mb-1 block font-medium">Category</label>
-        <input
-          type="text"
+        <label className="mb-2 block font-medium text-gray-700">Category</label>
+        <select
           name="category"
           value={formData.category}
           onChange={handleChange}
-          placeholder="e.g. Programming"
-          minLength="2"
           required
-          className="w-full rounded-md border p-3"
-        />
+          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+        >
+          <option value="">Select a skill category</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>
-        <label className="mb-1 block font-medium">Description</label>
+        <label className="mb-2 block font-medium text-gray-700">Description</label>
         <textarea
           name="description"
           value={formData.description}
           onChange={handleChange}
           placeholder="Describe the skill"
-          rows="3"
-          className="w-full rounded-md border p-3"
+          rows="4"
+          className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
         />
       </div>
 
       <button
         type="submit"
         disabled={loading}
-        className="rounded-md bg-yellow-500 px-6 py-3 font-semibold text-black hover:bg-yellow-400 disabled:opacity-50"
+        className="rounded-lg bg-blue-700 px-6 py-3 font-semibold text-white transition hover:bg-blue-800 disabled:opacity-50"
       >
         {loading ? 'Saving...' : 'Add Skill'}
       </button>

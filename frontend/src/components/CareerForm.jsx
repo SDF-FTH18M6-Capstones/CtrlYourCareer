@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 
 function CareerForm({ onSubmit, loading = false }) {
@@ -19,13 +18,13 @@ function CareerForm({ onSubmit, loading = false }) {
     e.preventDefault()
 
     if (formData.title.trim().length < 2) return
-    if (formData.category.trim().length < 2) return
+    if (!formData.category) return
     if (formData.description.trim().length < 10) return
 
     try {
       await onSubmit({
         title: formData.title.trim(),
-        category: formData.category.trim(),
+        category: formData.category,
         description: formData.description.trim()
       })
 
@@ -40,11 +39,11 @@ function CareerForm({ onSubmit, loading = false }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-lg bg-white p-6 shadow">
-      <h2 className="text-xl font-semibold">Add a Career</h2>
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <h2 className="text-xl font-semibold text-gray-900">Add a Career</h2>
 
       <div>
-        <label className="mb-1 block font-medium">Career Title</label>
+        <label className="mb-2 block font-medium text-gray-700">Career Title</label>
         <input
           type="text"
           name="title"
@@ -53,42 +52,44 @@ function CareerForm({ onSubmit, loading = false }) {
           placeholder="e.g. Software Developer"
           minLength="2"
           required
-          className="w-full rounded-md border p-3"
+          className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
         />
       </div>
 
       <div>
-        <label className="mb-1 block font-medium">Category</label>
-        <input
-          type="text"
+        <label className="mb-2 block font-medium text-gray-700">Category</label>
+        <select
           name="category"
           value={formData.category}
           onChange={handleChange}
-          placeholder="e.g. Technology"
-          minLength="2"
           required
-          className="w-full rounded-md border p-3"
-        />
+          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+        >
+          <option value="">Select a category</option>
+          <option value="Technology">Technology</option>
+          <option value="Design">Design</option>
+          <option value="Business">Business</option>
+        </select>
       </div>
 
       <div>
-        <label className="mb-1 block font-medium">Description</label>
+        <label className="mb-2 block font-medium text-gray-700">Description</label>
         <textarea
           name="description"
           value={formData.description}
           onChange={handleChange}
           placeholder="Describe this career"
           minLength="10"
-          rows="3"
+          rows="4"
           required
-          className="w-full rounded-md border p-3"
+          className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
         />
       </div>
 
       <button
         type="submit"
         disabled={loading}
-        className="rounded-md bg-yellow-500 px-6 py-3 font-semibold text-black hover:bg-yellow-400 disabled:opacity-50"
+        className="rounded-lg bg-blue-700 px-6 py-3 font-semibold text-white transition hover:bg-blue-800 disabled:opacity-50"
       >
         {loading ? 'Saving...' : 'Add Career'}
       </button>
