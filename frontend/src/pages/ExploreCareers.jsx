@@ -1,29 +1,63 @@
 
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import CareerForm from '../components/CareerForm'
+import CareerList from '../components/CareerList'
+import { getCareers, createCareer, deleteCareer } from '../services/api'
 
 function ExploreCareers() {
-  const careers = [
-    {
-      title: 'Frontend Developer',
-      description: 'Build websites and user interfaces using HTML, CSS and JavaScript.',
-      skills: ['HTML', 'CSS', 'JavaScript', 'React']
-    },
-    {
-      title: 'Backend Developer',
-      description: 'Build server-side applications, APIs and manage databases.',
-      skills: ['Python', 'Flask', 'SQL', 'APIs']
-    },
-    {
-      title: 'UI/UX Designer',
-      description: 'Design digital experiences that are useful and easy to navigate.',
-      skills: ['Figma', 'Wireframing', 'Prototyping', 'Research']
-    },
-    {
-      title: 'Data Analyst',
-      description: 'Use data to identify patterns and support decision-making.',
-      skills: ['Python', 'SQL', 'Excel', 'Data Visualization']
+  const [careers, setCareers] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+
+  useEffect(() => {
+    const loadCareers = async () => {
+      try {
+        const data = await getCareers()
+        setCareers(data)
+      } catch (err) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
     }
-  ]
+
+    loadCareers()
+  }, [])
+
+  const handleAddCareer = async (newCareer) => {
+    setSaving(true)
+    setError('')
+    setSuccess('')
+
+    try {
+      const createdCareer = await createCareer(newCareer)
+      setCareers((currentCareers) => [...currentCareers, createdCareer])
+      setSuccess('Career added successfully!')
+    } catch (err) {
+      setError(err.message)
+      throw err
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const handleDeleteCareer = async (id) => {
+    setError('')
+    setSuccess('')
+
+    try {
+      await deleteCareer(id)
+      setCareers((currentCareers) =>
+        currentCareers.filter((career) => career.id !== id)
+      )
+      setSuccess('Career deleted successfully!')
+    } catch (err) {
+      setError(err.message)
+    }
+  }
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
@@ -37,30 +71,31 @@ function ExploreCareers() {
         </p>
       </section>
 
-      <section className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {careers.map((career) => (
-          <div key={career.title} className="border border-gray-300 p-7">
-            <h2 className="mb-4 text-xl font-bold">{career.title}</h2>
+      {error && (
+        <p className="mb-4 rounded bg-red-100 p-3 text-red-700">
+          {error}
+        </p>
+      )}
 
-            <p className="mb-6 leading-7 text-gray-600">
-              {career.description}
-            </p>
+      {success && (
+        <p className="mb-4 rounded bg-green-100 p-3 text-green-700">
+          {success}
+        </p>
+      )}
 
-            <h3 className="mb-3 font-bold">Skills Required</h3>
+      <section className="mb-10">
+        <CareerForm onSubmit={handleAddCareer} loading={saving} />
+      </section>
 
-            <div className="mb-6 flex flex-wrap gap-2">
-              {career.skills.map((skill) => (
-                <span key={skill} className="border border-gray-300 px-3 py-2 text-sm">
-                  {skill}
-                </span>
-              ))}
-            </div>
-
-            <Link to="/skills-map" className="font-bold underline">
-              Explore Required Skills
-            </Link>
-          </div>
-        ))}
+      <section className="mb-10">
+        {loading ? (
+          <p className="text-gray-600">Loading careers...</p>
+        ) : (
+          <CareerList
+            careers={careers}
+            onDelete={handleDeleteCareer}
+          />
+        )}
       </section>
 
       <section className="mt-10 bg-gray-100 p-8">
@@ -70,7 +105,10 @@ function ExploreCareers() {
           Review your skills and identify areas you would like to improve.
         </p>
 
-        <Link to="/skills-map" className="inline-block bg-gray-900 px-6 py-3 text-white hover:bg-gray-700">
+        <Link
+          to="/skills-map"
+          className="inline-block bg-gray-900 px-6 py-3 text-white hover:bg-gray-700"
+        >
           View My Skills Map
         </Link>
       </section>

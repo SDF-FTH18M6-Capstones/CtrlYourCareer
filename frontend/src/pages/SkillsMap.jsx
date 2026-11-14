@@ -1,17 +1,63 @@
 
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import SkillForm from '../components/SkillForm'
+import SkillList from '../components/SkillList'
+import { getSkills, createSkill, deleteSkill } from '../services/api'
 
 function SkillsMap() {
-  const skills = [
-    {
-      category: 'Technical Skills',
-      items: ['HTML', 'CSS', 'JavaScript', 'Python']
-    },
-    {
-      category: 'Professional Skills',
-      items: ['Communication', 'Problem Solving', 'Teamwork', 'Time Management']
+  const [skills, setSkills] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+
+  useEffect(() => {
+    const loadSkills = async () => {
+      try {
+        const data = await getSkills()
+        setSkills(data)
+      } catch (err) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
     }
-  ]
+
+    loadSkills()
+  }, [])
+
+  const handleAddSkill = async (newSkill) => {
+    setSaving(true)
+    setError('')
+    setSuccess('')
+
+    try {
+      const createdSkill = await createSkill(newSkill)
+      setSkills((currentSkills) => [...currentSkills, createdSkill])
+      setSuccess('Skill added successfully!')
+    } catch (err) {
+      setError(err.message)
+      throw err
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const handleDeleteSkill = async (id) => {
+    setError('')
+    setSuccess('')
+
+    try {
+      await deleteSkill(id)
+      setSkills((currentSkills) =>
+        currentSkills.filter((skill) => skill.id !== id)
+      )
+      setSuccess('Skill deleted successfully!')
+    } catch (err) {
+      setError(err.message)
+    }
+  }
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
@@ -28,24 +74,35 @@ function SkillsMap() {
       <section className="mb-8 bg-gray-100 p-7">
         <h2 className="mb-3 text-2xl font-bold">My Skills Overview</h2>
         <p className="text-gray-600">
-          Start building your personal skills profile by identifying what you know.
+          Build your personal skills profile by adding the skills you know.
         </p>
       </section>
 
-      <section className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {skills.map((group) => (
-          <div key={group.category} className="border border-gray-300 p-7">
-            <h3 className="mb-6 text-xl font-bold">{group.category}</h3>
+      {error && (
+        <p className="mb-4 rounded bg-red-100 p-3 text-red-700">
+          {error}
+        </p>
+      )}
 
-            <div className="flex flex-wrap gap-3">
-              {group.items.map((skill) => (
-                <span key={skill} className="border border-gray-300 px-4 py-3 text-sm">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
+      {success && (
+        <p className="mb-4 rounded bg-green-100 p-3 text-green-700">
+          {success}
+        </p>
+      )}
+
+      <section className="mb-10">
+        <SkillForm onSubmit={handleAddSkill} loading={saving} />
+      </section>
+
+      <section>
+        {loading ? (
+          <p className="text-gray-600">Loading skills...</p>
+        ) : (
+          <SkillList
+            skills={skills}
+            onDelete={handleDeleteSkill}
+          />
+        )}
       </section>
 
       <section className="mt-10 bg-gray-100 p-8">
@@ -54,7 +111,10 @@ function SkillsMap() {
           Explore careers and find out which skills are needed for different career paths.
         </p>
 
-        <Link to="/explore-careers" className="inline-block bg-gray-900 px-6 py-3 text-white hover:bg-gray-700">
+        <Link
+          to="/explore-careers"
+          className="inline-block bg-gray-900 px-6 py-3 text-white hover:bg-gray-700"
+        >
           Explore Careers
         </Link>
       </section>
