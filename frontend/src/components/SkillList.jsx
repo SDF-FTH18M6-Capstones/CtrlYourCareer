@@ -1,40 +1,39 @@
-
 function SkillList({ skills = [], onDelete, loading = false }) {
   if (loading) {
-    return <p className="py-4 text-gray-500">Loading skills...</p>
+    return <p className="py-8 text-center text-gray-500">Loading skills...</p>
   }
 
   if (skills.length === 0) {
-    return <p className="py-4 text-gray-500">No skills available yet.</p>
+    return <p className="py-8 text-center text-gray-500">No skills available yet.</p>
   }
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-semibold">Available Skills</h2>
-
+    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {skills.map((skill) => (
-        <div
+        <article
           key={skill.id}
-          className="flex items-center justify-between gap-4 rounded-lg border bg-white p-4 shadow-sm"
+          className="flex flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md"
         >
-          <div>
-            <h3 className="font-semibold">{skill.name}</h3>
-            <p className="text-sm text-gray-600">
-              {skill.category || 'Uncategorized'}
-            </p>
-            <p className="mt-1 text-sm text-gray-500">
-              {skill.description || 'No description available'}
-            </p>
-          </div>
+          <span className="mb-3 w-fit rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
+            {skill.category || 'Uncategorized'}
+          </span>
+
+          <h3 className="mb-2 text-lg font-bold text-gray-900">
+            {skill.name}
+          </h3>
+
+          <p className="mb-5 flex-1 text-sm leading-6 text-gray-600">
+            {skill.description || 'No description available.'}
+          </p>
 
           <button
             type="button"
             onClick={() => onDelete(skill.id)}
-            className="rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600"
+            className="w-fit rounded-lg border border-red-200 px-4 py-2 text-sm font-semibold text-red-600 transition hover:bg-red-50"
           >
             Delete
           </button>
-        </div>
+        </article>
       ))}
     </div>
   )

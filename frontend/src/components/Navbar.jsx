@@ -1,37 +1,44 @@
-
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 function Navbar() {
+  const linkClass = ({ isActive }) =>
+    `transition hover:text-blue-700 ${
+      isActive ? 'font-semibold text-blue-700' : 'text-gray-700'
+    }`
+
   return (
-    <nav className="flex flex-col items-center justify-between gap-5 border-b border-gray-300 bg-white px-6 py-5 md:flex-row md:px-12">
-      <Link to="/" className="text-2xl font-bold tracking-tight text-gray-900">
+    <nav className="flex flex-col items-center justify-between gap-5 border-b border-gray-200 bg-white px-6 py-5 shadow-sm md:flex-row md:px-12">
+      <Link
+        to="/"
+        className="text-2xl font-bold tracking-tight text-blue-700"
+      >
         CtrlYourCareer
       </Link>
 
-      <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-700">
-        <Link to="/" className="hover:text-black hover:underline">
+      <div className="flex flex-wrap items-center justify-center gap-5 text-sm">
+        <NavLink to="/" end className={linkClass}>
           Home
-        </Link>
+        </NavLink>
 
-        <Link to="/explore-careers" className="hover:text-black hover:underline">
+        <NavLink to="/explore-careers" className={linkClass}>
           Explore Careers
-        </Link>
+        </NavLink>
 
-        <Link to="/skills-map" className="hover:text-black hover:underline">
+        <NavLink to="/skills-map" className={linkClass}>
           Skills Map
-        </Link>
+        </NavLink>
 
-        <Link to="/dashboard" className="hover:text-black hover:underline">
+        <NavLink to="/dashboard" className={linkClass}>
           Dashboard
-        </Link>
+        </NavLink>
 
-        <Link to="/login" className="hover:text-black hover:underline">
+        <NavLink to="/login" className={linkClass}>
           Login
-        </Link>
+        </NavLink>
 
         <Link
           to="/register"
-          className="border border-gray-900 bg-gray-900 px-5 py-2 text-white hover:bg-gray-700"
+          className="rounded-lg bg-blue-700 px-5 py-2.5 font-semibold text-white transition hover:bg-blue-800"
         >
           Sign Up
         </Link>
