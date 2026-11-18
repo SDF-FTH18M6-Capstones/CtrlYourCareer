@@ -2,6 +2,13 @@ from flask import Flask
 from config import Config
 from app.extensions import db, migrate, cors, bcrypt, jwt
 from app.routes.health import health_bp
+from app.routes.skills import skills_bp
+from app.routes.careers import careers_bp
+from app.routes.auth import auth_bp 
+from flask_jwt_extended import JWTManager
+
+
+jwt = JWTManager()
 from app.routes.auth import auth_bp
 
 
@@ -18,6 +25,9 @@ def create_app():
     from app import models
 
     app.register_blueprint(health_bp)
+    app.register_blueprint(skills_bp)
+    app.register_blueprint(careers_bp)
+    app.register_blueprint(auth_bp)
     app.register_blueprint(auth_bp)
 
 
