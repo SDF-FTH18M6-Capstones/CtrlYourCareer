@@ -1,4 +1,4 @@
-
+from flask_jwt_extended import jwt_required
 from flask import Blueprint, request, jsonify
 from marshmallow import ValidationError
 from sqlalchemy.exc import IntegrityError
@@ -17,6 +17,7 @@ careers_bp = Blueprint(
 
 # GET ALL CAREERS
 @careers_bp.route("", methods=["GET"])
+@jwt_required()
 def get_careers():
 
     careers = Career.query.order_by(Career.id).all()
@@ -26,6 +27,7 @@ def get_careers():
 
 # GET ONE CAREER
 @careers_bp.route("/<int:career_id>", methods=["GET"])
+@jwt_required()
 def get_career(career_id):
 
     career = db.session.get(Career, career_id)
@@ -40,6 +42,7 @@ def get_career(career_id):
 
 # CREATE A CAREER
 @careers_bp.route("", methods=["POST"])
+@jwt_required()
 def create_career():
 
     try:
@@ -74,6 +77,7 @@ def create_career():
 
 # UPDATE A CAREER
 @careers_bp.route("/<int:career_id>", methods=["PUT"])
+@jwt_required()
 def update_career(career_id):
 
     career = db.session.get(Career, career_id)
@@ -123,6 +127,7 @@ def update_career(career_id):
 
 # DELETE A CAREER
 @careers_bp.route("/<int:career_id>", methods=["DELETE"])
+@jwt_required()
 def delete_career(career_id):
 
     career = db.session.get(Career, career_id)
