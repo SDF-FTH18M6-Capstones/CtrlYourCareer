@@ -24,3 +24,16 @@ def app():
 @pytest.fixture
 def client(app):
     return app.test_client()
+
+import pytest
+from flask_jwt_extended import create_access_token
+
+
+@pytest.fixture
+def auth_headers(app):
+    with app.app_context():
+        token = create_access_token(identity="1")
+
+    return {
+        "Authorization": f"Bearer {token}"
+    }
