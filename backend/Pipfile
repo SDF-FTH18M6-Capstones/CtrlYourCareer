@@ -20,6 +20,8 @@ sqlalchemy = "==2.1.8"
 typing-extensions = "==4.16.0"
 werkzeug = "==3.1.9"
 marshmallow = "*"
+flask-jwt-extended = "*"
+flask-bcrypt = "*"
 
 [dev-packages]
 pytest = "*"
