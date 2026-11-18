@@ -1,0 +1,1561 @@
+{
+  "info": {
+    "_postman_id": "1acb58e1-3069-4f3a-8351-2ec9b5d9fef2",
+    "name": "CtrlYourCareer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "60012551",
+    "_collection_link": "https://go.postman.co/collection/60012551-1acb58e1-3069-4f3a-8351-2ec9b5d9fef2?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Skills API",
+      "item": [
+        {
+          "name": "All Skills",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/api/skills",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "skills"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "All Skills",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/skills",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "skills"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 11:58:09 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "394"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"category\": \"Web Development\",\n    \"description\": \"Developing interactive and responsive websites using JavaScript and modern frontend frameworks.\",\n    \"id\": 1,\n    \"name\": \"Sprint 2 Validation Test\"\n  },\n  {\n    \"category\": \"Software Development\",\n    \"description\": \"Building interactive web applications using JavaScript.\",\n    \"id\": 2,\n    \"name\": \"JavaScript Programming\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Single Skill",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n  \"category\": \"Programming\",\r\n  \"description\": \"Testing validation when the skill name is missing.\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/api/skills/2",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "skills",
+                "2"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Single Skill",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/skills/1",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "skills",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 11:59:21 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "201"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"category\": \"Web Development\",\n  \"description\": \"Developing interactive and responsive websites using JavaScript and modern frontend frameworks.\",\n  \"id\": 1,\n  \"name\": \"Sprint 2 Validation Test\"\n}"
+            },
+            {
+              "name": "Single Skill(Skill Not Found)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"category\": \"Programming\",\r\n  \"description\": \"Testing validation when the skill name is missing.\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/skills/9999",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "skills",
+                    "9999"
+                  ]
+                }
+              },
+              "status": "NOT FOUND",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:20:31 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "33"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Skill not found\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Skill",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"name\": \"Cybersecurity Fundamentals\",\r\n    \"category\": \"Cybersecurity\",\r\n    \"description\": \"Understanding network security, identifying threats, and protecting computer systems.\"\r\n  }\r\n\r\n\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/api/skills",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "skills"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Skill",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"name\": \"React Development\",\r\n  \"category\": \"Frontend Development\",\r\n  \"description\": \"Building reusable user interfaces and interactive web applications using React.\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/skills",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "skills"
+                  ]
+                }
+              },
+              "status": "CREATED",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:00:31 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "183"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"category\": \"Frontend Development\",\n  \"description\": \"Building reusable user interfaces and interactive web applications using React.\",\n  \"id\": 3,\n  \"name\": \"React Development\"\n}"
+            },
+            {
+              "name": "Create Skill(Missing Data Field)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"category\": \"Programming\",\r\n  \"description\": \"Testing validation when the skill name is missing.\"\r\n}\r\n\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/skills",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "skills"
+                  ]
+                }
+              },
+              "status": "BAD REQUEST",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:12:55 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "83"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"errors\": {\n    \"name\": [\n      \"Missing data for required field.\"\n    ]\n  }\n}"
+            },
+            {
+              "name": "Create Skill(Invalid Data Type)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"name\": 12345,\r\n  \"category\": \"Programming\",\r\n  \"description\": \"Testing validation when the skill name is a number instead of a string.\"\r\n}\r\n\r\n\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/skills",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "skills"
+                  ]
+                }
+              },
+              "status": "BAD REQUEST",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:15:00 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "70"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"errors\": {\n    \"name\": [\n      \"Not a valid string.\"\n    ]\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Skill",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Advanced Python\",\r\n  \"category\": \"Programming\",\r\n  \"description\": \"Testing an update to a nonexistent skill.\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/api/skills/2",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "skills",
+                "2"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Skill",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"name\": \"Advanced React Development\",\r\n  \"category\": \"Frontend Engineering\",\r\n  \"description\": \"Building scalable, reusable, and responsive user interfaces using React, hooks, and modern frontend development practices.\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/skills/3",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "skills",
+                    "3"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:01:22 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "235"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"category\": \"Frontend Engineering\",\n  \"description\": \"Building scalable, reusable, and responsive user interfaces using React, hooks, and modern frontend development practices.\",\n  \"id\": 3,\n  \"name\": \"Advanced React Development\"\n}"
+            },
+            {
+              "name": "Update Skill",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Advanced Python\",\r\n  \"category\": \"Programming\",\r\n  \"description\": \"Testing an update to a nonexistent skill.\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/skills/9999",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "skills",
+                    "9999"
+                  ]
+                }
+              },
+              "status": "NOT FOUND",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:23:29 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "33"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Skill not found\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Skill",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/api/skills/1",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "skills",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete Skill",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/skills/3",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "skills",
+                    "3"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:02:38 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "46"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Skill deleted successfully\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Careers API",
+      "item": [
+        {
+          "name": "All Careers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/api/careers",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "careers"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "All Careers",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/careers",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "careers"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:04:06 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "194"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"category\": \"Technology\",\n    \"description\": \"Develops responsive and interactive user interfaces using modern web technologies.\",\n    \"id\": 1,\n    \"title\": \"Frontend Developer\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Single Career",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/api/careers/2278",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "careers",
+                "2278"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Single Career",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/careers/1",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "careers",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:05:16 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "178"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"category\": \"Technology\",\n  \"description\": \"Develops responsive and interactive user interfaces using modern web technologies.\",\n  \"id\": 1,\n  \"title\": \"Frontend Developer\"\n}"
+            },
+            {
+              "name": "Single Career(Career Not Found)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/careers/2278",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "careers",
+                    "2278"
+                  ]
+                }
+              },
+              "status": "NOT FOUND",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:21:01 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "34"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Career not found\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Career",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"title\": \"Cybersecurity Analyst\",\r\n    \"category\": \"Cybersecurity\",\r\n    \"description\": \"Identifies security vulnerabilities, monitors threats, and protects digital systems.\"\r\n  }\r\n\r\n\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/api/careers",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "careers"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Career",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"title\": \"Full Stack Developer\",\r\n  \"category\": \"Software Development\",\r\n  \"description\": \"Designs and develops complete web applications, including frontend interfaces, backend APIs, and database systems.\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/careers",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "careers"
+                  ]
+                }
+              },
+              "status": "CREATED",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:06:42 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "222"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"category\": \"Software Development\",\n  \"description\": \"Designs and develops complete web applications, including frontend interfaces, backend APIs, and database systems.\",\n  \"id\": 2,\n  \"title\": \"Full Stack Developer\"\n}"
+            },
+            {
+              "name": "Create Career(Missing Data Field)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"category\": \"Technology\",\r\n  \"description\": \"Testing validation when the career title is missing.\"\r\n}\r\n\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/careers",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "careers"
+                  ]
+                }
+              },
+              "status": "BAD REQUEST",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:13:50 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "84"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"errors\": {\n    \"title\": [\n      \"Missing data for required field.\"\n    ]\n  }\n}"
+            },
+            {
+              "name": "Create Career(Invalid Data Type)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"title\": 12345,\r\n  \"category\": \"Technology\",\r\n  \"description\": \"Testing validation when the career title is a number instead of a string.\"\r\n}\r\n\r\n\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/careers",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "careers"
+                  ]
+                }
+              },
+              "status": "BAD REQUEST",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:16:29 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "71"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"errors\": {\n    \"title\": [\n      \"Not a valid string.\"\n    ]\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Career",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Senior Backend Developer\",\r\n  \"category\": \"Software Engineering\",\r\n  \"description\": \"Testing an update to a nonexistent career.\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:5000/api/careers/9999",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "careers",
+                "9999"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Career",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"title\": \"Senior Full Stack Developer\",\r\n  \"category\": \"Software Engineering\",\r\n  \"description\": \"Designs and maintains scalable frontend and backend applications, REST APIs, and database systems using modern development technologies.\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/careers/2",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "careers",
+                    "2"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:08:19 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "251"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"category\": \"Software Engineering\",\n  \"description\": \"Designs and maintains scalable frontend and backend applications, REST APIs, and database systems using modern development technologies.\",\n  \"id\": 2,\n  \"title\": \"Senior Full Stack Developer\"\n}"
+            },
+            {
+              "name": "Update Career",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Senior Backend Developer\",\r\n  \"category\": \"Software Engineering\",\r\n  \"description\": \"Testing an update to a nonexistent career.\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/careers/9999",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "careers",
+                    "9999"
+                  ]
+                }
+              },
+              "status": "NOT FOUND",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:25:06 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "34"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Career not found\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Career",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/api/careers/1",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "careers",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete Career",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/careers/2",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "careers",
+                    "2"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 12:09:13 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "47"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Career deleted successfully\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Health API",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:5000/api/health",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "health"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Health Check",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://127.0.0.1:5000/api/health",
+                  "protocol": "http",
+                  "host": [
+                    "127",
+                    "0",
+                    "0",
+                    "1"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "health"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Server",
+                  "value": "Werkzeug/3.1.9 Python/3.12.3"
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 12 Nov 2026 11:55:17 GMT"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "72"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Connection",
+                  "value": "close"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"CtrlYourCareer API is running\",\n  \"status\": \"healthy\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Authentication API",
+      "item": [
+        {
+          "name": "Get User(Auth)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User(No Auth)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"postmanuser\",\r\n  \"email\": \"postman@example.com\",\r\n  \"password\": \"PostmanPassword123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Test User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const data = pm.response.json();\r\n\r\npm.test(\"Login returns HTTP 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"JWT access token is returned\", function () {\r\n    pm.expect(data.access_token).to.be.a(\"string\").and.not.empty;\r\n});\r\n\r\nif (data.access_token) {\r\n    pm.collectionVariables.set(\"token\", data.access_token);\r\n}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"postman@example.com\",\r\n  \"password\": \"PostmanPassword123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
