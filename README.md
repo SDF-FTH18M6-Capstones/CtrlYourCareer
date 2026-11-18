@@ -419,3 +419,111 @@ Developed collaboratively by the CtrlYourCareer project team.
 ## License
 
 A project license has not yet been specified.
+
+---
+
+## Sprint 3: Authentication, Authorization & State Integration (Days 5–6)
+
+### Sprint Goal
+
+The goal of Sprint 3 was to implement secure user authentication and authorization in the Flask backend and integrate authentication state management into the React frontend.
+
+This sprint focused on enabling users to register, log in, access protected resources, and securely interact with the CtrlYourCareer application.
+
+### Technologies Used
+
+**Backend:**
+
+- Flask
+- Flask-JWT-Extended
+- Flask-Bcrypt
+- Flask-SQLAlchemy
+- Flask-CORS
+
+**Frontend:**
+
+- React
+- React Router DOM
+- React Context API
+- Fetch API
+- Browser localStorage for JWT token handling
+
+**Testing and Collaboration:**
+
+- Postman
+- Pytest
+- Git and GitHub
+- GitHub Projects
+
+### Features Implemented
+
+#### 1. User Registration
+
+The backend provides a registration endpoint that allows new users to create accounts.
+
+**Endpoint:** `POST /api/auth/register`
+
+Example request:
+
+```json
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "Password123"
+}
+```
+
+The system validates registration details, prevents duplicate email registration, and hashes passwords using Flask-Bcrypt before storing them in the database.
+
+**Expected response:** `201 Created`
+
+#### 2. User Login and JWT Authentication
+
+Registered users can log in using their email address and password.
+
+**Endpoint:** `POST /api/auth/login`
+
+Example request:
+
+```json
+{
+  "email": "test@example.com",
+  "password": "Password123"
+}
+```
+
+After successful authentication, the backend generates a JWT access token that can be used to access protected endpoints.
+
+**Expected response:** `200 OK`
+
+#### 3. Protected User Endpoint
+
+The application provides an endpoint to retrieve the currently authenticated user's details.
+
+**Endpoint:** `GET /api/auth/me`
+
+**Required header:**
+
+```http
+Authorization: Bearer <access_token>
+```
+
+- Valid JWT: `200 OK`
+- Missing or invalid JWT: `401 Unauthorized`
+
+#### 4. Protected Skills and Careers Endpoints
+
+JWT authentication was added to protected backend routes to prevent unauthorized users from creating, updating, or deleting Skills and Careers records.
+
+Protected write operations require a valid JWT access token.
+
+Public read endpoints remain accessible without authentication where permitted by the API design.
+
+#### 5. React Authentication Integration
+
+The React frontend uses an Authentication Context Provider to manage user authentication state throughout the application.
+
+Frontend authentication features include:
+
+- User registration and login forms.
+- Shared authentication
