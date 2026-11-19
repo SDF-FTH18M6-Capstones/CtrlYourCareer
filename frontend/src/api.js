@@ -1,5 +1,5 @@
 const base = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:5000/api";
-export const demo = import.meta.env.VITE_DEMO_MODE !== "false";
+export const demo = import.meta.env.VITE_DEMO_MODE === "true";
 const accountsKey = "cyc_demo_accounts",
   sessionKey = "cyc_demo_session";
 const read = (key, fallback) => {

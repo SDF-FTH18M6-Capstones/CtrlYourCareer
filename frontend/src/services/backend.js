@@ -1,18 +1,26 @@
+
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:5000/api";
+  import.meta.env.VITE_API_BASE_URL ||
+  "http://127.0.0.1:5000/api";
 
 function getToken() {
   try {
     const session = JSON.parse(
-      localStorage.getItem("cyc_demo_session") || "null",
+      localStorage.getItem("cyc_demo_session") || "null"
     );
 
-    // Demo tokens are not valid Flask JWTs.
-    if (!session?.token || session.token.startsWith("demo-")) {
+    const token = session?.token || session?.access_token;
+
+    // Never send demo tokens to the Flask backend.
+    if (
+      typeof token !== "string" ||
+      !token ||
+      token.startsWith("demo-")
+    ) {
       return null;
     }
 
-    return session.token;
+    return token;
   } catch {
     return null;
   }
@@ -27,14 +35,18 @@ async function apiRequest(endpoint, options = {}) {
     response = await fetch(`${API_BASE_URL}${endpoint}`, {
       ...options,
       headers: {
-        ...(options.body ? { "Content-Type": "application/json" } : {}),
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(options.body
+          ? { "Content-Type": "application/json" }
+          : {}),
+        ...(token
+          ? { Authorization: `Bearer ${token}` }
+          : {}),
         ...options.headers,
       },
     });
   } catch {
     throw new Error(
-      "Cannot connect to Flask. Check that the backend is running.",
+      "Cannot connect to Flask. Check that the backend is running."
     );
   }
 
@@ -45,7 +57,7 @@ async function apiRequest(endpoint, options = {}) {
       data?.message ||
         data?.error ||
         data?.msg ||
-        `Request failed: ${response.status}`,
+        `Request failed: ${response.status}`
     );
   }
 
