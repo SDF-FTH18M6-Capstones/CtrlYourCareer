@@ -34,7 +34,10 @@ async function request(path, { method = "GET", body, token } = {}) {
   const data = await response.json().catch(() => ({}));
   if (!response.ok)
     throw Error(
-      data.message || data.error || `Request failed (${response.status})`,
+      data.message ||
+        data.error ||
+        data.msg ||
+        `Request failed (${response.status})`,
     );
   return data;
 }
@@ -42,11 +45,11 @@ export const api = {
   getSession: () => read(sessionKey, null),
   saveSession: (session) => save(sessionKey, session),
   logout: () => localStorage.removeItem(sessionKey),
-  async register({ name, email, password }) {
+  async register({ username, email, password }) {
     if (!demo)
       return request("/auth/register", {
         method: "POST",
-        body: { name, email, password },
+        body: { username, email, password },
       });
     await wait();
     const all = read(accountsKey, []),
@@ -55,7 +58,7 @@ export const api = {
       throw Error("This email already has an account.");
     const account = {
       id: String(Date.now()),
-      name: name.trim(),
+      name: username.trim(),
       email: normalized,
       password,
       onboardingComplete: false,
@@ -65,16 +68,21 @@ export const api = {
       interests: [],
     };
     save(accountsKey, [...all, account]);
-    const session = { token: `demo-${account.id}`, user: safe(account) };
-    save(sessionKey, session);
-    return session;
+    return { user: safe(account) };
   },
   async login({ email, password }) {
-    if (!demo)
-      return request("/auth/login", {
+    if (!demo) {
+      const data = await request("/auth/login", {
         method: "POST",
         body: { email, password },
       });
+      const token = data.access_token || data.token;
+      if (!token)
+        throw Error("Login response did not contain a JWT access token.");
+      const user = data.user || (await request("/auth/me", { token })).user;
+      if (!user) throw Error("The backend did not return a user profile.");
+      return { token, user };
+    }
     await wait();
     const account = read(accountsKey, []).find(
       (a) => a.email === email.trim().toLowerCase() && a.password === password,
@@ -85,7 +93,10 @@ export const api = {
     return session;
   },
   async me(token) {
-    if (!demo) return request("/auth/me", { token });
+    if (!demo) {
+      const data = await request("/auth/me", { token });
+      return { user: data.user || data };
+    }
     await wait();
     const account = read(accountsKey, []).find((a) => `demo-${a.id}` === token);
     if (!account) throw Error("Your session has expired.");
