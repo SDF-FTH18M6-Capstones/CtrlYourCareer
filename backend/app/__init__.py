@@ -5,11 +5,21 @@ from app.routes.health import health_bp
 from app.routes.skills import skills_bp
 from app.routes.careers import careers_bp
 from app.routes.auth import auth_bp
+from app.routes.user_skills import user_skills_bp
+from flask import Flask, jsonify
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    @app.errorhandler(404)
+    def not_found(e):
+        return jsonify({"error": "Not found"}), 404
+
+    @app.errorhandler(405)
+    def method_not_allowed(e):
+        return jsonify({"error": "Method not allowed"}), 405
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -23,5 +33,6 @@ def create_app():
     app.register_blueprint(skills_bp)
     app.register_blueprint(careers_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(user_skills_bp, url_prefix="/api/my-skills")
 
     return app
