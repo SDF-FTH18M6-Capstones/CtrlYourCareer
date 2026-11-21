@@ -11,7 +11,7 @@ import { useAuth } from "./context/AuthContext";
 const LOADING_DURATION = 1000;
 
 export default function App() {
-  const { session, loading, login, logout, updateUser, demo } = useAuth();
+  const { session, loading, login, logout, updateUser } = useAuth();
 
   const [screen, setScreen] = useState("landing");
   const [showLoading, setShowLoading] = useState(true);
@@ -35,13 +35,13 @@ export default function App() {
     initializedRef.current = true;
 
     const nextScreen = session
-      ? demo && !session.user.onboardingComplete
-        ? "onboarding"
-        : "dashboard"
+      ? session.user.onboardingComplete
+        ? "dashboard"
+        : "onboarding"
       : "landing";
 
     startLoading(nextScreen);
-  }, [loading, session, demo]);
+  }, [loading, session]);
 
   useEffect(() => {
     return () => {
@@ -52,8 +52,9 @@ export default function App() {
   const authSuccess = async (email, password) => {
     const next = await login(email, password);
 
-    const nextScreen =
-      demo && !next.user.onboardingComplete ? "onboarding" : "dashboard";
+    const nextScreen = next.user.onboardingComplete
+      ? "dashboard"
+      : "onboarding";
 
     startLoading(nextScreen);
   };
@@ -89,7 +90,7 @@ export default function App() {
     return screen === "login" ? <Login {...props} /> : <Register {...props} />;
   }
 
-  if (session && screen === "onboarding" && demo) {
+  if (session && screen === "onboarding") {
     return (
       <Onboarding
         user={session.user}
@@ -110,7 +111,14 @@ export default function App() {
         onAuth={setScreen}
         session={session}
         onHome={() => {
-          setScreen(session ? "dashboard" : "landing");
+          const nextScreen = session
+            ? session.user.onboardingComplete
+              ? "dashboard"
+              : "onboarding"
+            : "landing";
+
+          setScreen(nextScreen);
+
           window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -121,7 +129,15 @@ export default function App() {
       <Landing
         onAuth={setScreen}
         session={session}
-        onDashboard={() => setScreen("dashboard")}
+        onDashboard={() => {
+          setScreen(
+            session?.user?.onboardingComplete
+              ? "dashboard"
+              : session
+                ? "onboarding"
+                : "login",
+          );
+        }}
       />
     </>
   );

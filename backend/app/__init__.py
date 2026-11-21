@@ -5,6 +5,7 @@ from app.routes.health import health_bp
 from app.routes.skills import skills_bp
 from app.routes.careers import careers_bp
 from app.routes.auth import auth_bp
+from app.routes.profile import profile_bp
 
 
 def create_app():
@@ -23,5 +24,6 @@ def create_app():
     app.register_blueprint(skills_bp)
     app.register_blueprint(careers_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(profile_bp)
 
     return app
