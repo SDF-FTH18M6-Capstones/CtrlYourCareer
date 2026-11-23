@@ -6,12 +6,16 @@ from app.routes.skills import skills_bp
 from app.routes.careers import careers_bp
 from app.routes.auth import auth_bp
 from app.routes.profile import profile_bp
+from app.routes.user_skills import user_skills_bp
+from app.errors import register_error_handlers
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+    app.register_blueprint(user_skills_bp)
 
+    register_error_handlers(app)
     db.init_app(app)
     migrate.init_app(app, db)
     cors.init_app(app)
