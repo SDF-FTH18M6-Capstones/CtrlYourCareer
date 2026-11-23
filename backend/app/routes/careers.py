@@ -3,6 +3,8 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app.extensions import db
 from app.models import Career, CareerSkill, UserSkill, Skill
+from app.models import User, UserSkill, Career, CareerSkill
+from app.schemas import career_schema, careers_schema
 
 careers_bp = Blueprint("careers", __name__, url_prefix="/api/careers")
 
@@ -114,4 +116,155 @@ def skill_gap(career_id):
         "match_percentage": percentage,
         "matched_skills": skill_names(matched),
         "missing_skills": skill_names(missing),
+        "message": "Career deleted successfully"
+    }), 200
+
+# CAREER RECOMMENDATIONS AND SKILL GAP LOGIC
+def get_logged_in_user():
+    """
+    Retrieve the user represented by the JWT identity.
+    """
+    identity = get_jwt_identity()
+
+    try:
+        user_id = int(identity)
+    except (TypeError, ValueError):
+        return None
+
+    return db.session.get(User, user_id)
+
+
+def calculate_career_match(user_skill_ids, career):
+    """
+    Compare the user's skills with the skills required by a career.
+    """
+
+    required_skills = [
+        relationship.skill
+        for relationship in career.skills
+        if relationship.skill is not None
+    ]
+
+    matched_skills = [
+        skill.name
+        for skill in required_skills
+        if skill.id in user_skill_ids
+    ]
+
+    missing_skills = [
+        skill.name
+        for skill in required_skills
+        if skill.id not in user_skill_ids
+    ]
+
+    total_required = len(required_skills)
+
+    percentage = (
+        round((len(matched_skills) / total_required) * 100)
+        if total_required > 0
+        else 0
+    )
+
+    return {
+        "total_required_skills": total_required,
+        "matched_count": len(matched_skills),
+        "missing_count": len(missing_skills),
+        "match_percentage": percentage,
+        "matched_skills": matched_skills,
+        "missing_skills": missing_skills
+    }
+
+
+# GET CAREER RECOMMENDATIONS
+@careers_bp.route("/recommendations", methods=["GET"])
+@jwt_required()
+def career_recommendations():
+
+    user = get_logged_in_user()
+
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+
+    user_records = UserSkill.query.filter_by(
+        user_id=user.id
+    ).all()
+
+    user_skill_ids = {
+        record.skill_id for record in user_records
+    }
+
+    careers = (
+        Career.query
+        .options(
+            joinedload(Career.skills).joinedload(CareerSkill.skill)
+        )
+        .all()
+    )
+
+    recommendations = []
+
+    for career in careers:
+        match = calculate_career_match(
+            user_skill_ids,
+            career
+        )
+
+        recommendations.append({
+            "id": career.id,
+            "title": career.title,
+            "description": career.description,
+            "category": career.category,
+            **match
+        })
+
+    recommendations.sort(
+        key=lambda item: item["match_percentage"],
+        reverse=True
+    )
+
+    return jsonify(recommendations), 200
+
+
+# GET CAREER SKILL GAP
+@careers_bp.route("/<int:career_id>/skill-gap", methods=["GET"])
+@jwt_required()
+def career_skill_gap(career_id):
+
+    user = get_logged_in_user()
+
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+
+    career = (
+        Career.query
+        .options(
+            joinedload(Career.skills).joinedload(CareerSkill.skill)
+        )
+        .filter_by(id=career_id)
+        .first()
+    )
+
+    if career is None:
+        return jsonify({"error": "Career not found"}), 404
+
+    user_records = UserSkill.query.filter_by(
+        user_id=user.id
+    ).all()
+
+    user_skill_ids = {
+        record.skill_id for record in user_records
+    }
+
+    match = calculate_career_match(
+        user_skill_ids,
+        career
+    )
+
+    return jsonify({
+        "career": {
+            "id": career.id,
+            "title": career.title,
+            "description": career.description
+        },
+        **match
     }), 200

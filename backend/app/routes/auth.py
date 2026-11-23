@@ -1,3 +1,4 @@
+import json
 
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import (
@@ -8,7 +9,7 @@ from flask_jwt_extended import (
 from sqlalchemy.exc import IntegrityError
 
 from app.extensions import db, bcrypt
-from app.models import User
+from app.models import User, Profile
 
 
 auth_bp = Blueprint(
@@ -19,13 +20,38 @@ auth_bp = Blueprint(
 
 
 def serialize_user(user):
-    """Return safe user details without exposing the password hash."""
+    """Return safe user details, including saved onboarding information."""
+
+    # Retrieve the user's profile from the database
+    profile = Profile.query.filter_by(user_id=user.id).first()
+
+    # Retrieve saved career interests
+    interests = []
+
+    if profile and profile.career_interest:
+        try:
+            saved_interests = json.loads(profile.career_interest)
+
+            if isinstance(saved_interests, list):
+                interests = saved_interests
+
+        except (json.JSONDecodeError, TypeError):
+            interests = []
+
     return {
         "id": user.id,
         "username": user.username,
         "name": user.username,
         "email": user.email,
         "role": user.role,
+
+        # Saved onboarding information
+        "goal": profile.education if profile else "",
+        "experience": profile.experience if profile else "",
+        "interests": interests,
+
+        # Check whether onboarding has been completed
+        "onboardingComplete": profile is not None,
     }
 
 
@@ -34,7 +60,9 @@ def register():
     data = request.get_json(silent=True)
 
     if not isinstance(data, dict):
-        return jsonify({"error": "Valid JSON is required"}), 400
+        return jsonify({
+            "error": "Valid JSON is required"
+        }), 400
 
     # Accept both 'name' (React) and 'username' (Postman).
     username = data.get("username") or data.get("name")
@@ -94,6 +122,7 @@ def register():
 
     except IntegrityError:
         db.session.rollback()
+
         return jsonify({
             "error": "Email already registered"
         }), 409
@@ -156,6 +185,7 @@ def get_current_user():
 
     try:
         user = db.session.get(User, int(user_id))
+
     except (ValueError, TypeError):
         return jsonify({
             "error": "Invalid user identity"
