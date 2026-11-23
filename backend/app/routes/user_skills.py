@@ -1,47 +1,9 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy.orm import joinedload
+
 from app.extensions import db
 from app.models import User, Skill, UserSkill
-
-user_skills_bp = Blueprint("user_skills", __name__)
-
-
-@user_skills_bp.route("", methods=["POST"])
-@jwt_required()
-def add_user_skill():
-    user_id = int(get_jwt_identity())
-    data = request.get_json() or {}
-
-    skill_id = data.get("skill_id")
-    skill = db.session.get(Skill, skill_id) if skill_id else None
-    if not skill:
-        return jsonify({"error": "Invalid skill_id"}), 400
-
-    existing = UserSkill.query.filter_by(
-        user_id=user_id, skill_id=skill_id
-    ).first()
-    if existing:
-        return jsonify({"error": "Skill already added"}), 409
-
-    user_skill = UserSkill(
-        user_id=user_id,
-        skill_id=skill_id,
-        proficiency_level=data.get("proficiency_level", "Beginner"),
-        years_experience=data.get("years_experience", 0),
-    )
-    db.session.add(user_skill)
-    db.session.commit()
-
-    return jsonify({
-        "skill_id": skill.id,
-        "name": skill.name,
-        "proficiency_level": user_skill.proficiency_level,
-        "years_experience": user_skill.years_experience,
-    }), 201
-
-
-
 
 user_skills_bp = Blueprint(
     "user_skills",
@@ -51,9 +13,6 @@ user_skills_bp = Blueprint(
 
 
 def get_current_user():
-    """
-    Get the user ID stored inside the JWT and find that user.
-    """
     identity = get_jwt_identity()
 
     try:
@@ -65,9 +24,6 @@ def get_current_user():
 
 
 def serialize_user_skill(record):
-    """
-    Convert a UserSkill database record into JSON-friendly data.
-    """
     return {
         "id": record.id,
         "skill_id": record.skill_id,
@@ -79,9 +35,6 @@ def serialize_user_skill(record):
 
 
 def validate_skill_data(data, require_skill_id=False):
-    """
-    Validate information received from the frontend.
-    """
     if not isinstance(data, dict):
         return None, "Request body must be a JSON object."
 
@@ -95,13 +48,10 @@ def validate_skill_data(data, require_skill_id=False):
             return None, "skill_id must be an integer."
 
     proficiency = data.get("proficiency_level", "Beginner")
-
     allowed_levels = ["Beginner", "Intermediate", "Advanced"]
 
     if proficiency not in allowed_levels:
-        return None, (
-            "proficiency_level must be Beginner, Intermediate, or Advanced."
-        )
+        return None, "proficiency_level must be Beginner, Intermediate, or Advanced."
 
     years = data.get("years_experience", 0)
 
@@ -115,7 +65,6 @@ def validate_skill_data(data, require_skill_id=False):
     }, None
 
 
-# GET ALL SKILLS BELONGING TO THE LOGGED-IN USER
 @user_skills_bp.route("", methods=["GET"])
 @jwt_required()
 def get_my_skills():
@@ -137,7 +86,6 @@ def get_my_skills():
     ]), 200
 
 
-# ADD A SKILL TO THE LOGGED-IN USER
 @user_skills_bp.route("", methods=["POST"])
 @jwt_required()
 def add_my_skill():
@@ -165,9 +113,7 @@ def add_my_skill():
     ).first()
 
     if existing:
-        return jsonify({
-            "error": "You have already added this skill."
-        }), 409
+        return jsonify({"error": "You have already added this skill."}), 409
 
     record = UserSkill(
         user_id=user.id,
@@ -181,11 +127,11 @@ def add_my_skill():
 
     return jsonify({
         "message": "Skill added successfully",
+        "name": record.skill.name,
         "skill": serialize_user_skill(record)
     }), 201
 
 
-# UPDATE A USER'S SKILL RECORD
 @user_skills_bp.route("/<int:record_id>", methods=["PUT"])
 @jwt_required()
 def update_my_skill(record_id):
@@ -220,7 +166,6 @@ def update_my_skill(record_id):
     }), 200
 
 
-# DELETE A USER'S SKILL RECORD
 @user_skills_bp.route("/<int:record_id>", methods=["DELETE"])
 @jwt_required()
 def delete_my_skill(record_id):
@@ -240,3 +185,4 @@ def delete_my_skill(record_id):
     db.session.delete(record)
     db.session.commit()
 
+    return jsonify({"message": "Skill deleted successfully"}), 200
