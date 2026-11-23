@@ -16,7 +16,7 @@ import Brand from "../components/Brand";
 import { roles, goals } from "../data/onboardingOptions";
 import { demo } from "../api";
 
-export default function Dashboard({ user, onLogout }) {
+export default function Dashboard({ user, onLogout, onSettings }) {
   const skillsRef = useRef(null);
   const careersRef = useRef(null);
 
@@ -57,7 +57,7 @@ export default function Dashboard({ user, onLogout }) {
       title: "Learning journey",
       description: "Plan what you want to learn next.",
       actionLabel: "Coming soon",
-      available: false,
+      available: true,
     },
   ];
 
@@ -67,9 +67,16 @@ export default function Dashboard({ user, onLogout }) {
         <Brand />
 
         <div className="dash-user">
-          <span className="user-avatar">{first[0].toUpperCase()}</span>
-
-          <span>{first}</span>
+          <button
+            type="button"
+            className="profile-trigger"
+            onClick={onSettings}
+            aria-label="Open account settings"
+          >
+            <span className="user-avatar">{first[0].toUpperCase()}</span>
+            <span>{first}</span>
+            <span aria-hidden="true">⌄</span>
+          </button>
 
           <button className="btn btn-quiet" onClick={onLogout}>
             <LogOut size={17} />
@@ -98,7 +105,7 @@ export default function Dashboard({ user, onLogout }) {
 
           <div className="ready-pill">
             <CheckCircle2 size={17} />
-            Profile ready
+            Welcome! Your profile is ready.
           </div>
         </div>
 

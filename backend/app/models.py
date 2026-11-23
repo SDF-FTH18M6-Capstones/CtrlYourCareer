@@ -29,25 +29,44 @@ class User(db.Model):
 class Profile(db.Model):
     __tablename__ = "profiles"
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+        autoincrement=True
+    )
+
     user_id = db.Column(
         db.Integer,
         db.ForeignKey("users.id"),
         nullable=False,
         unique=True
     )
+
     full_name = db.Column(db.String(120), nullable=True)
+
+    # Education information
     education = db.Column(db.Text, nullable=True)
-    experience = db.Column(db.Text, nullable=True)
-    career_interest = db.Column(db.String(120), nullable=True)
+    education_level = db.Column(db.String(100), nullable=True)
+    course = db.Column(db.String(150), nullable=True)
+
+    # Experience information
+    experience = db.Column(db.String(100), nullable=True)
+    experience_details = db.Column(db.Text, nullable=True)
+
+    # Career preferences
+    career_interest = db.Column(db.Text, nullable=True)
+    career_goal = db.Column(db.String(120), nullable=True)
+
+    # Personal development goals
+    short_term_goal = db.Column(db.Text, nullable=True)
+    long_term_goal = db.Column(db.Text, nullable=True)
+
     bio = db.Column(db.Text, nullable=True)
 
-    # Connects the profile back to its user.
     user = db.relationship(
         "User",
         back_populates="profile"
     )
-
 
 class Skill(db.Model):
     __tablename__ = "skills"
@@ -115,17 +134,49 @@ class UserSkill(db.Model):
 class Career(db.Model):
     __tablename__ = "careers"
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    title = db.Column(db.String(120), nullable=False)
-    description = db.Column(db.Text, nullable=True)
-    category = db.Column(db.String(80), nullable=True)
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+        autoincrement=True
+    )
 
-    # A career can require many skills.
+    title = db.Column(
+        db.String(120),
+        nullable=False
+    )
+
+    description = db.Column(
+        db.Text,
+        nullable=True
+    )
+
+    category = db.Column(
+        db.String(80),
+        nullable=True
+    )
+
+    # Minimum education level required
+    education_level = db.Column(
+        db.String(100),
+        nullable=True
+    )
+
+    # Additional education requirements
+    education_requirements = db.Column(
+        db.Text,
+        nullable=True
+    )
+
+    # Expected experience level
+    experience_level = db.Column(
+        db.String(30),
+        nullable=True
+    )
+
     skills = db.relationship(
         "CareerSkill",
         back_populates="career"
     )
-
 
 class CareerSkill(db.Model):
     __tablename__ = "career_skills"

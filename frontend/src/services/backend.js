@@ -5,35 +5,21 @@ const API_BASE_URL =
 
 function getToken() {
   const session = api.getSession();
-
   const token = session?.token || session?.access_token;
-
-  // Never send demo tokens to Flask.
-  if (typeof token !== "string" || !token || token.startsWith("demo-")) {
-    return null;
-  }
-
-  return token;
+  return typeof token === "string" && token && !token.startsWith("demo-")
+    ? token
+    : null;
 }
 
 async function apiRequest(endpoint, options = {}) {
   const token = getToken();
-
   let response;
-
   try {
     response = await fetch(`${API_BASE_URL}${endpoint}`, {
       ...options,
-
       headers: {
         ...(options.body ? { "Content-Type": "application/json" } : {}),
-
-        ...(token
-          ? {
-              Authorization: `Bearer ${token}`,
-            }
-          : {}),
-
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
         ...options.headers,
       },
     });
@@ -42,9 +28,7 @@ async function apiRequest(endpoint, options = {}) {
       "Cannot connect to Flask. Check that the backend is running.",
     );
   }
-
   const data = await response.json().catch(() => null);
-
   if (!response.ok) {
     throw new Error(
       data?.message ||
@@ -53,17 +37,25 @@ async function apiRequest(endpoint, options = {}) {
         `Request failed: ${response.status}`,
     );
   }
-
   return data;
 }
 
 export const backendApi = {
-  // HEALTH
   health: () => apiRequest("/health"),
-
-  // SKILLS
   getSkills: () => apiRequest("/skills"),
-
-  // CAREERS
+  getMySkills: () => apiRequest("/my-skills"),
+  addMySkill: (payload) =>
+    apiRequest("/my-skills", { method: "POST", body: JSON.stringify(payload) }),
+  updateMySkill: (recordId, payload) =>
+    apiRequest(`/my-skills/${recordId}`, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+    }),
+  deleteMySkill: (recordId) =>
+    apiRequest(`/my-skills/${recordId}`, { method: "DELETE" }),
   getCareers: () => apiRequest("/careers"),
+  getRecommendations: () => apiRequest("/careers/recommendations"),
+  refreshRecommendations: () =>
+    apiRequest("/careers/recommendations/refresh", { method: "POST" }),
+  getCareerSkillGap: (careerId) => apiRequest(`/careers/${careerId}/skill-gap`),
 };

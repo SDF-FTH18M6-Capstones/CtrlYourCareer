@@ -6,6 +6,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
+import Settings from "./pages/Settings";
+import "./theme.css";
 import { useAuth } from "./context/AuthContext";
 
 const LOADING_DURATION = 1000;
@@ -14,6 +16,19 @@ export default function App() {
   const { session, loading, login, logout, updateUser } = useAuth();
 
   const [screen, setScreen] = useState("landing");
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("cyc-theme") || "system",
+  );
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const apply = () =>
+      (document.documentElement.dataset.theme =
+        theme === "system" ? (media.matches ? "dark" : "light") : theme);
+    apply();
+    localStorage.setItem("cyc-theme", theme);
+    media.addEventListener("change", apply);
+    return () => media.removeEventListener("change", apply);
+  }, [theme]);
   const [showLoading, setShowLoading] = useState(true);
 
   const timerRef = useRef(null);
@@ -102,7 +117,27 @@ export default function App() {
   }
 
   if (session && screen === "dashboard") {
-    return <Dashboard user={session.user} onLogout={signOut} />;
+    return (
+      <Dashboard
+        user={session.user}
+        onLogout={signOut}
+        onSettings={() => setScreen("settings")}
+      />
+    );
+  }
+
+  if (session && screen === "settings") {
+    return (
+      <Settings
+        user={session.user}
+        token={session.token || session.access_token}
+        onBack={() => setScreen("dashboard")}
+        onLogout={signOut}
+        onUserUpdated={updateUser}
+        theme={theme}
+        onThemeChange={setTheme}
+      />
+    );
   }
 
   return (

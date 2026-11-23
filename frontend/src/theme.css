@@ -1,0 +1,387 @@
+.profile-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  border-radius: 14px;
+  padding: 7px 10px;
+}
+
+.profile-trigger:hover,
+.profile-trigger:focus-visible {
+  background: rgba(45, 103, 223, 0.09);
+  outline-offset: 3px;
+}
+
+/* =========================
+   SETTINGS PAGE
+========================= */
+
+.settings-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 70px;
+}
+
+.settings-intro {
+  margin: 40px 0 26px;
+}
+
+.settings-intro h1 {
+  font-size: clamp(30px, 4vw, 44px);
+  margin: 15px 0 8px;
+  color: var(--cyc-text, #102449);
+}
+
+.settings-intro p,
+.settings-panel p {
+  color: var(--cyc-muted, #667a98);
+}
+
+.settings-panel {
+  background: var(--cyc-card, #fff);
+  border: 1px solid var(--cyc-border, #e2eaf6);
+  border-radius: 26px;
+  padding: clamp(22px, 3vw, 38px);
+  margin: 22px 0;
+  box-shadow: 0 10px 28px rgba(22, 45, 82, 0.035);
+}
+
+.settings-panel h2 {
+  font-size: 23px;
+  margin: 0 0 8px;
+  color: var(--cyc-text, #102449);
+}
+
+.settings-panel-heading {
+  margin-bottom: 25px;
+}
+
+/* =========================
+   THEME SELECTION
+========================= */
+
+.theme-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.theme-choice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 76px;
+  border-radius: 16px;
+  border: 1px solid var(--cyc-border, #dce6f5);
+  background: var(--cyc-card, #fff);
+  color: var(--cyc-text, #102449);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.theme-choice:hover,
+.theme-choice.selected {
+  border-color: #3775ed;
+  background: var(--cyc-selected, #edf4ff);
+  color: var(--cyc-link, #245ed7);
+}
+
+/* =========================
+   SETTINGS FORM
+========================= */
+
+.settings-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.settings-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-weight: 650;
+  color: var(--cyc-text, #102449);
+  min-width: 0;
+}
+
+.settings-fields input,
+.settings-fields textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--cyc-border, #dce6f5);
+  border-radius: 12px;
+  background: var(--cyc-input, #fff);
+  color: var(--cyc-text, #102449);
+  padding: 13px 15px;
+  font: inherit;
+  min-width: 0;
+}
+
+.settings-fields input:focus,
+.settings-fields textarea:focus {
+  outline: 2px solid #5289ed;
+  outline-offset: 1px;
+}
+
+.settings-wide {
+  grid-column: 1 / -1;
+}
+
+/* =========================
+   SETTINGS ACTIONS
+========================= */
+
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+}
+
+.settings-save {
+  border: 0;
+  border-radius: 12px;
+  background: #2864dc;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 23px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.settings-save:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.settings-save:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.settings-success {
+  color: #13865a !important;
+}
+
+.settings-error {
+  color: #df5260 !important;
+}
+
+/* =====================================================
+   DARK MODE VARIABLES
+===================================================== */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --cyc-text: #eef4ff;
+  --cyc-muted: #a8b9d5;
+  --cyc-card: #17263e;
+  --cyc-border: #314561;
+  --cyc-input: #102038;
+  --cyc-selected: #233e67;
+  --cyc-link: #8eb4ff;
+}
+
+/* =========================
+   GLOBAL DARK BACKGROUND
+========================= */
+
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] #root {
+  background: #0e1b2f !important;
+  color: #eef4ff;
+}
+
+/* =========================
+   DASHBOARD DARK MODE
+========================= */
+
+:root[data-theme="dark"] .dashboard {
+  background: linear-gradient(140deg, #101e34, #142744) !important;
+
+  color: #eef4ff;
+}
+
+/* =========================
+   HEADER DARK MODE
+========================= */
+
+:root[data-theme="dark"] .dash-header,
+:root[data-theme="dark"] .header {
+  background: #142239 !important;
+  border-color: #314561 !important;
+  color: #eef4ff;
+}
+
+/* =========================
+   DASHBOARD CARDS
+========================= */
+
+:root[data-theme="dark"] .dash-card,
+:root[data-theme="dark"] .next-card,
+:root[data-theme="dark"] .explore-section,
+:root[data-theme="dark"] .modern-item-card,
+:root[data-theme="dark"] .career-detail-panel,
+:root[data-theme="dark"] .skill-edit-panel,
+:root[data-theme="dark"] .settings-panel,
+:root[data-theme="dark"] .demo-banner {
+  background: #17263e !important;
+  border-color: #314561 !important;
+  color: #eef4ff !important;
+}
+
+/* =========================
+   DASHBOARD HEADINGS
+========================= */
+
+:root[data-theme="dark"] .dashboard h1,
+:root[data-theme="dark"] .dashboard h2,
+:root[data-theme="dark"] .dashboard h3,
+:root[data-theme="dark"] .dashboard strong,
+:root[data-theme="dark"] .dashboard .dash-card-label,
+:root[data-theme="dark"] .dashboard .section-label,
+:root[data-theme="dark"] .dashboard .modern-item-card h3 {
+  color: #f2f6ff !important;
+}
+
+/* =========================
+   DASHBOARD PARAGRAPHS
+========================= */
+
+:root[data-theme="dark"] .dashboard p,
+:root[data-theme="dark"] .dashboard .card-bottom,
+:root[data-theme="dark"] .dashboard .profile-meta span {
+  color: #b4c4de !important;
+}
+
+/* =========================
+   DARK MODE INPUTS
+========================= */
+
+:root[data-theme="dark"] .dashboard select,
+:root[data-theme="dark"] .dashboard input,
+:root[data-theme="dark"] .dashboard textarea {
+  background: #102038 !important;
+  border: 1px solid #3b526f !important;
+  color: #edf3ff !important;
+}
+
+/* Placeholder text */
+
+:root[data-theme="dark"] .dashboard input::placeholder,
+:root[data-theme="dark"] .dashboard textarea::placeholder {
+  color: #91a6c5;
+}
+
+/* Dropdown options */
+
+:root[data-theme="dark"] .dashboard select option {
+  background: #102038;
+  color: #edf3ff;
+}
+
+/* =========================
+   QUIET BUTTONS
+========================= */
+
+:root[data-theme="dark"] .dashboard .btn-quiet {
+  background: transparent !important;
+  color: #eef4ff;
+}
+
+:root[data-theme="dark"] .dashboard .btn-quiet:hover {
+  background: #243c5e !important;
+}
+
+/* =========================
+   PROFILE TRIGGER
+========================= */
+
+:root[data-theme="dark"] .profile-trigger {
+  color: #eef4ff;
+}
+
+:root[data-theme="dark"] .profile-trigger:hover {
+  background: #243c5e;
+}
+
+/* =========================
+   SETTINGS DARK MODE
+========================= */
+
+:root[data-theme="dark"] .settings-intro h1,
+:root[data-theme="dark"] .settings-panel h2,
+:root[data-theme="dark"] .settings-fields label {
+  color: #eef4ff;
+}
+
+:root[data-theme="dark"] .settings-intro p,
+:root[data-theme="dark"] .settings-panel p {
+  color: #a8b9d5;
+}
+
+:root[data-theme="dark"] .settings-fields input,
+:root[data-theme="dark"] .settings-fields textarea {
+  background: #102038;
+  border-color: #3b526f;
+  color: #eef4ff;
+}
+
+:root[data-theme="dark"] .theme-choice {
+  background: #17263e;
+  border-color: #314561;
+  color: #eef4ff;
+}
+
+:root[data-theme="dark"] .theme-choice:hover,
+:root[data-theme="dark"] .theme-choice.selected {
+  background: #233e67;
+  border-color: #60a5fa;
+  color: #bfdbfe;
+}
+
+:root[data-theme="dark"] .settings-success {
+  color: #6ee7b7 !important;
+}
+
+:root[data-theme="dark"] .settings-error {
+  color: #fda4af !important;
+}
+
+/* =========================
+   RESPONSIVE SETTINGS
+========================= */
+
+@media (max-width: 650px) {
+  .settings-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-choices {
+    gap: 8px;
+  }
+
+  .theme-choice {
+    flex-direction: column;
+    min-height: 85px;
+  }
+
+  .settings-main {
+    padding: 15px;
+  }
+
+  .settings-panel {
+    border-radius: 18px;
+  }
+}
