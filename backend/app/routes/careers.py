@@ -1,9 +1,10 @@
+from app.admin_security import admin_required
 import json
 import re
 
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
-
+from app.career_categories import category_matches_interest
 from sqlalchemy.orm import joinedload
 
 from app.extensions import db
@@ -23,11 +24,6 @@ careers_bp = Blueprint(
     url_prefix="/api/careers"
 )
 
-
-# =====================================================
-# RECOMMENDATION WEIGHTS
-# =====================================================
-
 WEIGHTS = {
     "skills": 0.40,
     "education": 0.20,
@@ -35,11 +31,6 @@ WEIGHTS = {
     "interests": 0.15,
     "goals": 0.10
 }
-
-
-# =====================================================
-# COMPATIBILITY LEVELS
-# =====================================================
 
 EDUCATION_LEVELS = {
     "high-school": 1,
@@ -66,11 +57,6 @@ SKILL_LEVELS = {
     "advanced": 3
 }
 
-
-# =====================================================
-# AUTHENTICATED USER
-# =====================================================
-
 def get_logged_in_user():
 
     identity = get_jwt_identity()
@@ -81,11 +67,6 @@ def get_logged_in_user():
         return None
 
     return db.session.get(User, user_id)
-
-
-# =====================================================
-# PROFILE HELPERS
-# =====================================================
 
 def get_user_profile(user):
 
@@ -109,11 +90,6 @@ def get_user_interests(profile):
         pass
 
     return []
-
-
-# =====================================================
-# TEXT MATCHING HELPERS
-# =====================================================
 
 STOP_WORDS = {
     "the", "and", "for", "with", "from",
@@ -157,11 +133,6 @@ def text_match_score(user_text, career_text):
     return round(
         (len(overlap) / len(career_words)) * 100
     )
-
-
-# =====================================================
-# SKILLS COMPATIBILITY - 40%
-# =====================================================
 
 def calculate_skill_match(user_records, career):
 
@@ -229,7 +200,7 @@ def calculate_skill_match(user_records, career):
 
     else:
 
-        score = 50
+        score = 0
 
     return {
         "score": score,
@@ -238,11 +209,6 @@ def calculate_skill_match(user_records, career):
         "improvement_skills": improvement_skills,
         "total_required_skills": len(required_skills)
     }
-
-
-# =====================================================
-# EDUCATION COMPATIBILITY - 20%
-# =====================================================
 
 def calculate_education_match(profile, career):
 
@@ -272,7 +238,6 @@ def calculate_education_match(profile, career):
     else:
         level_score = 20
 
-    # Consider course and additional requirements
     if career.education_requirements:
 
         course_score = text_match_score(
@@ -286,11 +251,6 @@ def calculate_education_match(profile, career):
         )
 
     return level_score
-
-
-# =====================================================
-# EXPERIENCE COMPATIBILITY - 15%
-# =====================================================
 
 def calculate_experience_match(profile, career):
 
@@ -319,11 +279,13 @@ def calculate_experience_match(profile, career):
     return 40
 
 
-# =====================================================
-# CAREER INTEREST COMPATIBILITY - 15%
-# =====================================================
-
 def calculate_interest_match(profile, career):
+    """
+    Calculate career compatibility using onboarding interests.
+
+    Explicit industry matches receive priority.
+    Text matching remains available as a fallback.
+    """
 
     interests = get_user_interests(profile)
 
@@ -342,33 +304,33 @@ def calculate_interest_match(profile, career):
 
     for interest in interests:
 
+        if not isinstance(interest, str):
+            continue
+
         interest_normalized = normalize_text(interest)
 
         if not interest_normalized:
             continue
 
-        if interest_normalized in career_normalized:
-
+        if category_matches_interest(interest, career):
             scores.append(100)
+            continue
 
-        else:
+        if interest_normalized in career_normalized:
+            scores.append(90)
+            continue
 
-            scores.append(
-                text_match_score(
-                    interest,
-                    f"{career.title} {career.category or ''}"
-                )
-            )
+        similarity = text_match_score(
+            interest,
+            f"{career.title} {career.category or ''}"
+        )
+
+        scores.append(min(similarity, 70))
 
     if not scores:
         return 50
 
     return max(scores)
-
-
-# =====================================================
-# CAREER GOAL COMPATIBILITY - 10%
-# =====================================================
 
 def calculate_goal_match(profile, career):
 
@@ -392,11 +354,6 @@ def calculate_goal_match(profile, career):
         user_goals,
         career_description
     )
-
-
-# =====================================================
-# COMPLETE CAREER RECOMMENDATION
-# =====================================================
 
 def calculate_career_match(
     user_records,
@@ -429,7 +386,6 @@ def calculate_career_match(
         career
     )
 
-    # Weighted calculation
     final_score = (
 
         skills["score"] * WEIGHTS["skills"]
@@ -478,11 +434,6 @@ def calculate_career_match(
 
     }
 
-
-# =====================================================
-# CAREER SERIALIZATION
-# =====================================================
-
 def career_to_dict(career):
 
     return {
@@ -503,11 +454,6 @@ def career_to_dict(career):
 
     }
 
-
-# =====================================================
-# GET ALL CAREERS
-# =====================================================
-
 @careers_bp.route("", methods=["GET"])
 @jwt_required()
 def get_careers():
@@ -519,13 +465,8 @@ def get_careers():
         for career in careers
     ]), 200
 
-
-# =====================================================
-# CREATE CAREER
-# =====================================================
-
 @careers_bp.route("", methods=["POST"])
-@jwt_required()
+@admin_required
 def create_career():
 
     data = request.get_json() or {}
@@ -568,11 +509,6 @@ def create_career():
 
     return jsonify(career_to_dict(career)), 201
 
-
-# =====================================================
-# GET ONE CAREER
-# =====================================================
-
 @careers_bp.route("/<int:career_id>", methods=["GET"])
 @jwt_required()
 def get_career(career_id):
@@ -587,13 +523,8 @@ def get_career(career_id):
 
     return jsonify(career_to_dict(career)), 200
 
-
-# =====================================================
-# UPDATE CAREER
-# =====================================================
-
 @careers_bp.route("/<int:career_id>", methods=["PUT", "PATCH"])
-@jwt_required()
+@admin_required
 def update_career(career_id):
 
     career = db.session.get(Career, career_id)
@@ -625,13 +556,8 @@ def update_career(career_id):
 
     return jsonify(career_to_dict(career)), 200
 
-
-# =====================================================
-# DELETE CAREER
-# =====================================================
-
 @careers_bp.route("/<int:career_id>", methods=["DELETE"])
-@jwt_required()
+@admin_required
 def delete_career(career_id):
 
     career = db.session.get(Career, career_id)
@@ -655,12 +581,8 @@ def delete_career(career_id):
     }), 200
 
 
-# =====================================================
-# GENERATE PERSONALIZED RECOMMENDATIONS
-# =====================================================
-
 def generate_recommendations(user):
-
+    """Rank every career, prioritizing the user's selected industries."""
     profile = get_user_profile(user)
 
     user_records = (
@@ -679,35 +601,33 @@ def generate_recommendations(user):
         .all()
     )
 
+    user_interests = get_user_interests(profile)
     recommendations = []
 
     for career in careers:
+        match = calculate_career_match(user_records, profile, career)
 
-        match = calculate_career_match(
-            user_records,
-            profile,
-            career
+        industry_relevant = any(
+            category_matches_interest(interest, career)
+            for interest in user_interests
         )
 
         recommendations.append({
-
             **career_to_dict(career),
-
-            **match
-
+            **match,
+            "industry_relevant": industry_relevant,
         })
 
     recommendations.sort(
-        key=lambda item: item["match_percentage"],
-        reverse=True
+        key=lambda item: (
+            item["industry_relevant"],
+            item["match_percentage"],
+        ),
+        reverse=True,
     )
 
     return recommendations
 
-
-# =====================================================
-# GET CAREER RECOMMENDATIONS
-# =====================================================
 
 @careers_bp.route("/recommendations", methods=["GET"])
 @jwt_required()
@@ -725,10 +645,6 @@ def career_recommendations():
 
     return jsonify(recommendations), 200
 
-
-# =====================================================
-# REFRESH RECOMMENDATIONS
-# =====================================================
 
 @careers_bp.route(
     "/recommendations/refresh",
@@ -754,11 +670,6 @@ def refresh_recommendations():
         "recommendations": recommendations
 
     }), 200
-
-
-# =====================================================
-# CAREER SKILL GAP ANALYSIS
-# =====================================================
 
 @careers_bp.route(
     "/<int:career_id>/skill-gap",

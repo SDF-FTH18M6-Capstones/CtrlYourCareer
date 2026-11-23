@@ -1,0 +1,988 @@
+/* ============================================================
+   CTRL YOUR CAREER — REUSABLE MODAL
+============================================================ */
+
+.cyc-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(6, 19, 43, 0.65);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.cyc-modal {
+  width: 100%;
+  max-height: min(90vh, 850px);
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #dce5f2;
+  border-radius: 20px;
+
+  background: #ffffff;
+  color: #10254a;
+
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+
+  overflow: hidden;
+
+  animation: cyc-modal-appear 0.2s ease;
+}
+
+.cyc-modal-small {
+  max-width: 420px;
+}
+
+.cyc-modal-medium {
+  max-width: 560px;
+}
+
+.cyc-modal-large {
+  max-width: 740px;
+}
+
+.cyc-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  padding: 24px 28px;
+
+  border-bottom: 1px solid #e8edf5;
+}
+
+.cyc-modal-header h2 {
+  margin: 0;
+
+  font-size: 22px;
+  font-weight: 800;
+
+  color: #10254a;
+}
+
+.cyc-modal-close {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: #f0f5ff;
+  color: #647895;
+
+  cursor: pointer;
+}
+
+.cyc-modal-close:hover {
+  background: #e4edff;
+  color: #285bd8;
+}
+
+.cyc-modal-body {
+  padding: 28px;
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* FORM STYLING */
+
+.cyc-modal .cyc-admin-field {
+  margin-bottom: 20px;
+}
+
+.cyc-modal .cyc-admin-field label {
+  display: block;
+  margin-bottom: 8px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  color: #10254a;
+}
+
+.cyc-modal .cyc-admin-field input,
+.cyc-modal .cyc-admin-field textarea,
+.cyc-modal .cyc-admin-field select {
+  width: 100%;
+
+  padding: 13px 15px;
+
+  border: 1px solid #dce5f2;
+  border-radius: 11px;
+
+  background: #f8faff;
+  color: #10254a;
+
+  font: inherit;
+  font-size: 14px;
+
+  outline: none;
+}
+
+.cyc-modal .cyc-admin-field input:focus,
+.cyc-modal .cyc-admin-field textarea:focus,
+.cyc-modal .cyc-admin-field select:focus {
+  border-color: #285bd8;
+  box-shadow: 0 0 0 3px rgba(40, 91, 216, 0.12);
+}
+
+.cyc-modal .cyc-admin-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+
+  margin-top: 26px;
+}
+
+@keyframes cyc-modal-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* DARK MODE */
+
+[data-theme="dark"] .cyc-modal,
+.dark .cyc-modal {
+  background: #14233b;
+  border-color: #2b3b55;
+  color: #f0f5ff;
+}
+
+[data-theme="dark"] .cyc-modal-header,
+.dark .cyc-modal-header {
+  border-color: #2b3b55;
+}
+
+[data-theme="dark"] .cyc-modal-header h2,
+.dark .cyc-modal-header h2,
+[data-theme="dark"] .cyc-modal .cyc-admin-field label,
+.dark .cyc-modal .cyc-admin-field label {
+  color: #f0f5ff;
+}
+
+[data-theme="dark"] .cyc-modal .cyc-admin-field input,
+[data-theme="dark"] .cyc-modal .cyc-admin-field textarea,
+[data-theme="dark"] .cyc-modal .cyc-admin-field select,
+.dark .cyc-modal .cyc-admin-field input,
+.dark .cyc-modal .cyc-admin-field textarea,
+.dark .cyc-modal .cyc-admin-field select {
+  background: #0c182b;
+  border-color: #2b3b55;
+  color: #f0f5ff;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .cyc-modal-overlay {
+    padding: 12px;
+  }
+
+  .cyc-modal {
+    max-height: 92dvh;
+    border-radius: 16px;
+  }
+
+  .cyc-modal-header {
+    padding: 20px;
+  }
+
+  .cyc-modal-header h2 {
+    font-size: 19px;
+  }
+
+  .cyc-modal-body {
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyc-modal {
+    animation: none;
+  }
+}
+/* ============================================================
+   FIX: ADMIN MODAL BUTTON VISIBILITY
+============================================================ */
+
+/* Save Changes / Create buttons */
+.cyc-modal .cyc-admin-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 48px;
+  padding: 12px 24px;
+
+  background-color: #285bd8 !important;
+  color: #ffffff !important;
+
+  border: 1px solid #285bd8 !important;
+  border-radius: 12px;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Hover */
+.cyc-modal .cyc-admin-primary-btn:hover:not(:disabled) {
+  background-color: #1c49b5 !important;
+  color: #ffffff !important;
+  border-color: #1c49b5 !important;
+
+  transform: translateY(-1px);
+}
+
+/* Keyboard focus */
+.cyc-modal .cyc-admin-primary-btn:focus-visible {
+  outline: 3px solid rgba(40, 91, 216, 0.3);
+  outline-offset: 3px;
+}
+
+/* Disabled state */
+.cyc-modal .cyc-admin-primary-btn:disabled {
+  background-color: #9bb6ef !important;
+  border-color: #9bb6ef !important;
+  color: #ffffff !important;
+
+  opacity: 0.7 !important;
+  cursor: not-allowed;
+}
+
+/* Cancel button */
+.cyc-modal .cyc-admin-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+  padding: 12px 24px;
+
+  background-color: #eef3ff !important;
+  color: #285bd8 !important;
+
+  border: 1px solid #dce5f2 !important;
+  border-radius: 12px;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  cursor: pointer;
+}
+
+.cyc-modal .cyc-admin-secondary-btn:hover:not(:disabled) {
+  background-color: #dce8ff !important;
+  color: #1c49b5 !important;
+}
+/* ============================================================
+   REMOVE SKILL BUTTON — LIGHT MODE
+============================================================ */
+
+.cyc-modal .cyc-skill-remove-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 48px;
+  padding: 12px 22px;
+
+  background: #fff1f2 !important;
+  color: #dc2626 !important;
+
+  border: 1.5px solid #fecaca !important;
+  border-radius: 12px;
+
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* HOVER */
+
+.cyc-modal .cyc-skill-remove-btn:hover:not(:disabled) {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+  border-color: #dc2626 !important;
+
+  transform: translateY(-1px);
+}
+
+/* ACTIVE */
+
+.cyc-modal .cyc-skill-remove-btn:active:not(:disabled) {
+  background: #b91c1c !important;
+  color: #ffffff !important;
+
+  transform: translateY(0);
+}
+
+/* KEYBOARD FOCUS */
+
+.cyc-modal .cyc-skill-remove-btn:focus-visible {
+  outline: 3px solid rgba(220, 38, 38, 0.25);
+  outline-offset: 3px;
+}
+
+/* DISABLED */
+
+.cyc-modal .cyc-skill-remove-btn:disabled {
+  background: #fee2e2 !important;
+  color: #ef9a9a !important;
+  border-color: #fecaca !important;
+
+  opacity: 0.7 !important;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ============================================================
+   REMOVE SKILL BUTTON — DARK MODE
+============================================================ */
+
+[data-theme="dark"] .cyc-modal .cyc-skill-remove-btn,
+.dark .cyc-modal .cyc-skill-remove-btn {
+  background: #3b1725 !important;
+  color: #fda4af !important;
+  border-color: #7f3447 !important;
+}
+
+[data-theme="dark"] .cyc-modal .cyc-skill-remove-btn:hover:not(:disabled),
+.dark .cyc-modal .cyc-skill-remove-btn:hover:not(:disabled) {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+  border-color: #dc2626 !important;
+}
+
+/* ============================================================
+   MOBILE RESPONSIVENESS
+============================================================ */
+
+@media (max-width: 600px) {
+  .cyc-modal .cyc-skill-remove-btn {
+    width: 100%;
+    min-height: 48px;
+  }
+}
+/* ============================================================
+   CTRL YOUR CAREER — CAREER DETAILS POPUP
+============================================================ */
+
+.cyc-career-modal {
+  width: 100%;
+}
+
+/* HERO */
+
+.cyc-career-modal-hero {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  padding: 22px;
+  margin-bottom: 26px;
+
+  border: 1px solid #dce7fa;
+  border-radius: 16px;
+
+  background: linear-gradient(135deg, #f2f6ff 0%, #e8f0ff 100%);
+}
+
+.cyc-career-modal-icon {
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  width: 58px;
+  height: 58px;
+
+  border-radius: 15px;
+
+  background: #285bd8;
+  color: #ffffff;
+}
+
+.cyc-career-modal-hero-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.cyc-career-modal-eyebrow {
+  display: block;
+  margin-bottom: 7px;
+
+  color: #285bd8;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.cyc-career-modal-hero-content h3 {
+  margin: 0 0 6px;
+
+  color: #10254a;
+
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.cyc-career-modal-hero-content p {
+  margin: 0;
+
+  color: #647895;
+  font-size: 13px;
+}
+
+.cyc-career-modal-match {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 115px;
+
+  padding: 13px;
+
+  border-radius: 13px;
+
+  background: #ffffff;
+  border: 1px solid #dce7fa;
+}
+
+.cyc-career-modal-match strong {
+  color: #285bd8;
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.cyc-career-modal-match span {
+  margin-top: 4px;
+
+  color: #647895;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* SECTIONS */
+
+.cyc-career-modal-section {
+  margin-bottom: 27px;
+}
+
+.cyc-career-modal-section h4 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin: 0 0 15px;
+
+  color: #10254a;
+
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.cyc-career-modal-section h4 svg {
+  color: #285bd8;
+}
+
+.cyc-career-modal-description {
+  margin: 0;
+
+  color: #647895;
+
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.cyc-career-modal-muted {
+  margin: 0;
+
+  color: #8290a6;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* INFO CARDS */
+
+.cyc-career-modal-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+
+  margin-bottom: 28px;
+}
+
+.cyc-career-modal-info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  padding: 19px;
+
+  border: 1px solid #e3eaf5;
+  border-radius: 13px;
+
+  background: #f8faff;
+}
+
+.cyc-career-modal-info-card svg {
+  color: #285bd8;
+}
+
+.cyc-career-modal-info-card > span {
+  color: #8290a6;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cyc-career-modal-info-card strong {
+  color: #10254a;
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* MATCH BREAKDOWN */
+
+.cyc-career-modal-factors {
+  display: grid;
+  gap: 17px;
+}
+
+.cyc-career-modal-factor-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 9px;
+
+  color: #647895;
+  font-size: 13px;
+}
+
+.cyc-career-modal-factor-top strong {
+  color: #10254a;
+  font-weight: 800;
+}
+
+.cyc-career-modal-progress-track {
+  height: 9px;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+  background: #e7edf7;
+}
+
+.cyc-career-modal-progress-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(90deg, #285bd8, #6696ff);
+
+  transition: width 0.3s ease;
+}
+
+/* SKILL TAGS */
+
+.cyc-career-modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.cyc-career-modal-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 9px 13px;
+
+  border-radius: 9px;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cyc-career-modal-tag.matched {
+  background: #eaf8ef;
+  color: #187a42;
+
+  border: 1px solid #bce6c9;
+}
+
+.cyc-career-modal-tag.missing {
+  background: #fff0f0;
+  color: #b4232e;
+
+  border: 1px solid #f5c2c7;
+}
+
+/* SKILLS TO IMPROVE */
+
+.cyc-career-modal-improvements {
+  display: grid;
+  gap: 11px;
+}
+
+.cyc-career-modal-improvement {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  padding: 15px 17px;
+
+  border: 1px solid #e3eaf5;
+  border-radius: 11px;
+
+  background: #f8faff;
+}
+
+.cyc-career-modal-improvement > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cyc-career-modal-improvement strong {
+  color: #10254a;
+  font-size: 13px;
+}
+
+.cyc-career-modal-improvement > div:first-child span {
+  color: #8290a6;
+  font-size: 12px;
+}
+
+.cyc-career-modal-improvement-target {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #285bd8;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* WARNINGS */
+
+.cyc-career-modal-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  padding: 15px 17px;
+  margin-bottom: 25px;
+
+  border: 1px solid #f4d49a;
+  border-radius: 11px;
+
+  background: #fff8e8;
+  color: #9a6700;
+}
+
+.cyc-career-modal-warning svg {
+  flex-shrink: 0;
+}
+
+.cyc-career-modal-warning p {
+  margin: 0;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ACTION BUTTONS */
+
+.cyc-career-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  padding-top: 22px;
+
+  border-top: 1px solid #e8edf5;
+}
+
+.cyc-career-modal-close-btn,
+.cyc-career-modal-start-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 48px;
+  padding: 12px 22px;
+
+  border-radius: 11px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.cyc-career-modal-close-btn {
+  background: #eef3ff !important;
+  color: #285bd8 !important;
+  border: 1px solid #dce5f2 !important;
+}
+
+.cyc-career-modal-close-btn:hover:not(:disabled) {
+  background: #dce8ff !important;
+}
+
+.cyc-career-modal-start-btn {
+  background: #285bd8 !important;
+  color: #ffffff !important;
+  border: 1px solid #285bd8 !important;
+}
+
+.cyc-career-modal-start-btn:hover:not(:disabled) {
+  background: #1c49b5 !important;
+  border-color: #1c49b5 !important;
+
+  transform: translateY(-1px);
+}
+
+.cyc-career-modal-start-btn:disabled,
+.cyc-career-modal-close-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* LOADING */
+
+.cyc-career-modal-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  padding: 40px 15px;
+
+  color: #647895;
+
+  font-size: 14px;
+}
+
+.cyc-career-spinning {
+  animation: cyc-career-spin 0.8s linear infinite;
+}
+
+@keyframes cyc-career-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ERROR */
+
+.cyc-career-modal-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 16px;
+  margin-bottom: 20px;
+
+  border-radius: 10px;
+
+  background: #fff0f0;
+  border: 1px solid #f5c2c7;
+
+  color: #b4232e;
+
+  font-size: 13px;
+}
+
+/* ============================================================
+   DARK MODE
+============================================================ */
+
+[data-theme="dark"] .cyc-career-modal-hero,
+.dark .cyc-career-modal-hero {
+  background: #1b3156;
+  border-color: #2b4774;
+}
+
+[data-theme="dark"] .cyc-career-modal-hero-content h3,
+.dark .cyc-career-modal-hero-content h3,
+[data-theme="dark"] .cyc-career-modal-section h4,
+.dark .cyc-career-modal-section h4,
+[data-theme="dark"] .cyc-career-modal-info-card strong,
+.dark .cyc-career-modal-info-card strong,
+[data-theme="dark"] .cyc-career-modal-factor-top strong,
+.dark .cyc-career-modal-factor-top strong,
+[data-theme="dark"] .cyc-career-modal-improvement strong,
+.dark .cyc-career-modal-improvement strong {
+  color: #f0f5ff;
+}
+
+[data-theme="dark"] .cyc-career-modal-hero-content p,
+.dark .cyc-career-modal-hero-content p,
+[data-theme="dark"] .cyc-career-modal-description,
+.dark .cyc-career-modal-description,
+[data-theme="dark"] .cyc-career-modal-factor-top,
+.dark .cyc-career-modal-factor-top,
+[data-theme="dark"] .cyc-career-modal-muted,
+.dark .cyc-career-modal-muted {
+  color: #a8bad5;
+}
+
+[data-theme="dark"] .cyc-career-modal-match,
+.dark .cyc-career-modal-match,
+[data-theme="dark"] .cyc-career-modal-info-card,
+.dark .cyc-career-modal-info-card,
+[data-theme="dark"] .cyc-career-modal-improvement,
+.dark .cyc-career-modal-improvement {
+  background: #0c182b;
+  border-color: #2b3b55;
+}
+
+[data-theme="dark"] .cyc-career-modal-match span,
+.dark .cyc-career-modal-match span,
+[data-theme="dark"] .cyc-career-modal-info-card > span,
+.dark .cyc-career-modal-info-card > span,
+[data-theme="dark"] .cyc-career-modal-improvement > div:first-child span,
+.dark .cyc-career-modal-improvement > div:first-child span {
+  color: #a8bad5;
+}
+
+[data-theme="dark"] .cyc-career-modal-progress-track,
+.dark .cyc-career-modal-progress-track {
+  background: #2b3b55;
+}
+
+[data-theme="dark"] .cyc-career-modal-tag.matched,
+.dark .cyc-career-modal-tag.matched {
+  background: #153d2b;
+  color: #83e0ad;
+  border-color: #286548;
+}
+
+[data-theme="dark"] .cyc-career-modal-tag.missing,
+.dark .cyc-career-modal-tag.missing {
+  background: #3b1725;
+  color: #ff9daf;
+  border-color: #783449;
+}
+
+[data-theme="dark"] .cyc-career-modal-warning,
+.dark .cyc-career-modal-warning {
+  background: #392b12;
+  color: #ffd18a;
+  border-color: #715222;
+}
+
+[data-theme="dark"] .cyc-career-modal-actions,
+.dark .cyc-career-modal-actions {
+  border-color: #2b3b55;
+}
+
+/* ============================================================
+   MOBILE RESPONSIVENESS
+============================================================ */
+
+@media (max-width: 600px) {
+  .cyc-career-modal-hero {
+    flex-wrap: wrap;
+    padding: 17px;
+  }
+
+  .cyc-career-modal-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .cyc-career-modal-hero-content h3 {
+    font-size: 18px;
+  }
+
+  .cyc-career-modal-match {
+    width: 100%;
+  }
+
+  .cyc-career-modal-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cyc-career-modal-actions {
+    flex-direction: column;
+  }
+
+  .cyc-career-modal-actions button {
+    width: 100%;
+  }
+
+  .cyc-career-modal-improvement {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyc-career-spinning {
+    animation: none;
+  }
+}

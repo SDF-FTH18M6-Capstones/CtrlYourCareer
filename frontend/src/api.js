@@ -5,6 +5,10 @@ export const demo = import.meta.env.VITE_DEMO_MODE === "true";
 const accountsKey = "cyc_demo_accounts";
 const sessionKey = "cyc_auth_session";
 
+// ============================================================
+// LOCAL STORAGE HELPERS
+// ============================================================
+
 const read = (key, fallback) => {
   try {
     return JSON.parse(localStorage.getItem(key)) ?? fallback;
@@ -23,6 +27,10 @@ const safe = (account) => {
   const { password, ...user } = account;
   return user;
 };
+
+// ============================================================
+// API REQUEST HELPER
+// ============================================================
 
 async function request(path, { method = "GET", body, token } = {}) {
   let response;
@@ -56,7 +64,15 @@ async function request(path, { method = "GET", body, token } = {}) {
   return data;
 }
 
+// ============================================================
+// AUTHENTICATION API
+// ============================================================
+
 export const api = {
+  // ----------------------------------------------------------
+  // SESSION MANAGEMENT
+  // ----------------------------------------------------------
+
   getSession: () => read(sessionKey, null),
 
   saveSession: (session) => {
@@ -67,7 +83,10 @@ export const api = {
     localStorage.removeItem(sessionKey);
   },
 
+  // ----------------------------------------------------------
   // REGISTER
+  // ----------------------------------------------------------
+
   async register({ username, name, email, password }) {
     const displayName = username || name;
 
@@ -117,7 +136,10 @@ export const api = {
     return session;
   },
 
-  // LOGIN
+  // ----------------------------------------------------------
+  // LOGIN — NORMAL USER + ADMIN
+  // ----------------------------------------------------------
+
   async login({ email, password }) {
     if (!demo) {
       const data = await request("/auth/login", {
@@ -127,6 +149,31 @@ export const api = {
           password,
         },
       });
+
+      // ======================================================
+      // ADMIN LOGIN: PIN VERIFICATION REQUIRED
+      // ======================================================
+      //
+      // Admins must verify their six-digit PIN before
+      // receiving a JWT access token.
+      //
+      // Do not save a session at this stage.
+      // ======================================================
+
+      if (data.requires_admin_pin === true) {
+        if (typeof data.challenge !== "string" || !data.challenge) {
+          throw new Error("Admin verification challenge is missing.");
+        }
+
+        return {
+          requires_admin_pin: true,
+          challenge: data.challenge,
+        };
+      }
+
+      // ======================================================
+      // NORMAL USER LOGIN
+      // ======================================================
 
       const token = data.access_token || data.token;
 
@@ -150,6 +197,10 @@ export const api = {
       return session;
     }
 
+    // ========================================================
+    // DEMO MODE LOGIN
+    // ========================================================
+
     await wait();
 
     const account = read(accountsKey, []).find(
@@ -172,7 +223,61 @@ export const api = {
     return session;
   },
 
+  // ----------------------------------------------------------
+  // ADMIN PIN VERIFICATION
+  // ----------------------------------------------------------
+
+  async verifyAdminPin({ challenge, pin }) {
+    if (demo) {
+      throw new Error("Admin PIN verification is unavailable in demo mode.");
+    }
+
+    if (typeof challenge !== "string" || !challenge) {
+      throw new Error("Admin verification challenge is missing.");
+    }
+
+    if (!/^[0-9]{6}$/.test(String(pin))) {
+      throw new Error("Enter a valid six-digit admin PIN.");
+    }
+
+    const data = await request("/auth/admin/verify-pin", {
+      method: "POST",
+      body: {
+        challenge,
+        pin: String(pin),
+      },
+    });
+
+    const token = data.access_token || data.token;
+
+    if (!token) {
+      throw new Error("Admin verification did not return an access token.");
+    }
+
+    const user = data.user || (await request("/auth/me", { token })).user;
+
+    if (!user) {
+      throw new Error("The backend did not return an admin profile.");
+    }
+
+    if (user.role !== "admin") {
+      throw new Error("The verified account does not have admin access.");
+    }
+
+    const session = {
+      token,
+      user,
+    };
+
+    save(sessionKey, session);
+
+    return session;
+  },
+
+  // ----------------------------------------------------------
   // CURRENT USER
+  // ----------------------------------------------------------
+
   async me(token) {
     if (!demo) {
       const data = await request("/auth/me", {
@@ -208,7 +313,10 @@ export const api = {
     };
   },
 
+  // ----------------------------------------------------------
   // ONBOARDING
+  // ----------------------------------------------------------
+
   async onboard(token, profile) {
     if (!demo) {
       const data = await request("/profile/onboarding", {

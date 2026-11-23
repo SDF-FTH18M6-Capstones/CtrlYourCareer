@@ -1584,3 +1584,45 @@ a {
 .next-card button.coming {
   font-family: inherit;
 }
+
+.onboarding-progress-track {
+  width: 100%;
+  height: 8px;
+
+  margin: 28px 0 32px;
+
+  background: #dce5f3;
+  border-radius: 999px;
+
+  overflow: hidden;
+}
+
+.onboarding-progress-fill {
+  height: 100%;
+
+  background: linear-gradient(90deg, #285bd8, #4f83f1);
+
+  border-radius: inherit;
+
+  transition: width 0.35s ease;
+}
+
+/* DARK MODE */
+
+[data-theme="dark"] .onboarding-progress-track,
+.dark .onboarding-progress-track {
+  background: #2b3d59;
+}
+
+[data-theme="dark"] .onboarding-progress-fill,
+.dark .onboarding-progress-fill {
+  background: linear-gradient(90deg, #3b82f6, #80aaff);
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .onboarding-progress-fill {
+    transition: none;
+  }
+}

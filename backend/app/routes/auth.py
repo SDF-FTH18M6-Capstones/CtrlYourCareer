@@ -167,15 +167,16 @@ def login():
             "error": "Invalid credentials"
         }), 401
 
-    access_token = create_access_token(
-        identity=str(user.id)
-    )
+    if user.role == "admin":
+        from app.admin_models import AdminCredential
+        from app.routes.admin_auth import issue_challenge
+        credential = AdminCredential.query.filter_by(user_id=user.id).first()
+        if credential is None:
+            return jsonify(error="Admin PIN not configured"), 403
+        return jsonify(requires_admin_pin=True, challenge=issue_challenge(user)), 200
 
-    return jsonify({
-        "message": "Login successful",
-        "access_token": access_token,
-        "user": serialize_user(user),
-    }), 200
+    access_token = create_access_token(identity=str(user.id), additional_claims={"admin_verified": False})
+    return jsonify(message="Login successful", access_token=access_token, user=serialize_user(user)), 200
 
 
 @auth_bp.route("/me", methods=["GET"])

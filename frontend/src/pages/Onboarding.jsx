@@ -189,10 +189,20 @@ export default function Onboarding({ user, token, onComplete, onLogout }) {
           </div>
         </div>
 
-        <div className="step-progress">
-          {[0, 1, 2, 3, 4, 5].map((i) => (
-            <span key={i} className={i <= step ? "active" : ""} />
-          ))}
+        <div
+          className="onboarding-progress-track"
+          role="progressbar"
+          aria-label="Onboarding progress"
+          aria-valuemin={0}
+          aria-valuemax={6}
+          aria-valuenow={step + 1}
+        >
+          <div
+            className="onboarding-progress-fill"
+            style={{
+              width: `${((step + 1) / 6) * 100}%`,
+            }}
+          />
         </div>
 
         <div className="question-card">

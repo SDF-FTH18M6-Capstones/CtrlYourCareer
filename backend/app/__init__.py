@@ -1,8 +1,6 @@
 from flask import Flask, jsonify
 from config import Config
-
 from app.extensions import db, migrate, cors, bcrypt, jwt
-
 from app.routes.health import health_bp
 from app.routes.skills import skills_bp
 from app.routes.careers import careers_bp
@@ -34,7 +32,12 @@ def create_app():
     bcrypt.init_app(app)
     jwt.init_app(app)
 
-    from app import models
+    from app import models, admin_models, journey_models
+
+    from app.routes.admin_auth import admin_auth_bp
+    from app.routes.admin_management import admin_bp
+    from app.routes.journeys import journeys_bp
+    from app.routes.resources import resources_bp
 
     # Register blueprints
     app.register_blueprint(health_bp)
@@ -46,5 +49,10 @@ def create_app():
         url_prefix="/api/my-skills"
     )
     app.register_blueprint(profile_bp)
+
+    app.register_blueprint(admin_auth_bp)
+    app.register_blueprint(admin_bp)
+    app.register_blueprint(journeys_bp)
+    app.register_blueprint(resources_bp)
 
     return app

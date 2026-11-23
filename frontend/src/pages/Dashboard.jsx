@@ -16,7 +16,14 @@ import Brand from "../components/Brand";
 import { roles, goals } from "../data/onboardingOptions";
 import { demo } from "../api";
 
-export default function Dashboard({ user, onLogout, onSettings }) {
+export default function Dashboard({
+  user,
+  onLogout,
+  onSettings,
+  onExploreCareers,
+  onOpenJourneys,
+  onStartJourney,
+}) {
   const skillsRef = useRef(null);
   const careersRef = useRef(null);
 
@@ -41,13 +48,14 @@ export default function Dashboard({ user, onLogout, onSettings }) {
       title: "Explore careers",
       description: "Discover possible career paths and what they require.",
       actionLabel: "Explore careers",
-      onClick: () => scrollToSection(careersRef),
+      onClick: onExploreCareers,
       available: true,
     },
     {
       Icon: Code2,
       title: "My skills map",
-      description: "Discover skills and start building your knowledge.",
+      description:
+        "Find skills recommended for your interests and build your knowledge.",
       actionLabel: "View skills",
       onClick: () => scrollToSection(skillsRef),
       available: true,
@@ -56,7 +64,8 @@ export default function Dashboard({ user, onLogout, onSettings }) {
       Icon: BookOpen,
       title: "Learning journey",
       description: "Plan what you want to learn next.",
-      actionLabel: "Coming soon",
+      actionLabel: "View my journeys",
+      onClick: onOpenJourneys,
       available: true,
     },
   ];
@@ -146,7 +155,10 @@ export default function Dashboard({ user, onLogout, onSettings }) {
               ))}
             </div>
 
-            <p>These interests will help shape your career exploration.</p>
+            <p>
+              Your career and skill recommendations are based on these
+              interests. Update them in Settings anytime.
+            </p>
           </div>
         </div>
 
@@ -219,7 +231,7 @@ export default function Dashboard({ user, onLogout, onSettings }) {
             id="dashboard-careers"
             style={{ scrollMarginTop: "90px" }}
           >
-            <CareersList />
+            <CareersList onStartJourney={onStartJourney} />
           </div>
         </div>
       </main>

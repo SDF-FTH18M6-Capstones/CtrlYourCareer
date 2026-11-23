@@ -142,8 +142,6 @@ def onboarding():
 
     profile.full_name = user.username
 
-    # Save user role
-    user.role = role.strip()
 
     try:
         db.session.commit()
