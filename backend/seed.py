@@ -1,75 +1,98 @@
+
 from app import create_app
-from app.models import db, Skill, Career
+from app.extensions import db
+from app.models import Skill, Career, CareerSkill
 
 app = create_app()
 
 with app.app_context():
 
-    # Add sample skills
     skills_data = [
-        {
-            "name": "Python",
-            "category": "Programming",
-            "description": "Programming language used for backend development."
-        },
-        {
-            "name": "JavaScript",
-            "category": "Programming",
-            "description": "Programming language used for frontend development."
-        },
-        {
-            "name": "React",
-            "category": "Frontend",
-            "description": "JavaScript library for building user interfaces."
-        },
-        {
-            "name": "SQL",
-            "category": "Database",
-            "description": "Language used to manage relational databases."
-        },
-        {
-            "name": "Communication",
-            "category": "Soft Skills",
-            "description": "Ability to communicate ideas effectively."
-        }
+        ("Python", "Programming"),
+        ("Flask", "Backend Development"),
+        ("SQL", "Database"),
+        ("HTML", "Frontend Development"),
+        ("CSS", "Frontend Development"),
+        ("JavaScript", "Programming"),
+        ("React", "Frontend Development"),
+        ("REST APIs", "Backend Development"),
+        ("Git", "Tools"),
+        ("Communication", "Professional Skills")
     ]
 
-    # Add sample careers
-    careers_data = [
-        {
-            "title": "Frontend Developer",
-            "category": "Software Development",
-            "description": "Builds user interfaces and interactive web applications."
-        },
-        {
-            "title": "Backend Developer",
-            "category": "Software Development",
-            "description": "Builds server-side applications and APIs."
-        },
-        {
-            "title": "Data Analyst",
-            "category": "Data",
-            "description": "Analyzes data to support business decisions."
-        },
-        {
-            "title": "UI/UX Designer",
-            "category": "Design",
-            "description": "Designs useful and user-friendly digital experiences."
-        }
-    ]
+    for name, category in skills_data:
+        skill = Skill.query.filter_by(name=name).first()
 
-    for item in skills_data:
-        existing = Skill.query.filter_by(name=item["name"]).first()
-
-        if not existing:
-            db.session.add(Skill(**item))
-
-    for item in careers_data:
-        existing = Career.query.filter_by(title=item["title"]).first()
-
-        if not existing:
-            db.session.add(Career(**item))
+        if not skill:
+            db.session.add(
+                Skill(
+                    name=name,
+                    category=category,
+                    description=f"{name} skill"
+                )
+            )
 
     db.session.commit()
 
-    print("CtrlYourCareer seed data added successfully!")
+    careers_data = [
+        {
+            "title": "Backend Developer",
+            "description": "Builds server-side applications and APIs.",
+            "category": "Software Development",
+            "skills": ["Python", "Flask", "SQL", "REST APIs", "Git"]
+        },
+        {
+            "title": "Frontend Developer",
+            "description": "Builds user interfaces and web applications.",
+            "category": "Software Development",
+            "skills": ["HTML", "CSS", "JavaScript", "React", "Git"]
+        },
+        {
+            "title": "Full Stack Developer",
+            "description": "Builds both frontend and backend applications.",
+            "category": "Software Development",
+            "skills": [
+                "Python", "Flask", "SQL", "HTML",
+                "CSS", "JavaScript", "React", "Git"
+            ]
+        }
+    ]
+
+    for item in careers_data:
+        career = Career.query.filter_by(
+            title=item["title"]
+        ).first()
+
+        if not career:
+            career = Career(
+                title=item["title"],
+                description=item["description"],
+                category=item["category"]
+            )
+
+            db.session.add(career)
+            db.session.flush()
+
+        for skill_name in item["skills"]:
+            skill = Skill.query.filter_by(
+                name=skill_name
+            ).first()
+
+            if skill:
+                relationship = CareerSkill.query.filter_by(
+                    career_id=career.id,
+                    skill_id=skill.id
+                ).first()
+
+                if not relationship:
+                    db.session.add(
+                        CareerSkill(
+                            career_id=career.id,
+                            skill_id=skill.id,
+                            required_level="Beginner"
+                        )
+                    )
+
+    db.session.commit()
+
+    print("Sprint 4 seed data created successfully.")

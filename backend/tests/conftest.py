@@ -12,7 +12,11 @@ from app.models import db
 @pytest.fixture
 def app():
     app = create_app()
-    app.config.update(TESTING=True)
+    app.config.update({
+        "TESTING": True,
+        "SQLALCHEMY_DATABASE_URI": "sqlite://",
+        "JWT_SECRET_KEY": "test-secret-key-that-is-at-least-32-bytes-long",
+    })
 
     with app.app_context():
         db.create_all()
@@ -37,3 +41,6 @@ def auth_headers(app):
     return {
         "Authorization": f"Bearer {token}"
     }
+
+
+
