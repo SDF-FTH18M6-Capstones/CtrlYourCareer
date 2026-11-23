@@ -1,9 +1,9 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from sqlalchemy.orm import joinedload
 
 from app.extensions import db
-from app.models import Career, CareerSkill, UserSkill, Skill
-from app.models import User, UserSkill, Career, CareerSkill
+from app.models import User, Career, CareerSkill, UserSkill
 from app.schemas import career_schema, careers_schema
 
 careers_bp = Blueprint("careers", __name__, url_prefix="/api/careers")
@@ -84,40 +84,6 @@ def delete_career(career_id):
     db.session.commit()
     return jsonify({"message": "Career deleted"}), 200
 
-
-@careers_bp.route("/<int:career_id>/skill-gap", methods=["GET"])
-@jwt_required()
-def skill_gap(career_id):
-    user_id = int(get_jwt_identity())
-    career = db.session.get(Career, career_id)
-    if not career:
-        return jsonify({"error": "Career not found"}), 404
-
-    required_ids = {
-        cs.skill_id for cs in CareerSkill.query.filter_by(career_id=career_id)
-    }
-    user_ids = {
-        us.skill_id for us in UserSkill.query.filter_by(user_id=user_id)
-    }
-
-    matched = required_ids & user_ids
-    missing = required_ids - user_ids
-    percentage = (
-        round(len(matched) / len(required_ids) * 100) if required_ids else 0
-    )
-
-    def skill_names(ids):
-        return [
-            s.name for s in Skill.query.filter(Skill.id.in_(ids)).all()
-        ] if ids else []
-
-    return jsonify({
-        "career_id": career_id,
-        "match_percentage": percentage,
-        "matched_skills": skill_names(matched),
-        "missing_skills": skill_names(missing),
-        "message": "Career deleted successfully"
-    }), 200
 
 # CAREER RECOMMENDATIONS AND SKILL GAP LOGIC
 def get_logged_in_user():
