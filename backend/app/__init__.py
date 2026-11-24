@@ -45,6 +45,7 @@ def create_app():
 
     from app.routes.admin_auth import admin_auth_bp
     from app.routes.admin_management import admin_bp
+    from app.routes.admin_registration import admin_registration_bp
     from app.routes.journeys import journeys_bp
     from app.routes.resources import resources_bp
     from app.routes.progress import progress_bp
@@ -64,6 +65,7 @@ def create_app():
 
     app.register_blueprint(admin_auth_bp)
     app.register_blueprint(admin_bp)
+    app.register_blueprint(admin_registration_bp)
 
     app.register_blueprint(journeys_bp)
     app.register_blueprint(resources_bp)
