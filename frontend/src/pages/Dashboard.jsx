@@ -1,4 +1,5 @@
-import {
+ import EmploymentPanel from "../components/EmploymentPanel";
+ import {
   ArrowUpRight,
   BookOpen,
   CheckCircle2,
@@ -106,6 +107,7 @@ export default function Dashboard({
             <LogOut size={17} />
             Sign out
           </button>
+          <EmploymentPanel />
         </div>
       </header>
 
