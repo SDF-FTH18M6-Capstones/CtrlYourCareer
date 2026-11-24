@@ -2,25 +2,27 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import Brand from "./components/Brand";
 import Header from "./components/Header";
+
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AdminRegister from "./pages/AdminRegister";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
 
-import "./theme.css";
-
-import { backendApi } from "./services/backend";
-
 import AdminPin from "./components/AdminPin";
 import AdminDashboard from "./pages/AdminDashboard";
+
 import SkillsExplorer from "./pages/SkillsExplorer";
 import CareerExplorer from "./pages/CareerExplorer";
 import MyJourneys from "./pages/MyJourneys";
 import LearningJourney from "./pages/LearningJourney";
 
+import { backendApi } from "./services/backend";
 import { useAuth } from "./context/AuthContext";
+
+import "./theme.css";
 
 const LOADING_DURATION = 1000;
 
@@ -38,6 +40,24 @@ export default function App() {
 
   const [screen, setScreen] = useState("landing");
 
+  // ==========================================
+  // ADMINISTRATOR INVITATION TOKEN
+  // ==========================================
+
+  const [invitationToken, setInvitationToken] = useState(() => {
+    const fragment = window.location.hash.slice(1);
+
+    if (!fragment.startsWith("admin-register?")) {
+      return null;
+    }
+
+    const params = new URLSearchParams(
+      fragment.slice("admin-register?".length),
+    );
+
+    return params.get("token") || null;
+  });
+
   const [activeJourneyId, setActiveJourneyId] = useState(null);
 
   const [featureError, setFeatureError] = useState("");
@@ -52,11 +72,24 @@ export default function App() {
   const initializedRef = useRef(false);
 
   // ==========================================
+  // REMOVE INVITATION TOKEN FROM ADDRESS BAR
+  // ==========================================
+
+  useEffect(() => {
+    if (invitationToken) {
+      window.history.replaceState(
+        window.history.state,
+        "",
+        window.location.pathname + window.location.search,
+      );
+    }
+  }, [invitationToken]);
+
+  // ==========================================
   // RESET SCROLL POSITION WHEN SCREEN CHANGES
   // ==========================================
 
   useLayoutEffect(() => {
-    // Reset both the window and document scroll position.
     window.scrollTo({
       top: 0,
       left: 0,
@@ -120,10 +153,12 @@ export default function App() {
         : session.user.onboardingComplete
           ? "dashboard"
           : "onboarding"
-      : "landing";
+      : invitationToken
+        ? "admin-register"
+        : "landing";
 
     startLoading(nextScreen);
-  }, [loading, session]);
+  }, [loading, session, invitationToken]);
 
   // ==========================================
   // CLEAN UP LOADING TIMER
@@ -132,6 +167,7 @@ export default function App() {
   useEffect(() => {
     return () => {
       clearTimeout(timerRef.current);
+      initializedRef.current = false;
     };
   }, []);
 
@@ -158,9 +194,23 @@ export default function App() {
     startLoading(nextScreen);
   };
 
+  // ==========================================
+  // ADMINISTRATOR PIN VERIFICATION
+  // ==========================================
+
   const verifyPin = async (pin) => {
     await verifyAdminPin(pin);
+
     setScreen("admin-dashboard");
+  };
+
+  // ==========================================
+  // ADMINISTRATOR REGISTRATION NAVIGATION
+  // ==========================================
+
+  const leaveAdminRegistration = (nextScreen) => {
+    setInvitationToken(null);
+    setScreen(nextScreen);
   };
 
   // ==========================================
@@ -188,6 +238,7 @@ export default function App() {
 
   const finish = (user) => {
     updateUser(user);
+
     startLoading("dashboard");
   };
 
@@ -201,7 +252,11 @@ export default function App() {
     logout();
 
     setShowLoading(false);
-    setScreen("landing");
+
+    setActiveJourneyId(null);
+    setFeatureError("");
+
+    setScreen(invitationToken ? "admin-register" : "landing");
   };
 
   // ==========================================
@@ -218,7 +273,25 @@ export default function App() {
   }
 
   // ==========================================
-  // ADMIN PIN VERIFICATION
+  // ADMINISTRATOR REGISTRATION
+  // ==========================================
+
+  if (!session && screen === "admin-register") {
+    return (
+      <AdminRegister
+        invitationToken={invitationToken}
+        onBack={() => {
+          leaveAdminRegistration("landing");
+        }}
+        onLogin={() => {
+          leaveAdminRegistration("login");
+        }}
+      />
+    );
+  }
+
+  // ==========================================
+  // ADMINISTRATOR PIN VERIFICATION SCREEN
   // ==========================================
 
   if (screen === "admin-pin" && adminChallenge) {
@@ -234,7 +307,7 @@ export default function App() {
   }
 
   // ==========================================
-  // ADMIN DASHBOARD
+  // ADMINISTRATOR DASHBOARD
   // ==========================================
 
   if (session && session.user.role === "admin") {
@@ -242,12 +315,16 @@ export default function App() {
   }
 
   // ==========================================
-  // CAREER EXPLORER
+  // SKILLS EXPLORER
   // ==========================================
 
   if (session && screen === "skills-explorer") {
     return <SkillsExplorer onBack={() => setScreen("dashboard")} />;
   }
+
+  // ==========================================
+  // CAREER EXPLORER
+  // ==========================================
 
   if (session && screen === "career-explorer") {
     return (
@@ -326,7 +403,6 @@ export default function App() {
         user={session.user}
         onLogout={signOut}
         onSettings={() => setScreen("settings")}
-        // Opens the separate Career Explorer page.
         onExploreSkills={() => setScreen("skills-explorer")}
         onExploreCareers={() => setScreen("career-explorer")}
         onOpenJourneys={() => setScreen("my-journeys")}

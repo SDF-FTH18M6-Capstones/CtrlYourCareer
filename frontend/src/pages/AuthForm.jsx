@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { adminRegistrationApi } from "../services/adminRegistration";
+import "./AdminRegister.css";
 import {
   ArrowLeft,
   ArrowRight,
@@ -21,6 +23,28 @@ export default function AuthForm({ mode, setMode, onSuccess, onBack }) {
     [error, setError] = useState(""),
     [busy, setBusy] = useState(false);
   const signup = mode === "signup";
+  const [adminSetupAvailable, setAdminSetupAvailable] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+
+    adminRegistrationApi
+      .getSetupStatus()
+      .then((data) => {
+        if (active) {
+          setAdminSetupAvailable(data.setup_available === true);
+        }
+      })
+      .catch(() => {
+        if (active) {
+          setAdminSetupAvailable(false);
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [mode]);
   async function submit(e) {
     e.preventDefault();
     setError("");
@@ -172,6 +196,16 @@ export default function AuthForm({ mode, setMode, onSuccess, onBack }) {
               {signup ? "Log in" : "Create an account"}
             </button>
           </div>
+          {adminSetupAvailable && (
+            <button
+              type="button"
+              className="admin-registration-link"
+              onClick={() => setMode("admin-register")}
+            >
+              <ShieldCheck size={17} />
+              Register as administrator
+            </button>
+          )}
           <p className="auth-note">
             <ShieldCheck size={15} />{" "}
             {demo

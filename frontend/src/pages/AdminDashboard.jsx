@@ -1,5 +1,3 @@
-import EmploymentPanel from "../components/EmploymentPanel";
-import AdminUserMonitor from "../components/admin/AdminUserMonitor";
 import { useEffect, useState } from "react";
 
 import {
@@ -14,18 +12,27 @@ import {
   Menu,
   X,
   Compass,
+  UserPlus,
 } from "lucide-react";
 
-import { backendApi } from "../services/backend";
+import EmploymentPanel from "../components/EmploymentPanel";
+import AdminUserMonitor from "../components/admin/AdminUserMonitor";
 
 import AdminCareerManager from "../components/admin/AdminCareerManager";
 import AdminSkillManager from "../components/admin/AdminSkillManager";
 import AdminResourceManager from "../components/admin/AdminResourceManager";
+import AdminInvitations from "../components/admin/AdminInvitations";
+
+import { backendApi } from "../services/backend";
 
 import "./AdminDashboard.css";
 
 const navigation = [
-  { id: "monitoring", label: "User progress", icon: Users },
+  {
+    id: "monitoring",
+    label: "User progress",
+    icon: Users,
+  },
   {
     id: "overview",
     label: "Overview",
@@ -51,7 +58,16 @@ const navigation = [
     label: "Resources",
     icon: Library,
   },
-  { id: "employment", label: "Employment", icon: BriefcaseBusiness },
+  {
+    id: "employment",
+    label: "Employment",
+    icon: BriefcaseBusiness,
+  },
+  {
+    id: "invitations",
+    label: "Admin Invitations",
+    icon: UserPlus,
+  },
 ];
 
 export default function AdminDashboard({ user, onLogout }) {
@@ -65,31 +81,60 @@ export default function AdminDashboard({ user, onLogout }) {
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // ==========================================
+  // LOAD DASHBOARD DATA
+  // ==========================================
+
   useEffect(() => {
+    let activeRequest = true;
+
     async function loadDashboard() {
       try {
         setLoading(true);
+        setError("");
 
         const [statsData, usersData] = await Promise.all([
           backendApi.getAdminStats(),
           backendApi.getAdminUsers(),
         ]);
 
+        if (!activeRequest) return;
+
         setStats(statsData);
         setUsers(usersData);
       } catch (err) {
-        setError(err.message);
+        if (activeRequest) {
+          setError(err.message);
+        }
       } finally {
-        setLoading(false);
+        if (activeRequest) {
+          setLoading(false);
+        }
       }
     }
 
-    loadDashboard();
-  }, []);
+    if (active === "overview" || active === "users") {
+      loadDashboard();
+    }
+
+    return () => {
+      activeRequest = false;
+    };
+  }, [active]);
+
+  // ==========================================
+  // NAVIGATION
+  // ==========================================
 
   function navigate(section) {
     setActive(section);
     setSidebarOpen(false);
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
   }
 
   const currentSection = navigation.find((item) => item.id === active);
@@ -98,13 +143,14 @@ export default function AdminDashboard({ user, onLogout }) {
 
   return (
     <div className="cyc-admin">
-      {/* Mobile header */}
+      {/* MOBILE HEADER */}
 
       <header className="cyc-admin-mobile-header">
         <button
           type="button"
           onClick={() => setSidebarOpen(!sidebarOpen)}
           aria-label="Toggle navigation"
+          aria-expanded={sidebarOpen}
         >
           {sidebarOpen ? <X /> : <Menu />}
         </button>
@@ -112,7 +158,7 @@ export default function AdminDashboard({ user, onLogout }) {
         <span>CtrlYourCareer</span>
       </header>
 
-      {/* Sidebar */}
+      {/* SIDEBAR */}
 
       <aside className={`cyc-admin-sidebar ${sidebarOpen ? "open" : ""}`}>
         <div className="cyc-admin-brand">
@@ -124,6 +170,7 @@ export default function AdminDashboard({ user, onLogout }) {
             <h2>
               Ctrl<span>Your</span>Career
             </h2>
+
             <small>ADMIN CONSOLE</small>
           </div>
         </div>
@@ -170,13 +217,14 @@ export default function AdminDashboard({ user, onLogout }) {
         </div>
       </aside>
 
-      {/* Main content */}
+      {/* MAIN CONTENT */}
 
       <main className="cyc-admin-main">
         <header className="cyc-admin-topbar">
           <div className="cyc-admin-breadcrumb">
             <span>Administration</span>
             <span>/</span>
+
             <strong>{currentSection?.label}</strong>
           </div>
 
@@ -193,11 +241,13 @@ export default function AdminDashboard({ user, onLogout }) {
         </header>
 
         <div className="cyc-admin-content">
-          {error && (
+          {error && (active === "overview" || active === "users") && (
             <div className="cyc-admin-error" role="alert">
               {error}
             </div>
           )}
+
+          {/* OVERVIEW */}
 
           {active === "overview" && (
             <>
@@ -221,6 +271,8 @@ export default function AdminDashboard({ user, onLogout }) {
                   <LayoutDashboard size={36} />
                 </div>
               </section>
+
+              {/* STATISTICS */}
 
               <section className="cyc-admin-stat-grid">
                 {[
@@ -260,20 +312,26 @@ export default function AdminDashboard({ user, onLogout }) {
                         </div>
                       </div>
 
-                      <strong>{loading ? "..." : (stat.value ?? 0)}</strong>
+                      <strong>
+                        {loading ? "..." : error ? "—" : (stat.value ?? 0)}
+                      </strong>
 
                       <span className="cyc-admin-stat-link">
-                        View details <ArrowRight size={15} />
+                        View details
+                        <ArrowRight size={15} />
                       </span>
                     </button>
                   );
                 })}
               </section>
 
+              {/* PLATFORM MANAGEMENT */}
+
               <section className="cyc-admin-management">
                 <div className="cyc-admin-section-heading">
                   <div>
                     <h2>Platform Management</h2>
+
                     <p>Quick access to your administration tools.</p>
                   </div>
                 </div>
@@ -298,6 +356,27 @@ export default function AdminDashboard({ user, onLogout }) {
                       icon: Library,
                       section: "resources",
                     },
+                    {
+                      title: "User Progress",
+                      description:
+                        "Monitor user development and career readiness.",
+                      icon: Users,
+                      section: "monitoring",
+                    },
+                    {
+                      title: "Employment Referrals",
+                      description:
+                        "Manage employment opportunities and user referrals.",
+                      icon: BriefcaseBusiness,
+                      section: "employment",
+                    },
+                    {
+                      title: "Admin Invitations",
+                      description:
+                        "Invite trusted individuals to join the administration team.",
+                      icon: UserPlus,
+                      section: "invitations",
+                    },
                   ].map((item) => {
                     const Icon = item.icon;
 
@@ -314,10 +393,12 @@ export default function AdminDashboard({ user, onLogout }) {
 
                         <div>
                           <h3>{item.title}</h3>
+
                           <p>{item.description}</p>
 
                           <span>
-                            Manage <ArrowRight size={16} />
+                            Manage
+                            <ArrowRight size={16} />
                           </span>
                         </div>
                       </button>
@@ -328,11 +409,14 @@ export default function AdminDashboard({ user, onLogout }) {
             </>
           )}
 
+          {/* REGISTERED USERS */}
+
           {active === "users" && (
             <section className="cyc-admin-panel">
               <div className="cyc-admin-section-heading">
                 <div>
                   <h1>Registered Users</h1>
+
                   <p>View accounts registered on CtrlYourCareer.</p>
                 </div>
               </div>
@@ -370,15 +454,24 @@ export default function AdminDashboard({ user, onLogout }) {
                   </tbody>
                 </table>
 
-                {!loading && users.length === 0 && (
+                {loading && <p className="cyc-admin-empty">Loading users...</p>}
+
+                {!loading && !error && users.length === 0 && (
                   <p className="cyc-admin-empty">No users found.</p>
                 )}
               </div>
             </section>
           )}
 
+          {/* USER PROGRESS MONITORING */}
+
           {active === "monitoring" && <AdminUserMonitor />}
+
+          {/* EMPLOYMENT AND REFERRALS */}
+
           {active === "employment" && <EmploymentPanel admin />}
+
+          {/* CAREER MANAGEMENT */}
 
           {active === "careers" && (
             <section className="cyc-admin-panel">
@@ -386,17 +479,25 @@ export default function AdminDashboard({ user, onLogout }) {
             </section>
           )}
 
+          {/* SKILL MANAGEMENT */}
+
           {active === "skills" && (
             <section className="cyc-admin-panel">
               <AdminSkillManager />
             </section>
           )}
 
+          {/* LEARNING RESOURCE MANAGEMENT */}
+
           {active === "resources" && (
             <section className="cyc-admin-panel">
               <AdminResourceManager />
             </section>
           )}
+
+          {/* ADMINISTRATOR INVITATIONS */}
+
+          {active === "invitations" && <AdminInvitations />}
         </div>
       </main>
     </div>
