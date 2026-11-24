@@ -1,0 +1,45 @@
+
+.employment-panel {
+  padding: 1.25rem;
+  margin: 1rem auto;
+  max-width: 1100px;
+  color: inherit;
+  border: 1px solid currentColor;
+  border-radius: 12px;
+}
+
+.employment-panel form,
+.employment-panel article {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+}
+
+.employment-panel input,
+.employment-panel select,
+.employment-panel textarea,
+.employment-panel button {
+  font: inherit;
+  padding: 0.55rem;
+  border-radius: 6px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+}
+
+.employment-panel option {
+  color: #111;
+  background: #fff;
+}
+
+.employment-panel button {
+  cursor: pointer;
+}
+
+.employment-panel button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

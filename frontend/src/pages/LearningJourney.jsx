@@ -1,3 +1,4 @@
+import ResourceCompletion from "../components/ResourceCompletion";
 import { useEffect, useState } from "react";
 
 import {
