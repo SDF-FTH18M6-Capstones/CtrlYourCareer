@@ -55,4 +55,9 @@ def create_app():
     app.register_blueprint(journeys_bp)
     app.register_blueprint(resources_bp)
 
+    from app.routes.progress import progress_bp
+    app.register_blueprint(progress_bp)
+    from app.routes.referrals import referrals_bp
+    app.register_blueprint(referrals_bp)
+
     return app

@@ -39,6 +39,8 @@ def delete_resource(resource_id):
     r = db.session.get(LearningResource, resource_id)
     if not r:
         return jsonify(error="Resource not found"), 404
+    from app.progress_models import ResourceCompletion
+    ResourceCompletion.query.filter_by(resource_id=r.id).delete()
     db.session.delete(r)
     db.session.commit()
     return jsonify(message="Deleted")
