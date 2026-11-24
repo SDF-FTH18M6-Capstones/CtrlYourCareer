@@ -34,11 +34,18 @@ export default function Dashboard({
 
   const goalName = goals.find((g) => g.id === user.goal)?.title || "Explore";
 
-  // Scroll smoothly to the selected section.
+  // Scroll to a specific section within the Dashboard.
   const scrollToSection = (sectionRef) => {
-    sectionRef.current?.scrollIntoView({
+    if (!sectionRef.current) return;
+
+    const element = sectionRef.current;
+
+    const targetPosition =
+      element.getBoundingClientRect().top + window.scrollY - 90;
+
+    window.scrollTo({
+      top: targetPosition,
       behavior: "smooth",
-      block: "start",
     });
   };
 
@@ -48,7 +55,10 @@ export default function Dashboard({
       title: "Explore careers",
       description: "Discover possible career paths and what they require.",
       actionLabel: "Explore careers",
+
+      // Open the separate Career Explorer page through App.jsx.
       onClick: onExploreCareers,
+
       available: true,
     },
     {
@@ -57,7 +67,10 @@ export default function Dashboard({
       description:
         "Find skills recommended for your interests and build your knowledge.",
       actionLabel: "View skills",
+
+      // Scroll to the Skills section within the Dashboard.
       onClick: () => scrollToSection(skillsRef),
+
       available: true,
     },
     {
@@ -83,11 +96,13 @@ export default function Dashboard({
             aria-label="Open account settings"
           >
             <span className="user-avatar">{first[0].toUpperCase()}</span>
+
             <span>{first}</span>
+
             <span aria-hidden="true">⌄</span>
           </button>
 
-          <button className="btn btn-quiet" onClick={onLogout}>
+          <button type="button" className="btn btn-quiet" onClick={onLogout}>
             <LogOut size={17} />
             Sign out
           </button>
@@ -218,18 +233,24 @@ export default function Dashboard({
         </div>
 
         <div className="dashboard-api-content">
+          {/* Skills section */}
           <div
             ref={skillsRef}
             id="dashboard-skills"
-            style={{ scrollMarginTop: "90px" }}
+            style={{
+              scrollMarginTop: "90px",
+            }}
           >
             <SkillsList />
           </div>
 
+          {/* Careers section */}
           <div
             ref={careersRef}
             id="dashboard-careers"
-            style={{ scrollMarginTop: "90px" }}
+            style={{
+              scrollMarginTop: "90px",
+            }}
           >
             <CareersList onStartJourney={onStartJourney} />
           </div>
