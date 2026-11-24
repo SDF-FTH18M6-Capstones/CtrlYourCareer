@@ -9,15 +9,41 @@ import {
   Sparkles,
   AlertCircle,
   LoaderCircle,
+  Trash2,
 } from "lucide-react";
 
 import { backendApi } from "../services/backend";
 import "./FeaturePages.css";
+import Modal from "../components/ui/Modal";
+import "./JourneyRemoval.css";
 
 export default function MyJourneys({ onBack, onOpen }) {
   const [items, setItems] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const [selected, setSelected] = useState(null);
+  const [removing, setRemoving] = useState(false);
+  const [removeError, setRemoveError] = useState("");
+  const [notice, setNotice] = useState("");
+
+  async function removeJourney() {
+    if (!selected || removing) return;
+    setRemoving(true);
+    setRemoveError("");
+    try {
+      await backendApi.deleteJourney(selected.id);
+      setItems((previous) =>
+        previous.filter((item) => item.id !== selected.id),
+      );
+      setSelected(null);
+      setNotice("Learning journey removed successfully.");
+    } catch (err) {
+      setRemoveError(err.message);
+    } finally {
+      setRemoving(false);
+    }
+  }
 
   useEffect(() => {
     let active = true;
@@ -100,6 +126,12 @@ export default function MyJourneys({ onBack, onOpen }) {
         </div>
       )}
 
+      {notice && (
+        <div className="cyc-feature-success" role="status">
+          {notice}
+        </div>
+      )}
+
       {/* LOADING */}
 
       {loading && (
@@ -157,10 +189,65 @@ export default function MyJourneys({ onBack, onOpen }) {
                 Continue Journey
                 <ArrowRight size={17} />
               </button>
+              <button
+                type="button"
+                className="cyc-journey-remove"
+                onClick={() => {
+                  setSelected(journey);
+                  setRemoveError("");
+                  setNotice("");
+                }}
+              >
+                <Trash2 size={17} /> Remove Journey
+              </button>
             </article>
           ))}
         </div>
       )}
+      <Modal
+        open={Boolean(selected)}
+        busy={removing}
+        size="small"
+        title="Remove learning journey?"
+        onClose={() => {
+          if (!removing) setSelected(null);
+        }}
+      >
+        <div className="cyc-journey-confirm">
+          <p>
+            Remove <strong>{selected?.career?.title || "this career"}</strong>{" "}
+            from your learning journeys?
+          </p>
+          <p>
+            Your roadmap and its activity progress will be deleted. Your
+            personal skills and individual resource completions will be
+            preserved. You can start this journey again later.
+          </p>
+          {removeError && (
+            <div className="cyc-feature-alert" role="alert">
+              {removeError}
+            </div>
+          )}
+          <div className="cyc-journey-actions">
+            <button
+              type="button"
+              className="cyc-journey-cancel"
+              disabled={removing}
+              onClick={() => setSelected(null)}
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              className="cyc-journey-danger"
+              disabled={removing}
+              onClick={removeJourney}
+            >
+              <Trash2 size={17} /> {removing ? "Removing..." : "Remove Journey"}
+            </button>
+          </div>
+        </div>
+      </Modal>
     </main>
   );
 }

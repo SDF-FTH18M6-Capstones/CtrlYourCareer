@@ -86,6 +86,10 @@ export const backendApi = {
   getMyJourneys: () => apiRequest("/journeys/me"),
 
   getJourney: (id) => apiRequest(`/journeys/${id}`),
+  deleteJourney: (id) =>
+    apiRequest(`/journeys/${id}`, {
+      method: "DELETE",
+    }),
 
   startJourney: (career_id) =>
     apiRequest("/journeys", {

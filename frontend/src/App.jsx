@@ -15,6 +15,7 @@ import { backendApi } from "./services/backend";
 
 import AdminPin from "./components/AdminPin";
 import AdminDashboard from "./pages/AdminDashboard";
+import SkillsExplorer from "./pages/SkillsExplorer";
 import CareerExplorer from "./pages/CareerExplorer";
 import MyJourneys from "./pages/MyJourneys";
 import LearningJourney from "./pages/LearningJourney";
@@ -42,7 +43,7 @@ export default function App() {
   const [featureError, setFeatureError] = useState("");
 
   const [theme, setTheme] = useState(
-    () => localStorage.getItem("cyc-theme") || "system",
+    () => localStorage.getItem("cyc-theme") || "light",
   );
 
   const [showLoading, setShowLoading] = useState(true);
@@ -244,6 +245,10 @@ export default function App() {
   // CAREER EXPLORER
   // ==========================================
 
+  if (session && screen === "skills-explorer") {
+    return <SkillsExplorer onBack={() => setScreen("dashboard")} />;
+  }
+
   if (session && screen === "career-explorer") {
     return (
       <CareerExplorer
@@ -322,6 +327,7 @@ export default function App() {
         onLogout={signOut}
         onSettings={() => setScreen("settings")}
         // Opens the separate Career Explorer page.
+        onExploreSkills={() => setScreen("skills-explorer")}
         onExploreCareers={() => setScreen("career-explorer")}
         onOpenJourneys={() => setScreen("my-journeys")}
         onStartJourney={startJourney}

@@ -1,0 +1,500 @@
+.employment-panel,
+.cyc-resource-completion,
+.cyc-notification-bell {
+  --ep-text: var(--cyc-text, #142748);
+  --ep-muted: var(--cyc-muted, #647895);
+  --ep-card: var(--cyc-card, #fff);
+  --ep-border: var(--cyc-border, #e2eaf6);
+  --ep-soft: var(--cyc-input, #f5f8fd);
+  --ep-link: var(--cyc-link, #285bd8);
+  color: var(--ep-text);
+}
+.employment-panel {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.employment-user {
+  background: var(--ep-card);
+  border: 1px solid var(--ep-border);
+  border-radius: 24px;
+  padding: clamp(18px, 3vw, 30px);
+}
+.cyc-employment-section {
+  margin: 28px 0;
+  scroll-margin-top: 100px;
+  min-width: 0;
+}
+.emp-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.employment-panel h2 {
+  font-size: clamp(22px, 2.5vw, 29px);
+  line-height: 1.25;
+  margin: 8px 0;
+  letter-spacing: -0.6px;
+}
+.employment-panel h3 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 17px;
+  margin: 0 0 6px;
+}
+.employment-panel p {
+  margin: 0;
+  color: var(--ep-muted);
+}
+.emp-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ep-link);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+.emp-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: 14px;
+}
+.emp-stats > div {
+  background: var(--ep-card);
+  border: 1px solid var(--ep-border);
+  border-radius: 16px;
+  padding: 20px;
+  display: grid;
+  gap: 10px;
+}
+.emp-stats span {
+  color: var(--ep-muted);
+  font-size: 12px;
+  font-weight: 650;
+}
+.emp-stats strong {
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--ep-link);
+}
+.employment-panel form,
+.employment-panel article {
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+  background: var(--ep-card);
+  border: 1px solid var(--ep-border);
+  border-radius: 16px;
+  min-width: 0;
+  margin: 0;
+}
+.employment-user article {
+  background: var(--ep-soft);
+}
+.employment-panel input,
+.employment-panel select,
+.employment-panel textarea {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid var(--ep-border);
+  border-radius: 11px;
+  background: var(--ep-soft);
+  color: var(--ep-text);
+  padding: 12px 14px;
+  font: inherit;
+}
+.employment-panel textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.employment-panel option {
+  background: var(--ep-card);
+  color: var(--ep-text);
+}
+.employment-panel button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  padding: 10px 16px;
+  border-radius: 11px;
+  border: 1px solid transparent;
+  background: #285bd8;
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    filter 0.18s,
+    transform 0.18s;
+}
+.employment-panel button:hover:not(:disabled) {
+  filter: brightness(0.93);
+  transform: translateY(-1px);
+}
+.employment-panel button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.employment-panel button.emp-secondary {
+  background: var(--ep-card);
+  border-color: var(--ep-border);
+  color: var(--ep-link);
+}
+.employment-panel button.emp-accept {
+  background: #087c54;
+  color: white;
+}
+.employment-panel button.emp-decline {
+  background: transparent;
+  border-color: #e77b8b;
+  color: #be123c;
+}
+.employment-panel :is(button, input, select, textarea, summary):focus-visible,
+.cyc-notification-bell:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+.emp-company,
+.emp-badge,
+.monitor-tags span {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #eaf1ff;
+  color: #2458cb;
+  margin: 3px;
+  text-transform: none;
+}
+.emp-badge {
+  text-transform: capitalize;
+  margin: 0;
+}
+.emp-badge.pending {
+  background: #fff3d6;
+  color: #925500;
+}
+.emp-badge.declined {
+  background: #ffe4e8;
+  color: #a7193d;
+}
+.emp-badge.referred {
+  background: #f0e8ff;
+  color: #6940b5;
+}
+.emp-badge.hired {
+  background: #dff7ea;
+  color: #08754d;
+}
+.emp-badge.unsuccessful {
+  background: #e9edf4;
+  color: #52627b;
+}
+.emp-job,
+.emp-notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 15px;
+  border: 1px solid var(--ep-border);
+  border-radius: 12px;
+  background: var(--ep-card);
+}
+.emp-notice.unread {
+  border-inline-start: 4px solid #285bd8;
+}
+.emp-empty {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 26px;
+  background: var(--ep-soft);
+  border: 1px dashed var(--ep-border);
+  border-radius: 14px;
+  color: var(--ep-muted);
+}
+.emp-empty svg {
+  color: var(--ep-link);
+}
+.employment-panel .emp-error {
+  padding: 12px;
+  border-radius: 10px;
+  background: #ffe4e8;
+  color: #a7193d;
+}
+.cyc-notification-bell {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--ep-border);
+  border-radius: 13px;
+  background: var(--ep-card);
+  cursor: pointer;
+}
+.cyc-notification-bell > span {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 4px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #be123c;
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+}
+.emp-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ep-card);
+  border: 1px solid var(--ep-border);
+  border-radius: 12px;
+  padding: 0 14px;
+  color: var(--ep-muted);
+}
+.emp-search input {
+  border: 0;
+  background: transparent;
+}
+.monitor-user {
+  background: var(--ep-card);
+  border: 1px solid var(--ep-border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.monitor-user summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 18px;
+  cursor: pointer;
+  list-style: none;
+}
+.monitor-user summary::-webkit-details-marker {
+  display: none;
+}
+.monitor-avatar {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: #eaf1ff;
+  color: #2458cb;
+  font-weight: 800;
+}
+.monitor-name {
+  flex: 1;
+  min-width: 100px;
+  display: grid;
+}
+.monitor-name small {
+  color: var(--ep-muted);
+}
+.monitor-user[open] .monitor-chevron {
+  transform: rotate(180deg);
+}
+.monitor-body {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+  border-top: 1px solid var(--ep-border);
+}
+.monitor-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.monitor-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.monitor-metric span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ep-muted);
+}
+.monitor-body progress {
+  width: 100%;
+  height: 9px;
+  accent-color: #285bd8;
+}
+.monitor-note {
+  font-size: 12px;
+}
+.cyc-resource-completion {
+  padding: 10px 14px;
+  border: 1px solid var(--ep-border);
+  border-radius: 10px;
+  background: var(--ep-card);
+  font-size: 13px;
+}
+.cyc-resource-completion label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.cyc-resource-completion input {
+  width: 17px;
+  height: 17px;
+  accent-color: #087c54;
+}
+.cyc-resource-completion.done {
+  border-color: #46a982;
+}
+.cyc-resource-completion p {
+  color: #be123c;
+}
+:root[data-theme="dark"] .employment-panel .emp-badge,
+:root[data-theme="dark"] .emp-company,
+:root[data-theme="dark"] .monitor-tags span {
+  background: #233e67;
+  color: #bfdbfe;
+}
+:root[data-theme="dark"] .emp-badge.pending {
+  background: #503b20;
+  color: #fde68a;
+}
+:root[data-theme="dark"] .emp-badge.declined,
+:root[data-theme="dark"] .employment-panel .emp-error {
+  background: #4c2233;
+  color: #fda4af;
+}
+:root[data-theme="dark"] .emp-badge.hired {
+  background: #123d36;
+  color: #6ee7b7;
+}
+:root[data-theme="dark"] .emp-badge.referred {
+  background: #392c59;
+  color: #ddd6fe;
+}
+:root[data-theme="dark"] .emp-badge.unsuccessful {
+  background: #334155;
+  color: #e2e8f0;
+}
+:root[data-theme="dark"] .employment-panel button.emp-decline {
+  color: #fda4af;
+}
+:root[data-theme="dark"] .cyc-resource-completion p {
+  color: #fda4af;
+}
+@media (max-width: 650px) {
+  .employment-panel form,
+  .employment-panel article {
+    padding: 16px;
+  }
+  .emp-heading {
+    align-items: stretch;
+  }
+  .monitor-user summary {
+    padding: 12px;
+    gap: 8px;
+  }
+  .monitor-body {
+    padding: 14px;
+  }
+  .cyc-notification-bell {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Notification modal: native dialog keeps focus inside and supports Escape. */
+.cyc-employment-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(720px, calc(100% - 32px));
+  max-height: 85dvh;
+  padding: 0;
+  border: 1px solid var(--cyc-border, #e2eaf6);
+  border-radius: 24px;
+  background: var(--cyc-card, #fff);
+  color: var(--cyc-text, #142748);
+  box-shadow: 0 24px 80px #071a4250;
+  overflow: auto;
+  box-sizing: border-box;
+}
+.cyc-employment-dialog::backdrop {
+  background: rgba(9, 22, 45, 0.55);
+  backdrop-filter: blur(3px);
+}
+.cyc-employment-dialog-top {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  background: var(--cyc-card, #fff);
+  border-bottom: 1px solid var(--cyc-border, #e2eaf6);
+}
+.cyc-employment-dialog-top span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 700;
+  color: var(--cyc-link, #285bd8);
+}
+.cyc-employment-dialog-top button {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--cyc-border, #e2eaf6);
+  border-radius: 12px;
+  background: var(--cyc-input, #f5f8fd);
+  color: var(--cyc-text, #142748);
+  cursor: pointer;
+}
+.cyc-employment-dialog-top button:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+.cyc-employment-dialog .employment-user {
+  border: 0;
+  border-radius: 0;
+}
+body:has(.cyc-employment-dialog[open]) {
+  overflow: hidden;
+}
+@media (max-width: 650px) {
+  .cyc-employment-dialog {
+    width: calc(100% - 20px);
+    max-height: 90dvh;
+    border-radius: 18px;
+  }
+}
