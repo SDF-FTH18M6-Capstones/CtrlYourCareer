@@ -1,0 +1,7 @@
+import {useEffect,useState} from "react";
+import {request} from "../../services/monitoring";
+export default function AdminUserMonitor(){
+ const [users,setUsers]=useState([]), [search,setSearch]=useState(""), [error,setError]=useState(""), [loading,setLoading]=useState(true);
+ useEffect(()=>{request("/admin/monitoring").then(setUsers).catch(e=>setError(e.message)).finally(()=>setLoading(false));},[]);
+ return <section className="cyc-admin-panel"><h2>User progress monitoring</h2><p>Regular users: {users.length} · Users with journeys: {users.filter(u=>u.journeys.length).length}</p><input aria-label="Search users" placeholder="Search users" value={search} onChange={e=>setSearch(e.target.value)}/>{loading&&<p>Loading…</p>}{error&&<p role="alert">{error}</p>}{users.filter(u=>u.username.toLowerCase().includes(search.toLowerCase())).map(u=><details key={u.id}><summary>{u.username} · {u.skills.length} skills · {u.journeys.length} journeys</summary><p>User ID: {u.id}</p><p>{u.skills.map(s=>`${s.name}: ${s.level || "Unknown"}`).join(", ") || "No recorded skills"}</p>{u.journeys.map(j=><article key={j.id}><h3>{j.career}</h3><p>Resources: {j.completed}/{j.total}</p><progress max={j.total||1} value={j.completed}/><p>Activities: {j.activities_done}/{j.activities_total}</p><p>Required skills met: {j.readiness==null?"Not configured":`${j.readiness}%`}</p></article>)}<p>Self-reported skills are for human review, not employment certification.</p></details>)}</section>;
+}
