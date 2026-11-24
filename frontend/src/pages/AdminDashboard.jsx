@@ -1,3 +1,4 @@
+import EmploymentPanel from "../components/EmploymentPanel";
 import AdminUserMonitor from "../components/admin/AdminUserMonitor";
 import { useEffect, useState } from "react";
 
@@ -50,10 +51,7 @@ const navigation = [
     label: "Resources",
     icon: Library,
   },
-  { id: "employment", 
-    label: "Employment", 
-    icon: BriefcaseBusiness, 
-  },
+  { id: "employment", label: "Employment", icon: BriefcaseBusiness },
 ];
 
 export default function AdminDashboard({ user, onLogout }) {
@@ -381,7 +379,7 @@ export default function AdminDashboard({ user, onLogout }) {
 
           {active === "monitoring" && <AdminUserMonitor />}
           {active === "employment" && <EmploymentPanel admin />}
-          
+
           {active === "careers" && (
             <section className="cyc-admin-panel">
               <AdminCareerManager />

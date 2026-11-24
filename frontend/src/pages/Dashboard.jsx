@@ -1,6 +1,7 @@
- import EmploymentPanel from "../components/EmploymentPanel";
- import {
+import EmploymentPanel from "../components/EmploymentPanel";
+import {
   ArrowUpRight,
+  Bell,
   BookOpen,
   CheckCircle2,
   Code2,
@@ -8,8 +9,9 @@
   ShieldCheck,
   Sparkles,
   Target,
+  X,
 } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import SkillsList from "../components/SkillsList";
 import CareersList from "../components/CareersList";
@@ -22,10 +24,19 @@ export default function Dashboard({
   onLogout,
   onSettings,
   onExploreCareers,
+  onExploreSkills,
   onOpenJourneys,
   onStartJourney,
 }) {
   const skillsRef = useRef(null);
+  const employmentRef = useRef(null);
+  const [employmentOpen, setEmploymentOpen] = useState(false);
+
+  function openEmployment() {
+    employmentRef.current?.showModal();
+    setEmploymentOpen(true);
+  }
+  const [unread, setUnread] = useState(0);
   const careersRef = useRef(null);
 
   const displayName = user.name || user.username || "Explorer";
@@ -70,7 +81,7 @@ export default function Dashboard({
       actionLabel: "View skills",
 
       // Scroll to the Skills section within the Dashboard.
-      onClick: () => scrollToSection(skillsRef),
+      onClick: onExploreSkills,
 
       available: true,
     },
@@ -90,6 +101,20 @@ export default function Dashboard({
         <Brand />
 
         <div className="dash-user">
+          {!demo && (
+            <button
+              type="button"
+              className="cyc-notification-bell"
+              aria-label={`Employment notifications: ${unread} unread`}
+              aria-haspopup="dialog"
+              aria-controls="employment-dialog"
+              aria-expanded={employmentOpen}
+              onClick={openEmployment}
+            >
+              <Bell size={21} />
+              {unread > 0 && <span>{unread}</span>}
+            </button>
+          )}
           <button
             type="button"
             className="profile-trigger"
@@ -107,7 +132,6 @@ export default function Dashboard({
             <LogOut size={17} />
             Sign out
           </button>
-          <EmploymentPanel />
         </div>
       </header>
 
@@ -178,6 +202,40 @@ export default function Dashboard({
             </p>
           </div>
         </div>
+
+        {!demo && (
+          <dialog
+            id="employment-dialog"
+            ref={employmentRef}
+            className="cyc-employment-dialog"
+            aria-label="Employment opportunities and notifications"
+            onClose={() => setEmploymentOpen(false)}
+            onClick={(event) => {
+              if (event.target === event.currentTarget)
+                employmentRef.current?.close();
+            }}
+          >
+            <div className="cyc-employment-dialog-inner">
+              <div className="cyc-employment-dialog-top">
+                <span>
+                  <Bell size={18} /> Your updates
+                </span>
+                <button
+                  type="button"
+                  autoFocus
+                  aria-label="Close notifications"
+                  onClick={() => employmentRef.current?.close()}
+                >
+                  <X size={22} />
+                </button>
+              </div>
+              <EmploymentPanel
+                onUnreadChange={setUnread}
+                visible={employmentOpen}
+              />
+            </div>
+          </dialog>
+        )}
 
         <h2 className="dash-section-title">Where to next?</h2>
 

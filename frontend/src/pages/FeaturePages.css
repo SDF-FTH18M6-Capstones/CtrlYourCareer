@@ -1202,3 +1202,25 @@
     transition: none;
   }
 }
+/* Individual learning resource completion */
+
+.cyc-feature-resource-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.cyc-feature-resource-item .cyc-feature-resource {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cyc-feature-resource-item button {
+  cursor: pointer;
+}
+
+.cyc-feature-resource-item button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

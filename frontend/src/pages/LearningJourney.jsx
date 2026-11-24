@@ -1,11 +1,10 @@
-import ResourceCompletion from "../components/ResourceCompletion";
 import { useEffect, useState } from "react";
+import ResourceCompletion from "../components/ResourceCompletion";
 
 import {
   ArrowLeft,
   BookOpen,
   CheckCircle2,
-  Circle,
   ExternalLink,
   GraduationCap,
   Target,
@@ -72,16 +71,21 @@ export default function LearningJourney({ journeyId, onBack }) {
     }
   }
 
+  // LOADING STATE
+
   if (loading) {
     return (
       <main className="cyc-page cyc-feature-page">
         <div className="cyc-feature-empty">
           <LoaderCircle className="cyc-feature-spin" size={30} />
+
           <p>Loading your learning journey...</p>
         </div>
       </main>
     );
   }
+
+  // JOURNEY NOT FOUND
 
   if (!journey) {
     return (
@@ -93,11 +97,14 @@ export default function LearningJourney({ journeyId, onBack }) {
 
         <div className="cyc-feature-alert" role="alert">
           <AlertCircle size={19} />
+
           {error || "Learning journey not found."}
         </div>
       </main>
     );
   }
+
+  // JOURNEY PROGRESS CALCULATIONS
 
   const steps = journey.steps || [];
 
@@ -140,7 +147,7 @@ export default function LearningJourney({ journeyId, onBack }) {
         </div>
       </header>
 
-      {/* ERROR */}
+      {/* ERROR MESSAGE */}
 
       {error && (
         <div className="cyc-feature-alert" role="alert">
@@ -164,6 +171,8 @@ export default function LearningJourney({ journeyId, onBack }) {
           <div className="cyc-feature-progress-percentage">{progress}%</div>
         </div>
 
+        {/* PROGRESS BAR */}
+
         <div
           className="cyc-feature-progress-track"
           role="progressbar"
@@ -177,6 +186,8 @@ export default function LearningJourney({ journeyId, onBack }) {
             style={{ width: `${progress}%` }}
           />
         </div>
+
+        {/* PROGRESS STATISTICS */}
 
         <div className="cyc-feature-progress-stats">
           <div className="cyc-feature-stat">
@@ -201,6 +212,8 @@ export default function LearningJourney({ journeyId, onBack }) {
             </span>
           </div>
         </div>
+
+        {/* PROGRESS INFORMATION */}
 
         <div className="cyc-feature-progress-note">
           <AlertCircle size={17} />
@@ -231,7 +244,7 @@ export default function LearningJourney({ journeyId, onBack }) {
         </span>
       </div>
 
-      {/* ROADMAP */}
+      {/* LEARNING ROADMAP */}
 
       <div className="cyc-feature-roadmap">
         {steps.map((step, index) => {
@@ -271,6 +284,8 @@ export default function LearningJourney({ journeyId, onBack }) {
                     </span>
                   </div>
 
+                  {/* STEP STATUS */}
+
                   <span
                     className={`cyc-feature-status ${
                       completed ? "completed" : "pending"
@@ -290,7 +305,7 @@ export default function LearningJourney({ journeyId, onBack }) {
                   </span>
                 </div>
 
-                {/* COMPLETION CONTROL */}
+                {/* SKILL ACTIVITY COMPLETION CONTROL */}
 
                 <label className="cyc-feature-completion">
                   <input
@@ -309,7 +324,7 @@ export default function LearningJourney({ journeyId, onBack }) {
                   </span>
                 </label>
 
-                {/* RESOURCES */}
+                {/* LEARNING RESOURCES */}
 
                 <div className="cyc-feature-resources">
                   <h4>
@@ -320,21 +335,31 @@ export default function LearningJourney({ journeyId, onBack }) {
                   {resources.length > 0 ? (
                     <div className="cyc-feature-resource-list">
                       {resources.map((resource) => (
-                        <a
+                        <div
                           key={resource.id}
-                          className="cyc-feature-resource"
-                          href={resource.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          className="cyc-feature-resource-item"
                         >
-                          <div className="cyc-feature-resource-icon">
-                            <BookOpen size={19} />
-                          </div>
+                          {/* EXTERNAL RESOURCE LINK */}
 
-                          <span>{resource.title || "Learning Resource"}</span>
+                          <a
+                            className="cyc-feature-resource"
+                            href={resource.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <div className="cyc-feature-resource-icon">
+                              <BookOpen size={19} />
+                            </div>
 
-                          <ExternalLink size={17} />
-                        </a>
+                            <span>{resource.title || "Learning Resource"}</span>
+
+                            <ExternalLink size={17} />
+                          </a>
+
+                          {/* INDIVIDUAL RESOURCE COMPLETION */}
+
+                          <ResourceCompletion resourceId={resource.id} />
+                        </div>
                       ))}
                     </div>
                   ) : (
@@ -366,7 +391,7 @@ export default function LearningJourney({ journeyId, onBack }) {
         </div>
       )}
 
-      {/* COMPLETED MESSAGE */}
+      {/* COMPLETED JOURNEY MESSAGE */}
 
       {steps.length > 0 && progress === 100 && (
         <div className="cyc-feature-success">

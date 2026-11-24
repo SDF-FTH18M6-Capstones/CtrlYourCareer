@@ -1,5 +1,5 @@
-
 import { useEffect, useState } from "react";
+import "./EmploymentPanel.css";
 import { request } from "../services/employment";
 
 export default function ResourceCompletion({ resourceId }) {
@@ -21,11 +21,9 @@ export default function ResourceCompletion({ resourceId }) {
     setError("");
 
     try {
-      const result = await request(
-        `/progress/${resourceId}`,
-        "PUT",
-        { completed: !completed }
-      );
+      const result = await request(`/progress/${resourceId}`, "PUT", {
+        completed: !completed,
+      });
 
       setCompleted(result.completed);
     } catch (err) {
@@ -36,7 +34,7 @@ export default function ResourceCompletion({ resourceId }) {
   }
 
   return (
-    <div>
+    <div className={`cyc-resource-completion ${completed ? "done" : ""}`}>
       <label>
         <input
           type="checkbox"
@@ -44,7 +42,11 @@ export default function ResourceCompletion({ resourceId }) {
           disabled={loading}
           onChange={handleChange}
         />
-        Resource completed
+        {loading
+          ? "Updating…"
+          : completed
+            ? "Resource completed"
+            : "Mark resource as completed"}
       </label>
 
       {error && <p role="alert">{error}</p>}

@@ -73,3 +73,13 @@ def complete(step_id):
     s.completed = data["completed"]
     db.session.commit()
     return jsonify(id=s.id, completed=s.completed)
+
+@journeys_bp.delete("/<int:journey_id>")
+@jwt_required()
+def delete_journey(journey_id):
+    journey = CareerJourney.query.filter_by(id=journey_id, user_id=user_id()).first()
+    if journey is None:
+        return jsonify(error="Journey not found"), 404
+    db.session.delete(journey)
+    db.session.commit()
+    return jsonify(message="Learning journey removed"), 200

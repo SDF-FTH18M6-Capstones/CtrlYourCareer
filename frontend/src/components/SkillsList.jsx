@@ -7,21 +7,53 @@ import {
   CalendarDays,
   Save,
   Trash2,
+  Search,
+  BookOpen,
 } from "lucide-react";
 
 import { backendApi } from "../services/backend";
+import ResourceCompletion from "./ResourceCompletion";
 import Modal from "./ui/Modal";
 
 import "./DashboardInteractions.css";
 
 const LEVELS = ["Beginner", "Intermediate", "Advanced"];
 
-export default function SkillsList() {
+export default function SkillsList({ explorer = false }) {
   const [skills, setSkills] = useState([]);
   const [mySkills, setMySkills] = useState([]);
   const [recommendedSkills, setRecommendedSkills] = useState([]);
   const [view, setView] = useState("recommended");
   const [recommendationError, setRecommendationError] = useState("");
+
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
+  const [resourceSkill, setResourceSkill] = useState(null);
+  const [resources, setResources] = useState([]);
+  const [resourceLoading, setResourceLoading] = useState(false);
+  const [resourceError, setResourceError] = useState("");
+  useEffect(() => {
+    if (!resourceSkill) return;
+    let active = true;
+    setResources([]);
+    setResourceError("");
+    setResourceLoading(true);
+    backendApi
+      .getLearningResources(resourceSkill.id)
+      .then((data) => {
+        if (active)
+          setResources(Array.isArray(data) ? data : data?.resources || []);
+      })
+      .catch((err) => {
+        if (active) setResourceError(err.message);
+      })
+      .finally(() => {
+        if (active) setResourceLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [resourceSkill]);
 
   const [selected, setSelected] = useState(null);
 
@@ -219,9 +251,29 @@ export default function SkillsList() {
   );
 
   const isEditing = Boolean(selectedRecord);
-  const displayedSkills = view === "recommended" ? recommendedSkills : skills;
+  const categories = [
+    ...new Set(skills.map((s) => s.category).filter(Boolean)),
+  ].sort();
+  const baseSkills =
+    view === "recommended"
+      ? recommendedSkills
+      : view === "mine"
+        ? skills.filter((s) => mySkills.some((r) => r.skill_id === s.id))
+        : skills;
+  const displayedSkills = baseSkills.filter(
+    (s) =>
+      !explorer ||
+      ((!category || s.category === category) &&
+        [s.name, s.category, s.description].some((v) =>
+          String(v || "")
+            .toLowerCase()
+            .includes(search.trim().toLowerCase()),
+        )),
+  );
   return (
-    <section className="explore-section dashboard-interactions">
+    <section
+      className={`explore-section dashboard-interactions ${explorer ? "cyc-skills-library" : ""}`}
+    >
       <div className="explore-heading">
         <div>
           <span className="section-label">
@@ -241,6 +293,30 @@ export default function SkillsList() {
         </span>
       </div>
 
+      {explorer && (
+        <div className="cyc-skills-filters">
+          <div className="cyc-feature-search">
+            <Search size={20} />
+            <input
+              type="search"
+              aria-label="Search skills"
+              placeholder="Search skills..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+          <select
+            aria-label="Filter by category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="">All categories</option>
+            {categories.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
+        </div>
+      )}
       <div
         style={{ display: "flex", gap: 10, flexWrap: "wrap", margin: "16px 0" }}
         role="group"
@@ -270,6 +346,16 @@ export default function SkillsList() {
         >
           Explore All ({skills.length})
         </button>
+        {explorer && (
+          <button
+            type="button"
+            className="dashboard-secondary-button"
+            aria-pressed={view === "mine"}
+            onClick={() => setView("mine")}
+          >
+            My Skills ({mySkills.length})
+          </button>
+        )}
       </div>
       {view === "recommended" && recommendationError && (
         <p role="alert" className="api-error">
@@ -304,6 +390,12 @@ export default function SkillsList() {
         <p>No skills are available yet.</p>
       )}
 
+      {explorer && !loading && (
+        <p role="status">{displayedSkills.length} skills shown</p>
+      )}
+      {explorer && !loading && !error && displayedSkills.length === 0 && (
+        <p>No skills match this view or filter.</p>
+      )}
       {!loading && (
         <div className="modern-card-grid">
           {displayedSkills.map((skill) => {
@@ -312,54 +404,107 @@ export default function SkillsList() {
             );
 
             return (
-              <button
-                type="button"
-                className="modern-item-card dashboard-card-button"
+              <div
+                className={
+                  explorer
+                    ? "cyc-skills-card-wrap"
+                    : "cyc-skills-dashboard-wrap"
+                }
                 key={skill.id}
-                onClick={() => selectSkill(skill)}
+                style={explorer ? undefined : { display: "contents" }}
               >
-                <div className="card-top">
-                  <div className="modern-icon skill-icon">
-                    <Code2 size={24} />
+                <button
+                  type="button"
+                  className="modern-item-card dashboard-card-button"
+                  key={skill.id}
+                  onClick={() => selectSkill(skill)}
+                >
+                  <div className="card-top">
+                    <div className="modern-icon skill-icon">
+                      <Code2 size={24} />
+                    </div>
+
+                    <span className="card-badge">
+                      {owned
+                        ? "MY SKILL"
+                        : view === "recommended"
+                          ? "RECOMMENDED"
+                          : "SKILL"}
+                    </span>
                   </div>
 
-                  <span className="card-badge">
-                    {owned
-                      ? "MY SKILL"
-                      : view === "recommended"
-                        ? "RECOMMENDED"
-                        : "SKILL"}
-                  </span>
-                </div>
+                  <h3>{skill.name}</h3>
 
-                <h3>{skill.name}</h3>
+                  <p>{skill.description || "Explore this skill."}</p>
+                  {view === "recommended" &&
+                    skill.relevant_careers?.length > 0 && (
+                      <p>
+                        Useful for:{" "}
+                        {skill.relevant_careers.slice(0, 3).join(", ")}
+                      </p>
+                    )}
 
-                <p>{skill.description || "Explore this skill."}</p>
-                {view === "recommended" &&
-                  skill.relevant_careers?.length > 0 && (
-                    <p>
-                      Useful for:{" "}
-                      {skill.relevant_careers.slice(0, 3).join(", ")}
-                    </p>
-                  )}
+                  <div className="card-bottom">
+                    <span>
+                      {owned
+                        ? `${owned.proficiency_level} · ${
+                            owned.years_experience
+                          } years`
+                        : "Add to my skills"}
+                    </span>
 
-                <div className="card-bottom">
-                  <span>
-                    {owned
-                      ? `${owned.proficiency_level} · ${
-                          owned.years_experience
-                        } years`
-                      : "Add to my skills"}
-                  </span>
-
-                  <ArrowUpRight size={19} />
-                </div>
-              </button>
+                    <ArrowUpRight size={19} />
+                  </div>
+                </button>
+                {explorer && (
+                  <button
+                    type="button"
+                    className="cyc-skills-resource-button"
+                    onClick={() => setResourceSkill(skill)}
+                  >
+                    <BookOpen size={17} /> Learning resources{" "}
+                    <ArrowUpRight size={16} />
+                  </button>
+                )}
+              </div>
             );
           })}
         </div>
       )}
 
+      {explorer && (
+        <Modal
+          open={Boolean(resourceSkill)}
+          onClose={() => setResourceSkill(null)}
+          title={
+            resourceSkill
+              ? `${resourceSkill.name} resources`
+              : "Learning resources"
+          }
+          size="medium"
+        >
+          {resourceLoading && <p>Loading resources...</p>}
+          {resourceError && <p role="alert">{resourceError}</p>}
+          {!resourceLoading && !resourceError && resources.length === 0 && (
+            <p>No resources available yet.</p>
+          )}
+          <div className="cyc-skills-resource-list">
+            {resources.map((r) => (
+              <div key={r.id}>
+                {/^https?:\/\//i.test(r.url || "") && (
+                  <a href={r.url} target="_blank" rel="noopener noreferrer">
+                    {r.title} <ArrowUpRight size={16} />
+                  </a>
+                )}
+                <p>
+                  {[r.resource_type, r.difficulty].filter(Boolean).join(" · ")}
+                </p>
+                <ResourceCompletion resourceId={r.id} />
+              </div>
+            ))}
+          </div>
+        </Modal>
+      )}
       <Modal
         open={Boolean(selected)}
         onClose={closeSkillModal}

@@ -1,0 +1,15 @@
+ .cyc-feature-page .cyc-journey-remove, .cyc-journey-actions button {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 11px 14px; border-radius: 10px; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+}
+.cyc-feature-page .cyc-journey-remove { margin: 10px 0 0; background: #fff1f2; color: #b4232e; border: 1px solid #f5c2c7; }
+.cyc-feature-page .cyc-journey-remove:hover { background: #ffe0e4; }
+.cyc-journey-confirm p { line-height: 1.65; margin: 0 0 14px; color: var(--cyc-text, #102449); }
+.cyc-journey-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; margin-top: 24px; }
+.cyc-journey-actions .cyc-journey-cancel { background: var(--cyc-card, #eef3ff); color: var(--cyc-text, #102449); border: 1px solid var(--cyc-border, #dce5f2); }
+.cyc-journey-actions .cyc-journey-danger { background: #b4232e; color: white; border: 1px solid #b4232e; }
+.cyc-journey-actions .cyc-journey-danger:hover:not(:disabled) { background: #941c26; }
+.cyc-journey-actions button:disabled { opacity: .6; cursor: not-allowed; }
+[data-theme="dark"] .cyc-feature-page .cyc-journey-remove, .dark .cyc-feature-page .cyc-journey-remove { background: #3b1725; color: #ff9daf; border-color: #783449; }
+[data-theme="dark"] .cyc-journey-confirm p, .dark .cyc-journey-confirm p { color: #eef4ff; }
+@media(max-width: 480px) { .cyc-journey-actions button { width: 100%; } }
