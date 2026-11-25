@@ -1,0 +1,53 @@
+Table users {
+  id integer [pk, increment]
+  username varchar(80) [not null]
+  email varchar(120) [not null, unique]
+  password_hash varchar(255) [not null]
+  role varchar(30)
+  created_at timestamp
+}
+
+Table profiles {
+  id integer [pk, increment]
+  user_id integer [not null, unique]
+  full_name varchar(120)
+  education text
+  experience text
+  career_interest varchar(120)
+  bio text
+}
+
+Table skills {
+  id integer [pk, increment]
+  name varchar(100) [not null, unique]
+  category varchar(50)
+  description text
+}
+
+Table user_skills {
+  id integer [pk, increment]
+  user_id integer [not null]
+  skill_id integer [not null]
+  proficiency_level varchar(30)
+  years_experience integer
+}
+
+Table careers {
+  id integer [pk, increment]
+  title varchar(120) [not null]
+  description text
+  category varchar(80)
+}
+
+Table career_skills {
+  id integer [pk, increment]
+  career_id integer [not null]
+  skill_id integer [not null]
+  required_level varchar(30)
+}
+
+Ref: profiles.user_id - users.id
+Ref: user_skills.user_id > users.id
+Ref: user_skills.skill_id > skills.id
+Ref: career_skills.career_id > careers.id
+Ref: career_skills.skill_id > skills.id

@@ -1,0 +1,303 @@
+.admin-register-shell {
+  min-height: 100vh;
+}
+
+.admin-register-shell .auth-main {
+  padding-top: 35px;
+  padding-bottom: 35px;
+}
+
+.admin-register-form {
+  width: 100%;
+  max-width: 540px;
+}
+
+.admin-register-form h1 {
+  font-size: clamp(27px, 3vw, 36px);
+  line-height: 1.2;
+}
+
+.admin-register-form form {
+  display: grid;
+  gap: 16px;
+}
+
+/* =========================================
+   ASIDE FEATURES
+========================================= */
+
+.admin-register-features {
+  display: grid;
+  gap: 20px;
+  margin-top: 36px;
+}
+
+.admin-register-features > div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #e1ebff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.admin-register-features svg {
+  color: #91b8ff;
+  flex-shrink: 0;
+}
+
+/* =========================================
+   SECURITY NOTICE
+========================================= */
+
+.admin-register-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 17px;
+  margin: 20px 0 25px;
+  border: 1px solid #d5e4ff;
+  border-radius: 13px;
+  background: #edf4ff;
+  color: #2454a5;
+}
+
+.admin-register-notice svg {
+  flex-shrink: 0;
+}
+
+.admin-register-notice strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.admin-register-notice p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   PIN SECTION
+========================================= */
+
+.admin-register-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 20px;
+  margin-top: 5px;
+  border-top: 1px solid var(--cyc-border, #e2eaf6);
+  color: var(--cyc-text, #102449);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.admin-register-hint {
+  margin: -5px 0 0;
+  color: var(--cyc-muted, #71829d);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.admin-register-pin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.admin-register-pin-grid label {
+  min-width: 0;
+}
+
+.admin-register-pin-grid input {
+  min-width: 0;
+  width: 100%;
+}
+
+.admin-register-form input[readonly] {
+  cursor: default;
+  opacity: 0.8;
+}
+
+.admin-register-form .btn-submit {
+  margin-top: 8px;
+}
+
+/* =========================================
+   SUCCESS AND ERROR STATES
+========================================= */
+
+.admin-register-state {
+  text-align: center;
+  padding: 30px 0;
+}
+
+.admin-register-state h1,
+.admin-register-state h2 {
+  margin: 18px 0 12px;
+  color: var(--cyc-text, #102449);
+}
+
+.admin-register-state p {
+  color: var(--cyc-muted, #71829d);
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.admin-register-state-icon {
+  display: grid;
+  place-items: center;
+  width: 82px;
+  height: 82px;
+  border-radius: 24px;
+  margin: 0 auto 24px;
+}
+
+.admin-register-state-icon.success {
+  background: #e8f8ef;
+  color: #16834e;
+}
+
+.admin-register-state-icon.warning {
+  background: #fff3e4;
+  color: #b7791f;
+}
+
+.admin-register-spinner {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 25px;
+  border: 4px solid #dce7f8;
+  border-top-color: #285bd8;
+  border-radius: 50%;
+  animation: admin-register-spin 0.8s linear infinite;
+}
+
+@keyframes admin-register-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================
+   ADMIN REGISTRATION LINK
+========================================= */
+
+.admin-registration-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 20px;
+  padding: 13px;
+  border: 1px solid var(--cyc-border, #dce6f5);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--cyc-link, #285bd8);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.admin-registration-link:hover {
+  background: var(--cyc-selected, #edf4ff);
+}
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+:root[data-theme="dark"] .admin-register-shell,
+:root[data-theme="dark"] .admin-register-shell .auth-main {
+  background: #0e1b2f;
+  color: #eef4ff;
+}
+
+:root[data-theme="dark"] .admin-register-form h1,
+:root[data-theme="dark"] .admin-register-form h2,
+:root[data-theme="dark"] .admin-register-form label {
+  color: #eef4ff;
+}
+
+:root[data-theme="dark"] .admin-register-form .form-intro,
+:root[data-theme="dark"] .admin-register-form .auth-note,
+:root[data-theme="dark"] .admin-register-form .auth-switch {
+  color: #a8b9d5;
+}
+
+:root[data-theme="dark"] .admin-register-form .input-wrap {
+  background: #102038;
+  border-color: #314561;
+  color: #a8b9d5;
+}
+
+:root[data-theme="dark"] .admin-register-form input {
+  background: transparent;
+  color: #eef4ff;
+}
+
+:root[data-theme="dark"] .admin-register-form input::placeholder {
+  color: #91a6c5;
+}
+
+:root[data-theme="dark"] .admin-register-form .eye-button,
+:root[data-theme="dark"] .admin-register-shell .back-link,
+:root[data-theme="dark"] .admin-register-form .auth-switch button {
+  color: #8eb4ff;
+}
+
+:root[data-theme="dark"] .admin-register-form .form-badge,
+:root[data-theme="dark"] .admin-register-notice {
+  background: #233e67;
+  border-color: #3b526f;
+  color: #bfdbfe;
+}
+
+:root[data-theme="dark"] .admin-register-state-icon.success {
+  background: #153e32;
+  color: #6ee7b7;
+}
+
+:root[data-theme="dark"] .admin-register-state-icon.warning {
+  background: #49351e;
+  color: #fcd38d;
+}
+
+:root[data-theme="dark"] .admin-register-form .error {
+  background: #48252f;
+  color: #fda4af;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 600px) {
+  .admin-register-shell .auth-main {
+    padding: 24px 18px;
+  }
+
+  .admin-register-pin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-register-form h1 {
+    font-size: 28px;
+  }
+
+  .admin-register-notice {
+    padding: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-register-spinner {
+    animation: none;
+  }
+}

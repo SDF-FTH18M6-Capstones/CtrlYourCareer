@@ -1,0 +1,439 @@
+.cyc-pin-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 40px 20px;
+
+  background: linear-gradient(135deg, #091a38 0%, #102a56 55%, #163e7a 100%);
+
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.cyc-pin-page *,
+.cyc-pin-page *::before,
+.cyc-pin-page *::after {
+  box-sizing: border-box;
+}
+
+/* BACKGROUND DECORATIONS */
+
+.cyc-pin-background-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.cyc-pin-background-circle.circle-one {
+  width: 600px;
+  height: 600px;
+  top: -300px;
+  right: -200px;
+
+  background: radial-gradient(circle, rgba(64, 123, 255, 0.2), transparent 70%);
+}
+
+.cyc-pin-background-circle.circle-two {
+  width: 550px;
+  height: 550px;
+  bottom: -320px;
+  left: -200px;
+
+  background: radial-gradient(
+    circle,
+    rgba(72, 139, 255, 0.15),
+    transparent 70%
+  );
+}
+
+/* MAIN CONTAINER */
+
+.cyc-pin-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+}
+
+/* BRAND */
+
+.cyc-pin-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.cyc-pin-brand > span > span {
+  color: #82adff;
+}
+
+.cyc-pin-brand-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+
+  border-radius: 13px;
+  background: #ffffff;
+  color: #285bd8;
+}
+
+/* VERIFICATION CARD */
+
+.cyc-pin-card {
+  width: 100%;
+  padding: 42px 40px 32px;
+
+  border-radius: 24px;
+  background: #ffffff;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.2),
+    0 5px 20px rgba(0, 0, 0, 0.08);
+
+  text-align: center;
+}
+
+/* SHIELD ICON */
+
+.cyc-pin-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.cyc-pin-icon {
+  width: 76px;
+  height: 76px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 22px;
+
+  background: #eaf1ff;
+  color: #285bd8;
+}
+
+/* BADGE */
+
+.cyc-pin-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 8px 13px;
+
+  border-radius: 30px;
+
+  background: #edf3ff;
+  color: #285bd8;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+
+  margin-bottom: 17px;
+}
+
+/* HEADINGS */
+
+.cyc-pin-card h1 {
+  margin: 0 0 14px;
+
+  color: #10254a;
+
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 800;
+  letter-spacing: -1.2px;
+}
+
+.cyc-pin-description {
+  max-width: 390px;
+  margin: 0 auto 32px;
+
+  color: #71829d;
+
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* PIN LABEL */
+
+.cyc-pin-label {
+  display: block;
+  margin-bottom: 15px;
+
+  color: #334a70;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+
+  text-align: left;
+}
+
+/* PIN INPUTS */
+
+.cyc-pin-input-group {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+
+  margin-bottom: 24px;
+}
+
+.cyc-pin-input-group input {
+  width: 100%;
+  height: 62px;
+  min-width: 0;
+
+  border: 1.5px solid #dce5f2;
+  border-radius: 12px;
+
+  background: #f8faff;
+
+  color: #10254a;
+
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: 800;
+  text-align: center;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.cyc-pin-input-group input:hover {
+  border-color: #a9c2f5;
+}
+
+.cyc-pin-input-group input:focus {
+  border-color: #285bd8;
+
+  background: #ffffff;
+
+  box-shadow: 0 0 0 4px rgba(40, 91, 216, 0.12);
+}
+
+.cyc-pin-input-group input.filled {
+  border-color: #8eaff0;
+  background: #edf3ff;
+}
+
+.cyc-pin-input-group input:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* ERROR */
+
+.cyc-pin-error {
+  margin-bottom: 18px;
+  padding: 13px 15px;
+
+  border: 1px solid #f5c2c7;
+  border-radius: 10px;
+
+  background: #fff0f0;
+  color: #b4232e;
+
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* VERIFY BUTTON */
+
+.cyc-pin-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 100%;
+  min-height: 54px;
+
+  padding: 14px 20px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: #285bd8;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cyc-pin-submit:hover:not(:disabled) {
+  background: #1c49b5;
+  transform: translateY(-1px);
+
+  box-shadow: 0 8px 20px rgba(40, 91, 216, 0.22);
+}
+
+.cyc-pin-submit:disabled {
+  background: #9bb6ef;
+  cursor: not-allowed;
+}
+
+/* LOADING SPINNER */
+
+.cyc-pin-spinner {
+  width: 18px;
+  height: 18px;
+
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+
+  animation: cyc-pin-spin 0.7s linear infinite;
+}
+
+@keyframes cyc-pin-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* BACK BUTTON */
+
+.cyc-pin-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  margin-top: 22px;
+  padding: 10px 14px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: transparent;
+  color: #637897;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.cyc-pin-back:hover:not(:disabled) {
+  background: #f0f5ff;
+  color: #285bd8;
+}
+
+/* SECURITY NOTE */
+
+.cyc-pin-security-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  margin-top: 22px;
+  padding-top: 22px;
+
+  border-top: 1px solid #e8edf5;
+
+  color: #8290a6;
+
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.cyc-pin-security-note svg {
+  flex-shrink: 0;
+  color: #23a06b;
+}
+
+/* FOOTER */
+
+.cyc-pin-footer {
+  margin: 24px 0 0;
+
+  color: #a9c1e7;
+
+  font-size: 12px;
+  text-align: center;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 540px) {
+  .cyc-pin-page {
+    padding: 24px 14px;
+  }
+
+  .cyc-pin-brand {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+
+  .cyc-pin-card {
+    padding: 32px 20px 24px;
+    border-radius: 19px;
+  }
+
+  .cyc-pin-icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .cyc-pin-input-group {
+    gap: 7px;
+  }
+
+  .cyc-pin-input-group input {
+    height: 54px;
+    font-size: 20px;
+    border-radius: 9px;
+  }
+
+  .cyc-pin-description {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyc-pin-spinner {
+    animation: none;
+  }
+
+  .cyc-pin-page *,
+  .cyc-pin-page *::before,
+  .cyc-pin-page *::after {
+    transition: none;
+  }
+}
