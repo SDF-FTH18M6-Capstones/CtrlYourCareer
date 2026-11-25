@@ -24,15 +24,39 @@ def create_app():
 
     register_error_handlers(app)
 
+    # Initialize extensions
     db.init_app(app)
     migrate.init_app(app, db)
-    cors.init_app(app)
     bcrypt.init_app(app)
     jwt.init_app(app)
 
+    # Configure CORS for local and production environments
+    cors.init_app(
+        app,
+        resources={
+            r"/api/.*": {
+                "origins": app.config["CORS_ORIGINS"],
+                "methods": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "PATCH",
+                    "DELETE",
+                    "OPTIONS",
+                ],
+                "allow_headers": [
+                    "Content-Type",
+                    "Authorization",
+                ],
+            }
+        },
+    )
+
+    # Import database models
     from app import models, admin_models, journey_models
     from app.models import User
 
+    # Reject tokens belonging to deleted users
     @jwt.token_in_blocklist_loader
     def check_if_user_exists(jwt_header, jwt_payload):
         identity = jwt_payload.get("sub")
@@ -43,6 +67,7 @@ def create_app():
         except (ValueError, TypeError):
             return True
 
+    # Import additional blueprints
     from app.routes.admin_auth import admin_auth_bp
     from app.routes.admin_management import admin_bp
     from app.routes.admin_registration import admin_registration_bp
@@ -51,6 +76,7 @@ def create_app():
     from app.routes.progress import progress_bp
     from app.routes.referrals import referrals_bp
 
+    # Register core blueprints
     app.register_blueprint(health_bp)
     app.register_blueprint(skills_bp)
     app.register_blueprint(careers_bp)
@@ -58,18 +84,21 @@ def create_app():
 
     app.register_blueprint(
         user_skills_bp,
-        url_prefix="/api/my-skills"
+        url_prefix="/api/my-skills",
     )
 
     app.register_blueprint(profile_bp)
 
+    # Register administrator blueprints
     app.register_blueprint(admin_auth_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(admin_registration_bp)
 
+    # Register learning journey blueprints
     app.register_blueprint(journeys_bp)
     app.register_blueprint(resources_bp)
 
+    # Register progress and employment referral blueprints
     app.register_blueprint(progress_bp)
     app.register_blueprint(referrals_bp)
 

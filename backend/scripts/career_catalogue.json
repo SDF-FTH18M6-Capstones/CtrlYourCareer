@@ -1,0 +1,2169 @@
+{
+    "careers": [
+        {
+            "id": 1,
+            "title": "Frontend Developer",
+            "description": "Builds user interfaces and interactive web applications.",
+            "category": "Software Development",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 2,
+            "title": "Backend Developer",
+            "description": "Builds server-side applications and APIs.",
+            "category": "Software Development",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 3,
+            "title": "Data Analyst",
+            "description": "Analyzes data to support business decisions.",
+            "category": "Data",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 4,
+            "title": "UI/UX Designer",
+            "description": "Designs useful and user-friendly digital experiences.",
+            "category": "Design",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 5,
+            "title": "Mechanical Engineer",
+            "description": "A professional career in Engineering, specializing in mechanical engineer.",
+            "category": "Engineering",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 6,
+            "title": "Civil Engineer",
+            "description": "A professional career in Engineering, specializing in civil engineer.",
+            "category": "Engineering",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 7,
+            "title": "Electrical Engineer",
+            "description": "A professional career in Engineering, specializing in electrical engineer.",
+            "category": "Engineering",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 8,
+            "title": "Chemical Engineer",
+            "description": "A professional career in Engineering, specializing in chemical engineer.",
+            "category": "Engineering",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 9,
+            "title": "Industrial Engineer",
+            "description": "A professional career in Engineering, specializing in industrial engineer.",
+            "category": "Engineering",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 10,
+            "title": "Graphic Designer",
+            "description": "A professional career in Design, specializing in graphic designer.",
+            "category": "Design",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 11,
+            "title": "Product Designer",
+            "description": "A professional career in Design, specializing in product designer.",
+            "category": "Design",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 12,
+            "title": "Motion Graphics Designer",
+            "description": "A professional career in Design, specializing in motion graphics designer.",
+            "category": "Design",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 13,
+            "title": "Registered Nurse",
+            "description": "A professional career in Healthcare, specializing in registered nurse.",
+            "category": "Healthcare",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 14,
+            "title": "Pharmacist",
+            "description": "A professional career in Healthcare, specializing in pharmacist.",
+            "category": "Healthcare",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 15,
+            "title": "Medical Laboratory Scientist",
+            "description": "A professional career in Healthcare, specializing in medical laboratory scientist.",
+            "category": "Healthcare",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 16,
+            "title": "Public Health Officer",
+            "description": "A professional career in Healthcare, specializing in public health officer.",
+            "category": "Healthcare",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 17,
+            "title": "Accountant",
+            "description": "A professional career in Business & Finance, specializing in accountant.",
+            "category": "Business & Finance",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 18,
+            "title": "Financial Analyst",
+            "description": "A professional career in Business & Finance, specializing in financial analyst.",
+            "category": "Business & Finance",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 19,
+            "title": "Business Analyst",
+            "description": "A professional career in Business & Finance, specializing in business analyst.",
+            "category": "Business & Finance",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 20,
+            "title": "Digital Marketing Specialist",
+            "description": "A professional career in Marketing, specializing in digital marketing specialist.",
+            "category": "Marketing",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 21,
+            "title": "Brand Manager",
+            "description": "A professional career in Marketing, specializing in brand manager.",
+            "category": "Marketing",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 22,
+            "title": "Marketing Analyst",
+            "description": "A professional career in Marketing, specializing in marketing analyst.",
+            "category": "Marketing",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 23,
+            "title": "Cybersecurity Analyst",
+            "description": "A professional career in Cybersecurity, specializing in cybersecurity analyst.",
+            "category": "Cybersecurity",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 24,
+            "title": "Security Engineer",
+            "description": "A professional career in Cybersecurity, specializing in security engineer.",
+            "category": "Cybersecurity",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 26,
+            "title": "Data Scientist",
+            "description": "A professional career in Data & Analytics, specializing in data scientist.",
+            "category": "Data & Analytics",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 27,
+            "title": "Data Engineer",
+            "description": "A professional career in Data & Analytics, specializing in data engineer.",
+            "category": "Data & Analytics",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 28,
+            "title": "Business Intelligence Analyst",
+            "description": "A professional career in Data & Analytics, specializing in business intelligence analyst.",
+            "category": "Data & Analytics",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 29,
+            "title": "Teacher",
+            "description": "A professional career in Education, specializing in teacher.",
+            "category": "Education",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 30,
+            "title": "Curriculum Developer",
+            "description": "A professional career in Education, specializing in curriculum developer.",
+            "category": "Education",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 31,
+            "title": "Education Consultant",
+            "description": "A professional career in Education, specializing in education consultant.",
+            "category": "Education",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 32,
+            "title": "Product Manager",
+            "description": "A professional career in Product Management, specializing in product manager.",
+            "category": "Product Management",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 33,
+            "title": "Product Owner",
+            "description": "A professional career in Product Management, specializing in product owner.",
+            "category": "Product Management",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 34,
+            "title": "Mobile App Developer",
+            "description": "A professional career in Software Development, specializing in mobile app developer.",
+            "category": "Software Development",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 35,
+            "title": "Full Stack Developer",
+            "description": "A professional career in Software Development, specializing in full stack developer.",
+            "category": "Software Development",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        },
+        {
+            "id": 36,
+            "title": "DevOps Engineer",
+            "description": "A professional career in Software Development, specializing in devops engineer.",
+            "category": "Software Development",
+            "education_level": null,
+            "education_requirements": null,
+            "experience_level": null
+        }
+    ],
+    "skills": [
+        {
+            "id": 1,
+            "name": "Python",
+            "category": "Programming",
+            "description": "Programming language used for backend development."
+        },
+        {
+            "id": 2,
+            "name": "JavaScript",
+            "category": "Programming",
+            "description": "Programming language used for frontend development."
+        },
+        {
+            "id": 3,
+            "name": "React",
+            "category": "Frontend",
+            "description": "JavaScript library for building user interfaces."
+        },
+        {
+            "id": 4,
+            "name": "SQL",
+            "category": "Database",
+            "description": "Language used to manage relational databases."
+        },
+        {
+            "id": 5,
+            "name": "Communication",
+            "category": "Soft Skills",
+            "description": "Ability to communicate ideas effectively."
+        },
+        {
+            "id": 6,
+            "name": "AutoCAD",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 7,
+            "name": "SolidWorks",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 8,
+            "name": "Mechanical Design",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 9,
+            "name": "Engineering Mathematics",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 10,
+            "name": "Structural Analysis",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 11,
+            "name": "Construction Management",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 12,
+            "name": "Circuit Design",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 13,
+            "name": "MATLAB",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 14,
+            "name": "Electrical Systems",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 15,
+            "name": "Process Engineering",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 16,
+            "name": "Chemical Process Design",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 17,
+            "name": "Process Optimization",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 18,
+            "name": "Operations Research",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 19,
+            "name": "Quality Control",
+            "category": "Engineering",
+            "description": "A skill used in Engineering careers."
+        },
+        {
+            "id": 20,
+            "name": "Adobe Photoshop",
+            "category": "Design",
+            "description": "A skill used in Design careers."
+        },
+        {
+            "id": 21,
+            "name": "Adobe Illustrator",
+            "category": "Design",
+            "description": "A skill used in Design careers."
+        },
+        {
+            "id": 22,
+            "name": "Typography",
+            "category": "Design",
+            "description": "A skill used in Design careers."
+        },
+        {
+            "id": 23,
+            "name": "Visual Design",
+            "category": "Design",
+            "description": "A skill used in Design careers."
+        },
+        {
+            "id": 24,
+            "name": "Figma",
+            "category": "Design",
+            "description": "A skill used in Design careers."
+        },
+        {
+            "id": 25,
+            "name": "User Research",
+            "category": "Design",
+            "description": "A skill used in Design careers."
+        },
+        {
+            "id": 26,
+            "name": "Prototyping",
+            "category": "Design",
+            "description": "A skill used in Design careers."
+        },
+        {
+            "id": 27,
+            "name": "Design Thinking",
+            "category": "Design",
+            "description": "A skill used in Design careers."
+        },
+        {
+            "id": 28,
+            "name": "Adobe After Effects",
+            "category": "Design",
+            "description": "A skill used in Design careers."
+        },
+        {
+            "id": 29,
+            "name": "Animation",
+            "category": "Design",
+            "description": "A skill used in Design careers."
+        },
+        {
+            "id": 30,
+            "name": "Patient Care",
+            "category": "Healthcare",
+            "description": "A skill used in Healthcare careers."
+        },
+        {
+            "id": 31,
+            "name": "Clinical Assessment",
+            "category": "Healthcare",
+            "description": "A skill used in Healthcare careers."
+        },
+        {
+            "id": 32,
+            "name": "Medical Terminology",
+            "category": "Healthcare",
+            "description": "A skill used in Healthcare careers."
+        },
+        {
+            "id": 33,
+            "name": "Pharmacology",
+            "category": "Healthcare",
+            "description": "A skill used in Healthcare careers."
+        },
+        {
+            "id": 34,
+            "name": "Medication Management",
+            "category": "Healthcare",
+            "description": "A skill used in Healthcare careers."
+        },
+        {
+            "id": 35,
+            "name": "Patient Counseling",
+            "category": "Healthcare",
+            "description": "A skill used in Healthcare careers."
+        },
+        {
+            "id": 36,
+            "name": "Laboratory Testing",
+            "category": "Healthcare",
+            "description": "A skill used in Healthcare careers."
+        },
+        {
+            "id": 37,
+            "name": "Microbiology",
+            "category": "Healthcare",
+            "description": "A skill used in Healthcare careers."
+        },
+        {
+            "id": 38,
+            "name": "Clinical Analysis",
+            "category": "Healthcare",
+            "description": "A skill used in Healthcare careers."
+        },
+        {
+            "id": 39,
+            "name": "Epidemiology",
+            "category": "Healthcare",
+            "description": "A skill used in Healthcare careers."
+        },
+        {
+            "id": 40,
+            "name": "Health Education",
+            "category": "Healthcare",
+            "description": "A skill used in Healthcare careers."
+        },
+        {
+            "id": 41,
+            "name": "Public Health Research",
+            "category": "Healthcare",
+            "description": "A skill used in Healthcare careers."
+        },
+        {
+            "id": 42,
+            "name": "Financial Accounting",
+            "category": "Business & Finance",
+            "description": "A skill used in Business & Finance careers."
+        },
+        {
+            "id": 43,
+            "name": "Bookkeeping",
+            "category": "Business & Finance",
+            "description": "A skill used in Business & Finance careers."
+        },
+        {
+            "id": 44,
+            "name": "Microsoft Excel",
+            "category": "Business & Finance",
+            "description": "A skill used in Business & Finance careers."
+        },
+        {
+            "id": 45,
+            "name": "Financial Modeling",
+            "category": "Business & Finance",
+            "description": "A skill used in Business & Finance careers."
+        },
+        {
+            "id": 46,
+            "name": "Financial Analysis",
+            "category": "Business & Finance",
+            "description": "A skill used in Business & Finance careers."
+        },
+        {
+            "id": 47,
+            "name": "Business Analysis",
+            "category": "Business & Finance",
+            "description": "A skill used in Business & Finance careers."
+        },
+        {
+            "id": 48,
+            "name": "Requirements Gathering",
+            "category": "Business & Finance",
+            "description": "A skill used in Business & Finance careers."
+        },
+        {
+            "id": 49,
+            "name": "SEO",
+            "category": "Marketing",
+            "description": "A skill used in Marketing careers."
+        },
+        {
+            "id": 50,
+            "name": "Social Media Marketing",
+            "category": "Marketing",
+            "description": "A skill used in Marketing careers."
+        },
+        {
+            "id": 51,
+            "name": "Content Marketing",
+            "category": "Marketing",
+            "description": "A skill used in Marketing careers."
+        },
+        {
+            "id": 52,
+            "name": "Brand Strategy",
+            "category": "Marketing",
+            "description": "A skill used in Marketing careers."
+        },
+        {
+            "id": 53,
+            "name": "Market Research",
+            "category": "Marketing",
+            "description": "A skill used in Marketing careers."
+        },
+        {
+            "id": 54,
+            "name": "Marketing Strategy",
+            "category": "Marketing",
+            "description": "A skill used in Marketing careers."
+        },
+        {
+            "id": 55,
+            "name": "Data Analysis",
+            "category": "Marketing",
+            "description": "A skill used in Marketing careers."
+        },
+        {
+            "id": 56,
+            "name": "Network Security",
+            "category": "Cybersecurity",
+            "description": "A skill used in Cybersecurity careers."
+        },
+        {
+            "id": 57,
+            "name": "Threat Analysis",
+            "category": "Cybersecurity",
+            "description": "A skill used in Cybersecurity careers."
+        },
+        {
+            "id": 58,
+            "name": "Incident Response",
+            "category": "Cybersecurity",
+            "description": "A skill used in Cybersecurity careers."
+        },
+        {
+            "id": 59,
+            "name": "Security Architecture",
+            "category": "Cybersecurity",
+            "description": "A skill used in Cybersecurity careers."
+        },
+        {
+            "id": 60,
+            "name": "Ethical Hacking",
+            "category": "Cybersecurity",
+            "description": "A skill used in Cybersecurity careers."
+        },
+        {
+            "id": 61,
+            "name": "Vulnerability Assessment",
+            "category": "Cybersecurity",
+            "description": "A skill used in Cybersecurity careers."
+        },
+        {
+            "id": 62,
+            "name": "Machine Learning",
+            "category": "Data & Analytics",
+            "description": "A skill used in Data & Analytics careers."
+        },
+        {
+            "id": 63,
+            "name": "Statistics",
+            "category": "Data & Analytics",
+            "description": "A skill used in Data & Analytics careers."
+        },
+        {
+            "id": 64,
+            "name": "Data Pipelines",
+            "category": "Data & Analytics",
+            "description": "A skill used in Data & Analytics careers."
+        },
+        {
+            "id": 65,
+            "name": "Database Design",
+            "category": "Data & Analytics",
+            "description": "A skill used in Data & Analytics careers."
+        },
+        {
+            "id": 66,
+            "name": "Power BI",
+            "category": "Data & Analytics",
+            "description": "A skill used in Data & Analytics careers."
+        },
+        {
+            "id": 67,
+            "name": "Data Visualization",
+            "category": "Data & Analytics",
+            "description": "A skill used in Data & Analytics careers."
+        },
+        {
+            "id": 68,
+            "name": "Lesson Planning",
+            "category": "Education",
+            "description": "A skill used in Education careers."
+        },
+        {
+            "id": 69,
+            "name": "Classroom Management",
+            "category": "Education",
+            "description": "A skill used in Education careers."
+        },
+        {
+            "id": 70,
+            "name": "Curriculum Design",
+            "category": "Education",
+            "description": "A skill used in Education careers."
+        },
+        {
+            "id": 71,
+            "name": "Instructional Design",
+            "category": "Education",
+            "description": "A skill used in Education careers."
+        },
+        {
+            "id": 72,
+            "name": "Educational Assessment",
+            "category": "Education",
+            "description": "A skill used in Education careers."
+        },
+        {
+            "id": 73,
+            "name": "Educational Research",
+            "category": "Education",
+            "description": "A skill used in Education careers."
+        },
+        {
+            "id": 74,
+            "name": "Product Strategy",
+            "category": "Product Management",
+            "description": "A skill used in Product Management careers."
+        },
+        {
+            "id": 75,
+            "name": "Roadmapping",
+            "category": "Product Management",
+            "description": "A skill used in Product Management careers."
+        },
+        {
+            "id": 76,
+            "name": "Agile Methodologies",
+            "category": "Product Management",
+            "description": "A skill used in Product Management careers."
+        },
+        {
+            "id": 77,
+            "name": "Backlog Management",
+            "category": "Product Management",
+            "description": "A skill used in Product Management careers."
+        },
+        {
+            "id": 78,
+            "name": "Flutter",
+            "category": "Software Development",
+            "description": "A skill used in Software Development careers."
+        },
+        {
+            "id": 79,
+            "name": "Dart",
+            "category": "Software Development",
+            "description": "A skill used in Software Development careers."
+        },
+        {
+            "id": 80,
+            "name": "Mobile Development",
+            "category": "Software Development",
+            "description": "A skill used in Software Development careers."
+        },
+        {
+            "id": 81,
+            "name": "Docker",
+            "category": "Software Development",
+            "description": "A skill used in Software Development careers."
+        },
+        {
+            "id": 82,
+            "name": "CI/CD",
+            "category": "Software Development",
+            "description": "A skill used in Software Development careers."
+        },
+        {
+            "id": 83,
+            "name": "Linux",
+            "category": "Software Development",
+            "description": "A skill used in Software Development careers."
+        },
+        {
+            "id": 84,
+            "name": "Cloud Computing",
+            "category": "Software Development",
+            "description": "A skill used in Software Development careers."
+        },
+        {
+            "id": 85,
+            "name": "Kubernetes",
+            "category": "DevOps",
+            "description": "An open-source container orchestration platform used to automate the deployment, scaling, and management of containerized applications."
+        }
+    ],
+    "career_skills": [
+        {
+            "id": 1,
+            "career_id": 1,
+            "skill_id": 2,
+            "required_level": "Intermediate"
+        },
+        {
+            "id": 2,
+            "career_id": 1,
+            "skill_id": 3,
+            "required_level": "Intermediate"
+        },
+        {
+            "id": 3,
+            "career_id": 2,
+            "skill_id": 1,
+            "required_level": "Intermediate"
+        },
+        {
+            "id": 4,
+            "career_id": 2,
+            "skill_id": 4,
+            "required_level": "Intermediate"
+        },
+        {
+            "id": 5,
+            "career_id": 3,
+            "skill_id": 1,
+            "required_level": "Beginner"
+        },
+        {
+            "id": 6,
+            "career_id": 3,
+            "skill_id": 4,
+            "required_level": "Intermediate"
+        },
+        {
+            "id": 7,
+            "career_id": 4,
+            "skill_id": 5,
+            "required_level": "Intermediate"
+        },
+        {
+            "id": 8,
+            "career_id": 5,
+            "skill_id": 6,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 9,
+            "career_id": 5,
+            "skill_id": 7,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 10,
+            "career_id": 5,
+            "skill_id": 8,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 11,
+            "career_id": 5,
+            "skill_id": 9,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 12,
+            "career_id": 6,
+            "skill_id": 6,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 13,
+            "career_id": 6,
+            "skill_id": 10,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 14,
+            "career_id": 6,
+            "skill_id": 11,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 15,
+            "career_id": 6,
+            "skill_id": 9,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 16,
+            "career_id": 7,
+            "skill_id": 12,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 17,
+            "career_id": 7,
+            "skill_id": 13,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 18,
+            "career_id": 7,
+            "skill_id": 14,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 19,
+            "career_id": 7,
+            "skill_id": 9,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 20,
+            "career_id": 8,
+            "skill_id": 15,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 21,
+            "career_id": 8,
+            "skill_id": 16,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 22,
+            "career_id": 8,
+            "skill_id": 13,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 23,
+            "career_id": 9,
+            "skill_id": 17,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 24,
+            "career_id": 9,
+            "skill_id": 18,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 25,
+            "career_id": 9,
+            "skill_id": 19,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 26,
+            "career_id": 10,
+            "skill_id": 20,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 27,
+            "career_id": 10,
+            "skill_id": 21,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 28,
+            "career_id": 10,
+            "skill_id": 22,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 29,
+            "career_id": 10,
+            "skill_id": 23,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 30,
+            "career_id": 11,
+            "skill_id": 24,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 31,
+            "career_id": 11,
+            "skill_id": 25,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 32,
+            "career_id": 11,
+            "skill_id": 26,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 33,
+            "career_id": 11,
+            "skill_id": 27,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 34,
+            "career_id": 12,
+            "skill_id": 28,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 35,
+            "career_id": 12,
+            "skill_id": 29,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 36,
+            "career_id": 12,
+            "skill_id": 23,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 37,
+            "career_id": 13,
+            "skill_id": 30,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 38,
+            "career_id": 13,
+            "skill_id": 31,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 39,
+            "career_id": 13,
+            "skill_id": 32,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 40,
+            "career_id": 14,
+            "skill_id": 33,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 41,
+            "career_id": 14,
+            "skill_id": 34,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 42,
+            "career_id": 14,
+            "skill_id": 35,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 43,
+            "career_id": 15,
+            "skill_id": 36,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 44,
+            "career_id": 15,
+            "skill_id": 37,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 45,
+            "career_id": 15,
+            "skill_id": 38,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 46,
+            "career_id": 16,
+            "skill_id": 39,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 47,
+            "career_id": 16,
+            "skill_id": 40,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 48,
+            "career_id": 16,
+            "skill_id": 41,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 49,
+            "career_id": 17,
+            "skill_id": 42,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 50,
+            "career_id": 17,
+            "skill_id": 43,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 51,
+            "career_id": 17,
+            "skill_id": 44,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 52,
+            "career_id": 18,
+            "skill_id": 45,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 53,
+            "career_id": 18,
+            "skill_id": 46,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 54,
+            "career_id": 18,
+            "skill_id": 44,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 55,
+            "career_id": 19,
+            "skill_id": 47,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 56,
+            "career_id": 19,
+            "skill_id": 48,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 57,
+            "career_id": 19,
+            "skill_id": 44,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 58,
+            "career_id": 20,
+            "skill_id": 49,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 59,
+            "career_id": 20,
+            "skill_id": 50,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 60,
+            "career_id": 20,
+            "skill_id": 51,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 61,
+            "career_id": 21,
+            "skill_id": 52,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 62,
+            "career_id": 21,
+            "skill_id": 53,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 63,
+            "career_id": 21,
+            "skill_id": 54,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 64,
+            "career_id": 22,
+            "skill_id": 53,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 65,
+            "career_id": 22,
+            "skill_id": 55,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 66,
+            "career_id": 22,
+            "skill_id": 44,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 67,
+            "career_id": 23,
+            "skill_id": 56,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 68,
+            "career_id": 23,
+            "skill_id": 57,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 69,
+            "career_id": 23,
+            "skill_id": 58,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 70,
+            "career_id": 24,
+            "skill_id": 56,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 71,
+            "career_id": 24,
+            "skill_id": 59,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 72,
+            "career_id": 24,
+            "skill_id": 1,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 76,
+            "career_id": 26,
+            "skill_id": 1,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 77,
+            "career_id": 26,
+            "skill_id": 62,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 78,
+            "career_id": 26,
+            "skill_id": 63,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 79,
+            "career_id": 26,
+            "skill_id": 55,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 80,
+            "career_id": 27,
+            "skill_id": 1,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 81,
+            "career_id": 27,
+            "skill_id": 4,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 82,
+            "career_id": 27,
+            "skill_id": 64,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 83,
+            "career_id": 27,
+            "skill_id": 65,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 84,
+            "career_id": 28,
+            "skill_id": 4,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 85,
+            "career_id": 28,
+            "skill_id": 66,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 86,
+            "career_id": 28,
+            "skill_id": 67,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 87,
+            "career_id": 29,
+            "skill_id": 68,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 88,
+            "career_id": 29,
+            "skill_id": 69,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 89,
+            "career_id": 29,
+            "skill_id": 5,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 90,
+            "career_id": 30,
+            "skill_id": 70,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 91,
+            "career_id": 30,
+            "skill_id": 71,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 92,
+            "career_id": 30,
+            "skill_id": 72,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 93,
+            "career_id": 31,
+            "skill_id": 73,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 94,
+            "career_id": 31,
+            "skill_id": 5,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 95,
+            "career_id": 31,
+            "skill_id": 70,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 96,
+            "career_id": 32,
+            "skill_id": 74,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 97,
+            "career_id": 32,
+            "skill_id": 75,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 98,
+            "career_id": 32,
+            "skill_id": 25,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 99,
+            "career_id": 33,
+            "skill_id": 76,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 100,
+            "career_id": 33,
+            "skill_id": 77,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 101,
+            "career_id": 33,
+            "skill_id": 48,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 102,
+            "career_id": 34,
+            "skill_id": 78,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 103,
+            "career_id": 34,
+            "skill_id": 79,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 104,
+            "career_id": 34,
+            "skill_id": 80,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 105,
+            "career_id": 35,
+            "skill_id": 1,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 106,
+            "career_id": 35,
+            "skill_id": 2,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 107,
+            "career_id": 35,
+            "skill_id": 3,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 108,
+            "career_id": 35,
+            "skill_id": 4,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 109,
+            "career_id": 36,
+            "skill_id": 81,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 110,
+            "career_id": 36,
+            "skill_id": 82,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 111,
+            "career_id": 36,
+            "skill_id": 83,
+            "required_level": "intermediate"
+        },
+        {
+            "id": 112,
+            "career_id": 36,
+            "skill_id": 84,
+            "required_level": "intermediate"
+        }
+    ],
+    "learning_resources": [
+        {
+            "id": 1,
+            "skill_id": 1,
+            "title": "Official Python Tutorial",
+            "resource_type": "Documentation",
+            "url": "https://docs.python.org/3/tutorial/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 2,
+            "skill_id": 1,
+            "title": "Python Programming - freeCodeCamp",
+            "resource_type": "Course",
+            "url": "https://www.freecodecamp.org/learn/scientific-computing-with-python/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 3,
+            "skill_id": 2,
+            "title": "JavaScript Guide - MDN",
+            "resource_type": "Documentation",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 4,
+            "skill_id": 3,
+            "title": "Learn React",
+            "resource_type": "Documentation",
+            "url": "https://react.dev/learn",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 5,
+            "skill_id": 4,
+            "title": "SQL Tutorial - SQLBolt",
+            "resource_type": "Tutorial",
+            "url": "https://sqlbolt.com/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 6,
+            "skill_id": 5,
+            "title": "Communication Skills - OpenLearn",
+            "resource_type": "Course",
+            "url": "https://www.open.edu/openlearn/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 7,
+            "skill_id": 6,
+            "title": "AutoCAD Learning Resources",
+            "resource_type": "Tutorial",
+            "url": "https://www.autodesk.com/learn",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 8,
+            "skill_id": 7,
+            "title": "SOLIDWORKS Learning Resources",
+            "resource_type": "Tutorial",
+            "url": "https://my.solidworks.com/training",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 9,
+            "skill_id": 8,
+            "title": "Mechanical Engineering - MIT OpenCourseWare",
+            "resource_type": "Course",
+            "url": "https://ocw.mit.edu/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 10,
+            "skill_id": 9,
+            "title": "Engineering Mathematics - Khan Academy",
+            "resource_type": "Course",
+            "url": "https://www.khanacademy.org/math",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 11,
+            "skill_id": 10,
+            "title": "Structural Engineering Resources",
+            "resource_type": "Course",
+            "url": "https://ocw.mit.edu/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 12,
+            "skill_id": 11,
+            "title": "Construction Management Learning",
+            "resource_type": "Course",
+            "url": "https://www.coursera.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 13,
+            "skill_id": 12,
+            "title": "Circuits and Electronics - MIT",
+            "resource_type": "Course",
+            "url": "https://ocw.mit.edu/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 14,
+            "skill_id": 13,
+            "title": "MATLAB Onramp",
+            "resource_type": "Course",
+            "url": "https://matlabacademy.mathworks.com/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 15,
+            "skill_id": 14,
+            "title": "Electrical Engineering Resources",
+            "resource_type": "Course",
+            "url": "https://www.khanacademy.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 16,
+            "skill_id": 15,
+            "title": "Chemical Engineering - MIT OCW",
+            "resource_type": "Course",
+            "url": "https://ocw.mit.edu/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 17,
+            "skill_id": 16,
+            "title": "Chemical Engineering Learning Resources",
+            "resource_type": "Course",
+            "url": "https://ocw.mit.edu/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 18,
+            "skill_id": 17,
+            "title": "Optimization - MIT OpenCourseWare",
+            "resource_type": "Course",
+            "url": "https://ocw.mit.edu/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 19,
+            "skill_id": 18,
+            "title": "Operations Research - MIT OCW",
+            "resource_type": "Course",
+            "url": "https://ocw.mit.edu/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 20,
+            "skill_id": 19,
+            "title": "Quality Management Resources",
+            "resource_type": "Course",
+            "url": "https://asq.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 21,
+            "skill_id": 20,
+            "title": "Photoshop Tutorials",
+            "resource_type": "Tutorial",
+            "url": "https://helpx.adobe.com/photoshop/tutorials.html",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 22,
+            "skill_id": 21,
+            "title": "Illustrator Tutorials",
+            "resource_type": "Tutorial",
+            "url": "https://helpx.adobe.com/illustrator/tutorials.html",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 23,
+            "skill_id": 22,
+            "title": "Typography Fundamentals",
+            "resource_type": "Tutorial",
+            "url": "https://fonts.google.com/knowledge",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 24,
+            "skill_id": 23,
+            "title": "Visual Design Fundamentals",
+            "resource_type": "Course",
+            "url": "https://www.interaction-design.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 25,
+            "skill_id": 24,
+            "title": "Figma Learning Resources",
+            "resource_type": "Tutorial",
+            "url": "https://help.figma.com/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 26,
+            "skill_id": 25,
+            "title": "User Research Fundamentals",
+            "resource_type": "Course",
+            "url": "https://www.nngroup.com/articles/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 27,
+            "skill_id": 26,
+            "title": "Prototyping with Figma",
+            "resource_type": "Tutorial",
+            "url": "https://help.figma.com/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 28,
+            "skill_id": 27,
+            "title": "Design Thinking Resources",
+            "resource_type": "Course",
+            "url": "https://designthinking.ideo.com/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 29,
+            "skill_id": 28,
+            "title": "After Effects Tutorials",
+            "resource_type": "Tutorial",
+            "url": "https://helpx.adobe.com/after-effects/tutorials.html",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 30,
+            "skill_id": 29,
+            "title": "Animation Learning Resources",
+            "resource_type": "Tutorial",
+            "url": "https://www.blender.org/support/tutorials/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 31,
+            "skill_id": 30,
+            "title": "Patient Care Learning Resources",
+            "resource_type": "Course",
+            "url": "https://openstax.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 32,
+            "skill_id": 31,
+            "title": "Clinical Skills Resources",
+            "resource_type": "Course",
+            "url": "https://www.merckmanuals.com/professional",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 33,
+            "skill_id": 32,
+            "title": "Medical Terminology Resources",
+            "resource_type": "Course",
+            "url": "https://medlineplus.gov/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 34,
+            "skill_id": 33,
+            "title": "Pharmacology Learning Resources",
+            "resource_type": "Course",
+            "url": "https://www.ncbi.nlm.nih.gov/books/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 35,
+            "skill_id": 34,
+            "title": "Medication Safety Resources",
+            "resource_type": "Documentation",
+            "url": "https://www.who.int/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 36,
+            "skill_id": 35,
+            "title": "Patient Communication Resources",
+            "resource_type": "Course",
+            "url": "https://www.cdc.gov/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 37,
+            "skill_id": 36,
+            "title": "Laboratory Testing Resources",
+            "resource_type": "Documentation",
+            "url": "https://medlineplus.gov/lab-tests/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 38,
+            "skill_id": 37,
+            "title": "Microbiology - OpenStax",
+            "resource_type": "Course",
+            "url": "https://openstax.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 39,
+            "skill_id": 38,
+            "title": "Clinical Laboratory Resources",
+            "resource_type": "Course",
+            "url": "https://www.ncbi.nlm.nih.gov/books/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 40,
+            "skill_id": 39,
+            "title": "CDC Epidemiology Resources",
+            "resource_type": "Course",
+            "url": "https://www.cdc.gov/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 41,
+            "skill_id": 40,
+            "title": "Health Education Resources",
+            "resource_type": "Course",
+            "url": "https://www.who.int/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 42,
+            "skill_id": 41,
+            "title": "Public Health Research Resources",
+            "resource_type": "Course",
+            "url": "https://www.cdc.gov/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 43,
+            "skill_id": 42,
+            "title": "Accounting Fundamentals",
+            "resource_type": "Course",
+            "url": "https://www.accountingcoach.com/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 44,
+            "skill_id": 43,
+            "title": "Bookkeeping Basics",
+            "resource_type": "Course",
+            "url": "https://www.accountingcoach.com/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 45,
+            "skill_id": 44,
+            "title": "Excel Learning Resources",
+            "resource_type": "Tutorial",
+            "url": "https://support.microsoft.com/excel",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 46,
+            "skill_id": 45,
+            "title": "Financial Modeling Resources",
+            "resource_type": "Course",
+            "url": "https://corporatefinanceinstitute.com/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 47,
+            "skill_id": 46,
+            "title": "Financial Analysis Fundamentals",
+            "resource_type": "Course",
+            "url": "https://corporatefinanceinstitute.com/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 48,
+            "skill_id": 47,
+            "title": "Business Analysis Resources",
+            "resource_type": "Course",
+            "url": "https://www.iiba.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 49,
+            "skill_id": 48,
+            "title": "Requirements Engineering Resources",
+            "resource_type": "Course",
+            "url": "https://www.iiba.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 50,
+            "skill_id": 49,
+            "title": "Google Search Central SEO Guide",
+            "resource_type": "Documentation",
+            "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 51,
+            "skill_id": 50,
+            "title": "Social Media Marketing Resources",
+            "resource_type": "Course",
+            "url": "https://academy.hubspot.com/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 52,
+            "skill_id": 51,
+            "title": "Content Marketing Course",
+            "resource_type": "Course",
+            "url": "https://academy.hubspot.com/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 53,
+            "skill_id": 52,
+            "title": "Brand Strategy Learning",
+            "resource_type": "Course",
+            "url": "https://www.coursera.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 54,
+            "skill_id": 53,
+            "title": "Market Research Learning Resources",
+            "resource_type": "Course",
+            "url": "https://www.coursera.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 55,
+            "skill_id": 54,
+            "title": "Marketing Strategy Resources",
+            "resource_type": "Course",
+            "url": "https://academy.hubspot.com/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 56,
+            "skill_id": 55,
+            "title": "Data Analysis with Python",
+            "resource_type": "Course",
+            "url": "https://www.freecodecamp.org/learn/data-analysis-with-python/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 57,
+            "skill_id": 56,
+            "title": "Cisco Networking Academy",
+            "resource_type": "Course",
+            "url": "https://www.netacad.com/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 58,
+            "skill_id": 57,
+            "title": "MITRE ATT&CK",
+            "resource_type": "Documentation",
+            "url": "https://attack.mitre.org/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 59,
+            "skill_id": 58,
+            "title": "Incident Response Resources",
+            "resource_type": "Documentation",
+            "url": "https://www.cisa.gov/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 60,
+            "skill_id": 59,
+            "title": "Cybersecurity Framework",
+            "resource_type": "Documentation",
+            "url": "https://www.nist.gov/cyberframework",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 61,
+            "skill_id": 60,
+            "title": "Web Security Academy",
+            "resource_type": "Course",
+            "url": "https://portswigger.net/web-security",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 62,
+            "skill_id": 61,
+            "title": "OWASP Testing Guide",
+            "resource_type": "Documentation",
+            "url": "https://owasp.org/www-project-web-security-testing-guide/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 63,
+            "skill_id": 62,
+            "title": "Machine Learning Crash Course",
+            "resource_type": "Course",
+            "url": "https://developers.google.com/machine-learning/crash-course",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 64,
+            "skill_id": 63,
+            "title": "Statistics and Probability",
+            "resource_type": "Course",
+            "url": "https://www.khanacademy.org/math/statistics-probability",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 65,
+            "skill_id": 64,
+            "title": "Apache Airflow Documentation",
+            "resource_type": "Documentation",
+            "url": "https://airflow.apache.org/docs/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 66,
+            "skill_id": 65,
+            "title": "PostgreSQL Documentation",
+            "resource_type": "Documentation",
+            "url": "https://www.postgresql.org/docs/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 67,
+            "skill_id": 66,
+            "title": "Microsoft Power BI Learning",
+            "resource_type": "Course",
+            "url": "https://learn.microsoft.com/training/powerplatform/power-bi/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 68,
+            "skill_id": 67,
+            "title": "Data Visualization Learning",
+            "resource_type": "Course",
+            "url": "https://www.tableau.com/learn",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 69,
+            "skill_id": 68,
+            "title": "Lesson Planning Resources",
+            "resource_type": "Course",
+            "url": "https://www.edutopia.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 70,
+            "skill_id": 69,
+            "title": "Classroom Management Resources",
+            "resource_type": "Course",
+            "url": "https://www.edutopia.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 71,
+            "skill_id": 70,
+            "title": "Curriculum Development Resources",
+            "resource_type": "Course",
+            "url": "https://www.unesco.org/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 72,
+            "skill_id": 71,
+            "title": "Instructional Design Resources",
+            "resource_type": "Course",
+            "url": "https://www.edx.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 73,
+            "skill_id": 72,
+            "title": "Educational Assessment Resources",
+            "resource_type": "Course",
+            "url": "https://www.edutopia.org/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 74,
+            "skill_id": 73,
+            "title": "Education Research Resources",
+            "resource_type": "Course",
+            "url": "https://ies.ed.gov/",
+            "difficulty": "Intermediate"
+        },
+        {
+            "id": 75,
+            "skill_id": 74,
+            "title": "Product Management Resources",
+            "resource_type": "Course",
+            "url": "https://www.atlassian.com/agile/product-management",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 76,
+            "skill_id": 75,
+            "title": "Product Roadmaps",
+            "resource_type": "Tutorial",
+            "url": "https://www.atlassian.com/agile/product-management/product-roadmaps",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 77,
+            "skill_id": 76,
+            "title": "Scrum Guide",
+            "resource_type": "Documentation",
+            "url": "https://scrumguides.org/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 78,
+            "skill_id": 77,
+            "title": "Product Backlog Management",
+            "resource_type": "Tutorial",
+            "url": "https://www.atlassian.com/agile/scrum/backlogs",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 79,
+            "skill_id": 78,
+            "title": "Flutter Documentation",
+            "resource_type": "Documentation",
+            "url": "https://docs.flutter.dev/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 80,
+            "skill_id": 79,
+            "title": "Dart Language Tour",
+            "resource_type": "Documentation",
+            "url": "https://dart.dev/language",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 81,
+            "skill_id": 80,
+            "title": "Android Developers Training",
+            "resource_type": "Course",
+            "url": "https://developer.android.com/courses",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 82,
+            "skill_id": 81,
+            "title": "Docker Get Started",
+            "resource_type": "Documentation",
+            "url": "https://docs.docker.com/get-started/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 83,
+            "skill_id": 82,
+            "title": "GitHub Actions Documentation",
+            "resource_type": "Documentation",
+            "url": "https://docs.github.com/en/actions",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 84,
+            "skill_id": 83,
+            "title": "Linux Journey",
+            "resource_type": "Tutorial",
+            "url": "https://linuxjourney.com/",
+            "difficulty": "Beginner"
+        },
+        {
+            "id": 85,
+            "skill_id": 84,
+            "title": "AWS Cloud Practitioner Essentials",
+            "resource_type": "Course",
+            "url": "https://aws.amazon.com/training/",
+            "difficulty": "Beginner"
+        }
+    ]
+}
